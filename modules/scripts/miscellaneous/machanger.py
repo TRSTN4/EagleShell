@@ -69,10 +69,8 @@ def machanger_main():
 #        print("[-] MAC address did not get changed.")
 
     def exit_shell():
-        print('\n\u001b[31m[-] Exiting EagleShell')
-        print('\u001b[0m')
-        os.system(clear_screen)
-        exit()
+        from assets.functions import exit_main
+        exit_main()
 
     configuration()
 

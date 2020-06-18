@@ -7,8 +7,6 @@ from assets.commands import *
 
 import os
 
-# dev branch
-
 def menu():
     try:
         global menu_select
@@ -156,10 +154,11 @@ def scripts():
         print('')
         print('\t1): Scanning')
         print('\t2): Enumeration')
-        print('\t3): Privilege Escalation')
-        print('\t4): Other')
-        print('\t5): Back')
-        print('\t6): Exit')
+        print('\t3): Exploitation')
+        print('\t4): Privilege Escalation')
+        print('\t5): Miscellaneous')
+        print('\t6): Back')
+        print('\t7): Exit')
         print('')
         while True:
             scripts_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
@@ -168,12 +167,14 @@ def scripts():
             elif scripts_select == '2':
                 enumeration()
             elif scripts_select == '3':
-                privilege_escalation()
+                exploitation()
             elif scripts_select == '4':
-                miscellaneous()
+                privilege_escalation()
             elif scripts_select == '5':
-                menu()
+                miscellaneous()
             elif scripts_select == '6':
+                menu()
+            elif scripts_select == '7':
                 exit_shell()
             elif scripts_select == 'help' or scripts_select == '?':
                 from assets.commands import help_list
@@ -421,10 +422,8 @@ def miscellaneous():
 
 
 def exit_shell():
-    print('\u001b[31m[-] Exiting EagleShell')
-    print('\u001b[0m')
-    os.system(clear_screen)
-    exit()
+    from assets.functions import exit_main
+    exit_main()
 
 
 menu()
