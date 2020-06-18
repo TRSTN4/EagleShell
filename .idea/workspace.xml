@@ -17,6 +17,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1dPtcUaHNn6uPVPEOBO1PDWIsNA" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -132,10 +135,10 @@
       <screen x="-788" y="-2160" width="1920" height="1040" />
     </state>
     <state width="527" height="116" key="GridCell.Tab.0.right/0.0.1536.824/-788.-2160.1920.1040@-788.-2160.1920.1040" timestamp="1592505070087" />
-    <state x="656" y="346" key="com.intellij.ide.util.TipDialog" timestamp="1592464020775">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="-132" y="-1814" key="com.intellij.ide.util.TipDialog" timestamp="1592509202958">
+      <screen x="-788" y="-2160" width="1920" height="1040" />
     </state>
-    <state x="-132" y="-1814" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-788.-2160.1920.1040@-788.-2160.1920.1040" timestamp="1592423413511" />
+    <state x="-132" y="-1814" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-788.-2160.1920.1040@-788.-2160.1920.1040" timestamp="1592509202958" />
     <state x="656" y="346" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592464020775" />
     <state x="358" y="387" key="run.anything.popup" timestamp="1592393110217">
       <screen x="0" y="0" width="1536" height="824" />
