@@ -70,11 +70,11 @@ def payloads():
         while True:
             payloads_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
             if payloads_select == '1':
-                return '1'
+                pass
             elif payloads_select == '2':
-                return '2'
+                pass
             elif payloads_select == '3':
-                return '3'
+                pass
             elif payloads_select == '4':
                 menu()
             elif payloads_select == '5':
@@ -116,11 +116,11 @@ def listeners():
         while True:
             listeners_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
             if listeners_select == '1':
-                return '1'
+                pass
             elif listeners_select == '2':
-                return '2'
+                pass
             elif listeners_select == '3':
-                return '3'
+                pass
             elif listeners_select == '4':
                 menu()
             elif listeners_select == '5':
@@ -169,7 +169,7 @@ def scripts():
             elif scripts_select == '3':
                 privilege_escalation()
             elif scripts_select == '4':
-                other()
+                miscellaneous()
             elif scripts_select == '5':
                 menu()
             elif scripts_select == '6':
@@ -216,7 +216,7 @@ def scanning():
                 from modules.scripts.scanning.eaglescan import eaglescan_main
                 eaglescan_main()
             elif scanning_select == '3':
-                return '3'
+                pass
             elif scanning_select == '4':
                 scripts()
             elif scanning_select == '5':
@@ -257,11 +257,11 @@ def enumeration():
         while True:
             enumeration_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
             if enumeration_select == '1':
-                return '1'
+                pass
             elif enumeration_select == '2':
-                return '2'
+                pass
             elif enumeration_select == '3':
-                return '3'
+                pass
             elif enumeration_select == '4':
                 scripts()
             elif enumeration_select == '5':
@@ -272,6 +272,53 @@ def enumeration():
             elif enumeration_select == 'exit' or enumeration_select == 'quit':
                 exit_shell()
             elif enumeration_select == 'version':
+                from assets.commands import eagleshell_version
+                eagleshell_version()
+            else:
+                print('\u001b[31m[-] Invalid Input.')
+                continue
+    except KeyboardInterrupt:
+        exit_shell()
+
+
+def exploitation():
+    try:
+        os.system(clear_screen)
+        print(logo)
+        print('')
+        print(line)
+        print(privilege_escalation_banner)
+        print(line)
+        print('')
+        print(author)
+        print('Scripts:')
+        print('')
+        print('\t1): RSGEN - Reverse Shell Generator')
+        print('\t2): PGEN - Payload Generator')
+        print('\t3): Soon')
+        print('\t4): Back')
+        print('\t5): Exit')
+        print('')
+        while True:
+            exploitation_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
+            if exploitation_select == '1':
+                from modules.scripts.exploitation.rsgen import rsgen_main
+                rsgen_main()
+            elif exploitation_select == '2':
+                from modules.scripts.exploitation.pgen import pgen_main
+                pgen_main()
+            elif exploitation_select == '3':
+                pass
+            elif exploitation_select == '4':
+                scripts()
+            elif exploitation_select == '5':
+                exit_shell()
+            elif exploitation_select == 'help' or exploitation_select == '?':
+                from assets.commands import help_list
+                help_list()
+            elif exploitation_select == 'exit' or exploitation_select == 'quit':
+                exit_shell()
+            elif exploitation_select == 'version':
                 from assets.commands import eagleshell_version
                 eagleshell_version()
             else:
@@ -302,11 +349,11 @@ def privilege_escalation():
         while True:
             privilege_escalation_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
             if privilege_escalation_select == '1':
-                return '1'
+                pass
             elif privilege_escalation_select == '2':
-                return '2'
+                pass
             elif privilege_escalation_select == '3':
-                return '3'
+                pass
             elif privilege_escalation_select == '4':
                 scripts()
             elif privilege_escalation_select == '5':
@@ -326,45 +373,43 @@ def privilege_escalation():
         exit_shell()
 
 
-def other():
+def miscellaneous():
     try:
         os.system(clear_screen)
         print(logo)
         print('')
         print(line)
-        print(other_banner)
+        print(miscellaneous_banner)
         print(line)
         print('')
         print(author)
         print('Scripts:')
         print('')
-        print('\t1): RSGEN - Reverse Shell Generator')
-        print('\t2): MACHANGER - Change MAC from a Wireless Adapter')
+        print('\t1): MACHANGER - Change MAC from a Wireless Adapter')
+        print('\t2): Soon')
         print('\t3): Soon')
         print('\t4): Back')
         print('\t5): Exit')
         print('')
         while True:
-            other_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
-            if other_select == '1':
-                from modules.scripts.other.rsgen import rsgen_main
-                rsgen_main()
-            elif other_select == '2':
-                from modules.scripts.other.machanger import machanger_main
+            miscellaneous_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
+            if miscellaneous_select == '1':
+                from modules.scripts.miscellaneous.machanger import machanger_main
                 machanger_main()
-            elif other_select == '3':
-                from modules.payloads.pgen import pgen_main
-                pgen_main()
-            elif other_select == '4':
+            elif miscellaneous_select == '2':
+                pass
+            elif miscellaneous_select == '3':
+                pass
+            elif miscellaneous_select == '4':
                 scripts()
-            elif other_select == '5':
+            elif miscellaneous_select == '5':
                 exit_shell()
-            elif other_select == 'help' or other_select == '?':
+            elif miscellaneous_select == 'help' or miscellaneous_select == '?':
                 from assets.commands import help_list
                 help_list()
-            elif other_select == 'exit' or other_select == 'quit':
+            elif miscellaneous_select == 'exit' or miscellaneous_select == 'quit':
                 exit_shell()
-            elif other_select == 'version':
+            elif miscellaneous_select == 'version':
                 from assets.commands import eagleshell_version
                 eagleshell_version()
             else:
@@ -372,6 +417,7 @@ def other():
                 continue
     except KeyboardInterrupt:
         exit_shell()
+
 
 def exit_shell():
     print('\u001b[31m[-] Exiting EagleShell')
