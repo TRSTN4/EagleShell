@@ -53,5 +53,4 @@ assignees: 'EagleShell'
 
 - [ ] I searched the [current issues](https://github.com/TRSTN4/EagleShell/issues) and the issue is not known.
 - [ ] I searched the [troubleshooting](https://github.com/TRSTN4/EagleShell) and there's no fix available for this bug.
-- [ ] I searched on Google, Steam, YouTube, Reddit and there's no fix.
 - [ ] I am mostly sure that the problem is related to the config and isn't my fault.
