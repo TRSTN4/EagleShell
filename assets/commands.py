@@ -1,7 +1,10 @@
 #!/usr/bin/python3
 
+# Imports all the needed variables
 from assets.properties import version
 
+
+# Functions for all the commands that can be executed
 def help_list():
     print('''
 Core Commands
@@ -17,6 +20,7 @@ Core Commands
 
 =============
 ''')
+
 
 def eagleshell_version():
     print('Framework: ' + version)

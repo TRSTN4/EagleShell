@@ -1,16 +1,20 @@
 #!/usr/bin/python3
 
+# EagleEye Network Scanner Script
+
+# Imports all needed variables and packages
 from assets.banners import eagleye_banner
 from assets.designs import *
 from assets.properties import clear_screen
-
 import os
 import scapy.all as scapy
 import netifaces
 
 
+# Main function
 def eagleye_main():
 
+    # Function that takes user input
     def configuration():
         try:
             global network_ip_set
@@ -38,6 +42,7 @@ def eagleye_main():
         except KeyboardInterrupt:
             exit_shell()
 
+    # Function that displays all interfaces and ips
     def ips():
         x = netifaces.interfaces()
 
@@ -52,6 +57,7 @@ def eagleye_main():
             except KeyError:
                 continue
 
+    # Function that
     def scan():
         arp_request = scapy.ARP(pdst=network_ip_set + '/' + network_range_set)
         broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
@@ -64,6 +70,7 @@ def eagleye_main():
             clients_list.append(client_dict)
         return (clients_list)
 
+    # Function that displays result
     def print_result(results_list):
         try:
             global network_ip_set
@@ -103,6 +110,7 @@ def eagleye_main():
         except KeyboardInterrupt:
             exit_shell()
 
+    # Function that exit
     def exit_shell():
         from assets.functions import exit_main
         exit_main()
