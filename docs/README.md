@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/TRSTN4/EagleShell/"><img src="https://i.imgur.com/cEVAxmC.png" alt="EagleShell"></a>
+  <a href="https://github.com/TRSTN4/EagleShell/"><img src="https://i.imgur.com/8FZRu6g.png"></a>
 </h1>
 <h4 align="center">A high-quality pentesting tool.</h4>
 
@@ -28,7 +28,6 @@
   <a href="#support">Support</a> •
   <a href="#license">License</a>
 </p>
-
 ---
 
 ## About
@@ -68,7 +67,7 @@ When a **new version** is out, follow this method to _update_:
 ```
 cd EagleShell
 git checkout master
-git fetch
+git pull
 ```
 
 ## Features
