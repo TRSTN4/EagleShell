@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+# Variables for all the designs
 eagle = '''\u001b[36;1m
     ((
     \``.

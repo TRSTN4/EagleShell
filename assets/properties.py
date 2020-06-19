@@ -1,5 +1,12 @@
 #!/usr/bin/python3
 
-version = '1.3.7.4'
-clear_screen = 'clear'
+# How the version structure works.
+total_mass_updates = '1'
+total_modules = '3'
+total_categorys = '7'
 total_scripts = '5'
+version = total_mass_updates + '.' + total_modules + '.' + total_categorys + '.' + total_scripts
+
+# Variables that are used a lot.
+clear_screen = 'clear'
+

@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 
+# Imports all the needed variables
 from assets.properties import version
 from assets.properties import total_scripts
 
+# All the banners are stored here
 payloads_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Payloads | [Total] 0 Payloads Available'
 listeners_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Listeners | [Total] 0 Listeners Available'
 scripts_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Total] ' + total_scripts +' Scripts Available'
