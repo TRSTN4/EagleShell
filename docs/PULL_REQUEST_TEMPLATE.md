@@ -1,22 +1,22 @@
-<!--- Provide a general summary of your script or changes in the Title above. -->
+<- Provide a general summary of your script or changes in the Title above. ->
 
 ## Description
-<!--- Describe your new script or changes in detail. -->
+<- Describe your new script or changes in detail. ->
 
 ## Related issues
-<!--- If suggesting a new feature or change, please discuss it in an issue first. --> 
-<!--- If fixing a bug, there should be an issue describing it with steps to reproduce. -->
-<!--- If there is a issue, please link to the issue here. -->
+<- If suggesting a new feature or change, please discuss it in an issue first. -> 
+<- If fixing a bug, there should be an issue describing it with steps to reproduce. ->
+<- If there is a issue, please link to the issue here. ->
 
 ## Motivation and Context
-<!--- If there is a change instead of a script, why is this change is required? What problem does it solve? What brings in addition? -->
+<- If there is a change instead of a script, why is this change is required? What problem does it solve? What brings in addition? ->
 
 ## How has this been tested
-<!--- Please describe in detail how you tested your script or changes. -->
-<!--- Include details of the tests you ran. -->
+<- Please describe in detail how you tested your script or changes. ->
+<- Include details of the tests you ran. ->
 
 ## Features of the scripts or changes
-<!--- What types of scripts or changes does your code introduce? Put an `x` in all the boxes that apply: -->
+<- What types of scripts or changes does your code introduce? Put an `x` in all the boxes that apply: ->
 
 - [ ] Docs change / refactoring.
 - [ ] Introducing a new script (introducing a new and handy script for EagleShell.).
@@ -24,7 +24,7 @@
 - [ ] Breaking change (fix or feature that would cause existing functionality to change/break).
 
 ## Checklist
-<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<- Go over all the following points, and put an `x` in all the boxes that apply. ->
 
 - [ ] My code follows the code style of this project.
 - [ ] My change requires a change to the documentation.
