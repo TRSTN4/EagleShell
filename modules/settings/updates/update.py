@@ -2,7 +2,7 @@
 
 # EagleShell Updater
 
-# Imports all the needed packages
+# Imports needed packages
 from assets.banners import update_banner
 from assets.designs import *
 from assets.properties import clear_screen

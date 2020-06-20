@@ -53,7 +53,7 @@ We **heavily** support people who have **created** a python script and want to s
 ```
 git clone https://github.com/TRSTN4/EagleShell.git
 cd EagleShell
-python3 eagleshell.py
+python3 setup.py
 ```
 
 ## Updating

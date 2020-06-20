@@ -10,7 +10,6 @@ import os
 import scapy.all as scapy
 import netifaces
 
-
 # Main function
 def eagleye_main():
 
