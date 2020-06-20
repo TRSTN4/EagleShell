@@ -28,7 +28,6 @@
   <a href="#support">Support</a> •
   <a href="#license">License</a>
 </p>
-
 ---
 
 ## About
@@ -59,11 +58,16 @@ python3 eagleshell.py
 
 ## Updating
 
-When a **new version** is out, follow this method to _update_:
+When a **new version** is out, you have **two methods** to _update_:
 
-##### Updating and update steps:
+##### 1. Use the built-in update.py
 
-### Linux Updating
+```
+cd EagleShell
+python3 update.py
+```
+
+##### 2. Use Git Commands
 
 ```
 cd EagleShell
@@ -72,6 +76,8 @@ git pull
 ```
 
 ## Features
+
+This _config_ is **updated** (at a random time), so make sure you **come back** here to **check** for **updates**.Features
 
 |                           | 🦅 EagleShell |
 | ------------------------- | :----------: |

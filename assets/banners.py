@@ -17,3 +17,4 @@ machanger_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scri
 eagleye_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Scanning | [Script] EAGLEYE'
 eaglscan_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Scanning | [Script] EAGLESCAN'
 pgen_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Exploitation | [Script] PGEN'
+update_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Settings | [Option] Updates | [Script] UPDATE'
