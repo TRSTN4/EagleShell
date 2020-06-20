@@ -2,7 +2,7 @@
 
 # EagleShell Updater
 
-# Imports needed packages
+# Imports all the needed packages
 from assets.banners import update_banner
 from assets.designs import *
 from assets.properties import clear_screen
@@ -38,11 +38,13 @@ def update_main():
                 print('\u001b[32m[+] Update Complete!')
                 print('\u001b[0m')
                 os.system('sleep 3')
+                os.system(clear_screen)
                 exit()
             else:
                 print('\n\u001b[31m[-] Please make sure to run this in the EagleShell directory.')
                 print('\u001b[0m')
                 os.system('sleep 3')
+                os.system(clear_screen)
                 exit()
         except KeyboardInterrupt:
             from assets.functions import exit_main
