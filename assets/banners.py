@@ -19,3 +19,4 @@ eaglscan_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scrip
 pgen_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Exploitation | [Script] PGEN'
 update_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Settings | [Option] Update | [Script] UPDATE'
 setup_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] None | [Option] None | [Script] SETUP'
+arpspoof_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] ARPSPOOF'

