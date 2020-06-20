@@ -31,8 +31,10 @@ def setup_main():
             setup_select = input('\u001b[33mSETUP \u001b[37m> ').lower()
             if setup_select == 'yes' or setup_select == 'y':
                 print('\n\u001b[32m[+] Installing EagleShell...')
-                os.system('pip install netifaces')
-                os.system('pip install scapy')
+                os.system('pip install netifaces >/dev/null 2>&1')
+                os.system('pip3 install netifaces >/dev/null 2>&1')
+                os.system('pip install scapy >/dev/null 2>&1')
+                os.system('pip3 install scapy >/dev/null 2>&1')
                 print('\u001b[32m[+] Install Complete!')
                 print('\u001b[0m')
                 exit()
