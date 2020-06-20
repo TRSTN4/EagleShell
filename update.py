@@ -3,7 +3,7 @@
 # EagleShell Updater Shortcut
 
 
-# Main update function
+# Main shortcut update function
 def update_shortcut_main():
 
     # Function that imports update script
