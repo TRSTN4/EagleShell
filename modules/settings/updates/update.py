@@ -31,6 +31,8 @@ def update_main():
             update_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
             if update_select == 'yes' or update_select == 'y':
                 print('\u001b[32m[+] Updating EagleShell...')
+                os.system('git fetch >/dev/null 2>&1')
+                os.system('git reset --hard origin/master >/dev/null 2>&1')
                 os.system('git checkout master >/dev/null 2>&1')
                 os.system('git pull >/dev/null 2>&1')
                 print('\u001b[32m[+] Update Complete!')
