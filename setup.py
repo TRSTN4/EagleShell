@@ -37,11 +37,13 @@ def setup_main():
                 os.system('pip3 install scapy >/dev/null 2>&1')
                 print('\u001b[32m[+] Install Complete!')
                 print('\u001b[0m')
+                os.system('sleep 3')
                 os.system(clear_screen)
                 exit()
             else:
                 print('\n\u001b[31m[-] Setup cancelled.')
                 print('\u001b[0m')
+                os.system('sleep 3')
                 os.system(clear_screen)
                 exit()
         except KeyboardInterrupt:
