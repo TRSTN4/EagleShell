@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="aee5740f-7dc1-4bdd-99e9-a29ac1f8d63d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1dPtcUaHNn6uPVPEOBO1PDWIsNA" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Github\EagleShell\modules\scripts\exploitation" />
+      <recent name="D:\eagleshell\modules\scripts\scanning" />
+      <recent name="D:\eagleshell\modules\scripts\other" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.eagleshell">
+    <configuration name="eagleshell" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="eagleshell" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/eagleshell.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="rsgen (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="eagleshell" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/modules/scripts/exploitation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/modules/scripts/exploitation/rsgen.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="rsgen" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="eagleshell" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/modules/scripts/other" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/modules/scripts/other/rsgen.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.eagleshell" />
+        <item itemvalue="Python.rsgen (1)" />
+        <item itemvalue="Python.rsgen" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="aee5740f-7dc1-4bdd-99e9-a29ac1f8d63d" name="Default Changelist" comment="" />
+      <created>1592338635505</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1592338635505</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-235" y="-1980" key="#Project_Structure" timestamp="1592339008443">
+      <screen x="-788" y="-2160" width="1920" height="1040" />
+    </state>
+    <state x="-235" y="-1980" key="#Project_Structure/0.0.1536.824/-788.-2160.1920.1040@-788.-2160.1920.1040" timestamp="1592339008443" />
+    <state width="1878" height="511" key="GridCell.Tab.0.bottom" timestamp="1592554536447">
+      <screen x="-788" y="-2160" width="1920" height="1040" />
+    </state>
+    <state width="1878" height="511" key="GridCell.Tab.0.bottom/0.0.1536.824/-788.-2160.1920.1040@-788.-2160.1920.1040" timestamp="1592554536447" />
+    <state width="1878" height="511" key="GridCell.Tab.0.center" timestamp="1592554536447">
+      <screen x="-788" y="-2160" width="1920" height="1040" />
+    </state>
+    <state width="1878" height="511" key="GridCell.Tab.0.center/0.0.1536.824/-788.-2160.1920.1040@-788.-2160.1920.1040" timestamp="1592554536447" />
+    <state width="1878" height="511" key="GridCell.Tab.0.left" timestamp="1592554536446">
+      <screen x="-788" y="-2160" width="1920" height="1040" />
+    </state>
+    <state width="1878" height="511" key="GridCell.Tab.0.left/0.0.1536.824/-788.-2160.1920.1040@-788.-2160.1920.1040" timestamp="1592554536446" />
+    <state width="1878" height="511" key="GridCell.Tab.0.right" timestamp="1592554536447">
+      <screen x="-788" y="-2160" width="1920" height="1040" />
+    </state>
+    <state width="1878" height="511" key="GridCell.Tab.0.right/0.0.1536.824/-788.-2160.1920.1040@-788.-2160.1920.1040" timestamp="1592554536447" />
+    <state x="-132" y="-1814" key="com.intellij.ide.util.TipDialog" timestamp="1592643696298">
+      <screen x="-788" y="-2160" width="1920" height="1040" />
+    </state>
+    <state x="-132" y="-1814" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-788.-2160.1920.1040@-788.-2160.1920.1040" timestamp="1592643696298" />
+    <state x="656" y="346" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592464020775" />
+    <state x="358" y="387" key="run.anything.popup" timestamp="1592393110217">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="358" y="387" key="run.anything.popup/0.0.1536.824/-788.-2160.1920.1040@-788.-2160.1920.1040" timestamp="1592393110217" />
+    <state x="624" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1592465934991">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-165" y="-1934" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-788.-2160.1920.1040@-788.-2160.1920.1040" timestamp="1592428818605" />
+    <state x="624" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1592465934991" />
+  </component>
+</project>
