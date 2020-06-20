@@ -27,7 +27,8 @@ def eaglehell_main():
             print('\t1): Eagle Payloads')
             print('\t2): Eagle Listeners')
             print('\t3): Eagle Scripts')
-            print('\t4): Exit')
+            print('\t4): Settings')
+            print('\t5): Exit')
             print('')
             while True:
                 menu_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
@@ -38,6 +39,8 @@ def eaglehell_main():
                 elif menu_select == '3':
                     scripts()
                 elif menu_select == '4':
+                    settings()
+                elif menu_select == '5':
                     exit_shell()
                 elif menu_select == 'help' or menu_select == '?':
                     from assets.commands import help_list
@@ -419,6 +422,53 @@ def eaglehell_main():
                 elif miscellaneous_select == 'exit' or miscellaneous_select == 'quit':
                     exit_shell()
                 elif miscellaneous_select == 'version':
+                    from assets.commands import eagleshell_version
+                    eagleshell_version()
+                else:
+                    print('\u001b[31m[-] Invalid Input.')
+                    continue
+        except KeyboardInterrupt:
+            exit_shell()
+
+    # Function that shows all settings
+    def settings():
+        try:
+            os.system(clear_screen)
+            print(logo)
+            print('')
+            print(line)
+            print(payloads_banner)
+            print(line)
+            print('')
+            print(author)
+            print('Options:')
+            print('')
+            print('\t1): Update')
+            print('\t2): Soon')
+            print('\t3): Version')
+            print('\t4): Back')
+            print('\t5): Exit')
+            print('')
+            while True:
+                settings_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
+                if settings_select == '1':
+                    from modules.settings.updates.update import update_main
+                    update_main()
+                elif settings_select == '2':
+                    pass
+                elif settings_select == '3':
+                    from assets.commands import eagleshell_version
+                    eagleshell_version()
+                elif settings_select == '4':
+                    menu()
+                elif settings_select == '5':
+                    exit_shell()
+                elif settings_select == 'help' or settings_select == '?':
+                    from assets.commands import help_list
+                    help_list()
+                elif settings_select == 'exit' or settings_select == 'quit':
+                    exit_shell()
+                elif settings_select == 'version':
                     from assets.commands import eagleshell_version
                     eagleshell_version()
                 else:

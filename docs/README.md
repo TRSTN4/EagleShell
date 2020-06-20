@@ -71,6 +71,8 @@ python3 update.py
 
 ```
 cd EagleShell
+git fetch
+git reset --hard origin/master
 git checkout master
 git pull
 ```
