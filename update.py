@@ -37,10 +37,12 @@ def update_main():
                 os.system('git pull >/dev/null 2>&1')
                 print('\u001b[32m[+] Update Complete!')
                 print('\u001b[0m')
+                os.system(clear_screen)
                 exit()
             else:
                 print('\n\u001b[31m[-] Please make sure to run this in the EagleShell directory.')
                 print('\u001b[0m')
+                os.system(clear_screen)
                 exit()
         except KeyboardInterrupt:
             from assets.functions import exit_main
