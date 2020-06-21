@@ -1,64 +1,44 @@
-#!/usr/bin/python3
+#!/usr/bin.env python
 
-# MaChanger MAC Changer Script
-
-# Imports all the needed variables and packages
-from assets.banners import machanger_banner
-from assets.designs import *
-from assets.properties import clear_screen
-import os
-import netifaces
+import subprocess
+import optparse
+import re
 
 
-# The main function
-def machanger_main():
+def get_arguments():
+    parser = optparse.OptionParser()
+    parser.add_option("-i", "--interface", dest="interface", help="Interface to change its MAC address")
+    parser.add_option("-m", "--mac", dest="new_mac", help="New MAC address")
+    (options, arguments) = parser.parse_args()
+    if not options.interface:
+        parser.error("[-] Please specify an interface, use --help for more info")
+    elif not options.new_mac:
+        parser.error("[-] Please specify a new mac, use --help for more info")
+    return options
 
-    # Function where it takes user input
-    def configuration():
-        try:
-            global interface_set
-            global mac_set
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(machanger_banner)
-            print(line)
-            print('')
-            print(author)
-            print('Interface:')
-            ips()
-            print('')
-            while True:
-                interface_set = input('\u001b[33mINTERFACE \u001b[37m> ').lower()
-                mac_set = input('\u001b[33mNEW MAC \u001b[37m> ').lower()
-                change_mac()
-        except KeyboardInterrupt:
-            exit_shell()
+def change_mac(interface, new_mac):
+    print("[+] Changing MAC address for " + interface + " to " + new_mac)
+    subprocess.call(["ifconfig", interface, "down"])
+    subprocess.call(["ifconfig", interface, "hw", "ether", new_mac])
+    subprocess.call(["ifconfig", interface, "up"])
 
-    # Function that displays all available and unavailable interfaces
-    def ips():
-        x = netifaces.interfaces()
+def get_current_mac(interface):
+    ifconfig_result = subprocess.check_output(["ifconfig", interface])
+    mac_address_search_result = re.search(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w", ifconfig_result)
+    if mac_address_search_result:
+        return mac_address_search_result.group(0)
+    else:
+        print("[-] Could not read MAC address.")
 
-        for i in x:
-            if i == 'wlan0' or i == 'wlan1' or i == 'wlan2' or i == 'wlan3' or i == 'mon0' or i == 'mon1' or i == 'mon2' or i == 'mon3' or i == 'wlp5s0' or i == 'wlp5s1' or i == 'wlp5s2' or i == 'wlp5s3':
-                print('\n\t[+] Available Interface: ' + i)
-            elif i != 'lo' or i != 'eth0' or i != 'eth1' or i != 'eth2' or i != 'eth3' or i != 'tun0' or i != 'tun1' or i != 'tun2' or i != 'tun3':
-                print('\n\t[-] Unavailable Interface: ' + i)
+options = get_arguments()
 
-    # Function that will change the mac address
-    def change_mac():
-        print("[+] Changing MAC address for " + interface_set + " to " + mac_set + ' >/dev/null 2>&1')
-        os.system("ifconfig " + interface_set + " down" + ' >/dev/null 2>&1')
-        os.system("ifconfig " + interface_set + " hw " + " ether " + mac_set + ' >/dev/null 2>&1')
-        os.system("ifconfig " + interface_set + " up" + ' >/dev/null 2>&1')
+current_mac = get_current_mac(options.interface)
+print("Current MAC = " + str(current_mac))
 
-    # Function that
-    def exit_shell():
-        from assets.functions import exit_main
-        exit_main()
+change_mac(options.interface, options.new_mac)
 
-    configuration()
-
-
-machanger_main()
+current_mac = get_current_mac(options.interface)
+if current_mac == options.new_mac:
+    print("[+] MAC address was successfully changed to " + current_mac)
+else:
+    print("[-] MAC address did not get changed.")
