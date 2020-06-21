@@ -397,8 +397,8 @@ def eaglehell_main():
             print(author)
             print('Scripts:')
             print('')
-            print('\t1): MACHANGER - Change MAC from a Wireless Adapter')
-            print('\t2): Soon')
+            print('\t1): MACHANGER - Change MAC Address')
+            print('\t2): ARPSPOOF - ARP Spoofer')
             print('\t3): Soon')
             print('\t4): Back')
             print('\t5): Exit')
@@ -409,7 +409,8 @@ def eaglehell_main():
                     from modules.scripts.miscellaneous.machanger import machanger_main
                     machanger_main()
                 elif miscellaneous_select == '2':
-                    pass
+                    from modules.scripts.miscellaneous.arp_spoofer import arpspoof_main
+                    arpspoof_main()
                 elif miscellaneous_select == '3':
                     pass
                 elif miscellaneous_select == '4':
