@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+# PacketSniffer Packet Sniffer Script
+
 # Imports all needed variables and packages
 from assets.banners import packetsniffer_banner
 from assets.designs import *

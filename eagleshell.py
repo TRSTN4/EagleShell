@@ -24,18 +24,18 @@ def eaglehell_main():
             print(author)
             print('Modules:')
             print('')
-            #print('\t1): Eagle Payloads')
-            #print('\t2): Eagle Listeners')
+            # print('\t1): Eagle Payloads')
+            # print('\t2): Eagle Listeners')
             print('\t1): Eagle Scripts')
             print('\t2): Settings')
             print('\t3): Exit')
             print('')
             while True:
                 menu_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
-                #if menu_select == '1':
-                    #payloads()
-                #elif menu_select == '2':
-                    #listeners()
+                # if menu_select == '1':
+                    # payloads()
+                # elif menu_select == '2':
+                    # listeners()
                 if menu_select == '1':
                     scripts()
                 elif menu_select == '2':
