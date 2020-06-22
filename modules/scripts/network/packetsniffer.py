@@ -5,6 +5,7 @@ from assets.banners import packetsniffer_banner
 from assets.designs import *
 from assets.properties import clear_screen
 import os
+import netifaces
 import scapy.all as scapy
 from scapy.layers import http
 

@@ -166,9 +166,10 @@ def eaglehell_main():
             print('\t2): Enumeration')
             print('\t3): Exploitation')
             print('\t4): Privilege Escalation')
-            print('\t5): Miscellaneous')
-            print('\t6): Back')
-            print('\t7): Exit')
+            print('\t5): Network')
+            print('\t6): Miscellaneous')
+            print('\t7): Back')
+            print('\t8): Exit')
             print('')
             while True:
                 scripts_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
