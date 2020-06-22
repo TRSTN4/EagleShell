@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+# MaChanger MAC Address Changer Script
+
 # Imports all the needed variables and packages
 from assets.banners import machanger_banner
 from assets.designs import *

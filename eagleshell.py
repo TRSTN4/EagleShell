@@ -181,10 +181,12 @@ def eaglehell_main():
                 elif scripts_select == '4':
                     privilege_escalation()
                 elif scripts_select == '5':
-                    miscellaneous()
+                    network()
                 elif scripts_select == '6':
-                    menu()
+                    miscellaneous()
                 elif scripts_select == '7':
+                    menu()
+                elif scripts_select == '8':
                     exit_shell()
                 elif scripts_select == 'help' or scripts_select == '?':
                     from assets.commands import help_list
@@ -398,7 +400,7 @@ def eaglehell_main():
             print('Scripts:')
             print('')
             print('\t1): MACHANGER - Change MAC Address')
-            print('\t2): ARPSPOOF - ARP Spoofer')
+            print('\t2): Soon')
             print('\t3): Soon')
             print('\t4): Back')
             print('\t5): Exit')
@@ -409,8 +411,7 @@ def eaglehell_main():
                     from modules.scripts.miscellaneous.machanger import machanger_main
                     machanger_main()
                 elif miscellaneous_select == '2':
-                    from modules.scripts.miscellaneous.arpspoof import arpspoof_main
-                    arpspoof_main()
+                    pass
                 elif miscellaneous_select == '3':
                     pass
                 elif miscellaneous_select == '4':
@@ -423,6 +424,52 @@ def eaglehell_main():
                 elif miscellaneous_select == 'exit' or miscellaneous_select == 'quit':
                     exit_shell()
                 elif miscellaneous_select == 'version':
+                    from assets.commands import eagleshell_version
+                    eagleshell_version()
+                else:
+                    print('\u001b[31m[-] Invalid Input.')
+                    continue
+        except KeyboardInterrupt:
+            exit_shell()
+
+    def network():
+        try:
+            os.system(clear_screen)
+            print(logo)
+            print('')
+            print(line)
+            print(miscellaneous_banner)
+            print(line)
+            print('')
+            print(author)
+            print('Scripts:')
+            print('')
+            print('\t1): ARPSPOOF - ARP Spoofer')
+            print('\t2): PACKETSNIFFER - Packet Sniffer')
+            print('\t3): Soon')
+            print('\t4): Back')
+            print('\t5): Exit')
+            print('')
+            while True:
+                network_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
+                if network_select == '1':
+                    from modules.scripts.network.arpspoof import arpspoof_main
+                    arpspoof_main()
+                elif network_select == '2':
+                    from modules.scripts.network.packetsniffer import packetsniffer_main
+                    packetsniffer_main()
+                elif network_select == '3':
+                    pass
+                elif network_select == '4':
+                    scripts()
+                elif network_select == '5':
+                    exit_shell()
+                elif network_select == 'help' or network_select == '?':
+                    from assets.commands import help_list
+                    help_list()
+                elif network_select == 'exit' or network_select == 'quit':
+                    exit_shell()
+                elif network_select == 'version':
                     from assets.commands import eagleshell_version
                     eagleshell_version()
                 else:
