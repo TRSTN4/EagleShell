@@ -51,8 +51,14 @@ def subscan_main():
                     os.system('cd wordlists/subdomains/')
                     subdomain_list = "subdomains-100.txt"
                 elif wordlist_set == '2':
+                    os.system('cd wordlists/subdomains/')
+                    subdomain_list = "subdomains-500.txt"
                 elif wordlist_set == '3':
+                    os.system('cd wordlists/subdomains/')
+                    subdomain_list = "subdomains-1000.txt"
                 elif wordlist_set == '4':
+                    os.system('cd wordlists/subdomains/')
+                    subdomain_list = "subdomains-10000.txt"
                 else:
                     print('\u001b[31m[-] Invalid Input.')
                     continue
