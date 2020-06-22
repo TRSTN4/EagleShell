@@ -35,6 +35,8 @@ def setup_main():
                 os.system('pip3 install netifaces >/dev/null 2>&1')
                 os.system('pip install scapy >/dev/null 2>&1')
                 os.system('pip3 install scapy >/dev/null 2>&1')
+                os.system('pip3 install requests >/dev/null 2>&1')
+                os.system('pip3 install requests >/dev/null 2>&1')
                 print('\u001b[32m[+] Install Complete!')
                 print('\u001b[0m')
                 os.system('sleep 3')

@@ -21,3 +21,4 @@ update_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Settings | [O
 setup_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] None | [Option] None | [Script] SETUP'
 arpspoof_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Network | [Script] ARPSPOOF'
 packetsniffer_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Network | [Script] PACKETSNIFFER'
+subscan_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Scanning | [Script] SUBSCAN'

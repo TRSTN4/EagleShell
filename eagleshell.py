@@ -231,7 +231,8 @@ def eaglehell_main():
                     from modules.scripts.scanning.eaglescan import eaglescan_main
                     eaglescan_main()
                 elif scanning_select == '3':
-                    pass
+                    from modules.scripts.scanning.subscan import subscan_main
+                    subscan_main()
                 elif scanning_select == '4':
                     scripts()
                 elif scanning_select == '5':
