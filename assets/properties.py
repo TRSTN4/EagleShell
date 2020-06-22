@@ -4,7 +4,7 @@
 total_mass_updates = '1'
 total_modules = '4'
 total_categorys = '7'
-total_scripts = '5'
+total_scripts = '7'
 version = total_mass_updates + '.' + total_modules + '.' + total_categorys + '.' + total_scripts
 
 # Variables that are used a lot.
