@@ -24,23 +24,23 @@ def eaglehell_main():
             print(author)
             print('Modules:')
             print('')
-            print('\t1): Eagle Payloads')
-            print('\t2): Eagle Listeners')
-            print('\t3): Eagle Scripts')
-            print('\t4): Settings')
-            print('\t5): Exit')
+            #print('\t1): Eagle Payloads')
+            #print('\t2): Eagle Listeners')
+            print('\t1): Eagle Scripts')
+            print('\t2): Settings')
+            print('\t3): Exit')
             print('')
             while True:
                 menu_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
+                #if menu_select == '1':
+                    #payloads()
+                #elif menu_select == '2':
+                    #listeners()
                 if menu_select == '1':
-                    payloads()
-                elif menu_select == '2':
-                    listeners()
-                elif menu_select == '3':
                     scripts()
-                elif menu_select == '4':
+                elif menu_select == '2':
                     settings()
-                elif menu_select == '5':
+                elif menu_select == '3':
                     exit_shell()
                 elif menu_select == 'help' or menu_select == '?':
                     from assets.commands import help_list
