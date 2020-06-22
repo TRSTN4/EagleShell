@@ -25,6 +25,38 @@ def subscan_main():
             print('\tExample: google.com')
             print('')
             website_set = input('\u001b[33mWEBSITE \u001b[37m> ').lower()
+            wordlist()
+        except KeyboardInterrupt:
+            exit_shell()
+
+    def wordlist():
+        try:
+            global wordlist_set
+            global subdomain_list
+            os.system(clear_screen)
+            print(logo)
+            print('')
+            print(line)
+            print(subscan_banner)
+            print(line)
+            print('')
+            print(author)
+            print('Configuration:')
+            print('')
+            print('\tExample: google.com')
+            print('')
+            while True:
+                wordlist_set = input('\u001b[33mWEBSITE \u001b[37m> ').lower()
+                if wordlist_set == '1':
+                    os.system('cd wordlists/subdomains/')
+                    subdomain_list = "subdomains-100.txt"
+                elif wordlist_set == '2':
+                elif wordlist_set == '3':
+                elif wordlist_set == '4':
+                else:
+                    print('\u001b[31m[-] Invalid Input.')
+                    continue
+
             subsdomain_scan()
         except KeyboardInterrupt:
             exit_shell()
@@ -34,7 +66,7 @@ def subscan_main():
         domain = website_set
 
         # read all subdomains
-        file = open("subdomains.txt")
+        file = open(subdomain_list)
         # read all content
         content = file.read()
         # split by new lines
