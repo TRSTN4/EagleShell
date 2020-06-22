@@ -218,7 +218,7 @@ def eaglehell_main():
             print('')
             print('\t1): EAGLEYE - Eagle Network Scanner')
             print('\t2): EAGLESCAN - Eagle Port Scanner')
-            print('\t3): Soon')
+            print('\t3): SUBSCAN - Sub Domain Scanner')
             print('\t4): Back')
             print('\t5): Exit')
             print('')
