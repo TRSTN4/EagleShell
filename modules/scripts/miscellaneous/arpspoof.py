@@ -3,8 +3,6 @@
 from assets.banners import arpspoof_banner
 from assets.designs import *
 from assets.properties import clear_screen
-from threading import Timer
-from subprocess import Popen, PIPE
 import scapy.all as scapy
 import time
 import sys
@@ -64,10 +62,6 @@ def arpspoof_main():
         packet = scapy.ARP(op=2, pdst=destination_ip, hwdst=destination_mac, psrc=source_ip, hwsrc=source_mac)
         scapy.send(packet, count=4, verbose=False)
 
-    def reset_tables():
-        restore(rhost_set, gateway_set)
-        restore(gateway_set, rhost_set)
-
     def process():
         global sent_packets_count
         try:
@@ -96,7 +90,8 @@ def arpspoof_main():
                 print('')
         except KeyboardInterrupt:
             print('\n\u001b[32;1m[+] Resetting ARP Tables')
-            reset_tables()
+            restore(rhost_set, gateway_set)
+            restore(gateway_set, rhost_set)
             result()
 
     def result():
