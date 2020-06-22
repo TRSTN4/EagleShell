@@ -9,6 +9,6 @@ import os
 def exit_main():
     print('\n\u001b[31m[-] Exiting EagleShell')
     print('\u001b[0m')
-    os.system('sleep 3')
+    os.system('sleep 2')
     os.system(clear_screen)
     exit()

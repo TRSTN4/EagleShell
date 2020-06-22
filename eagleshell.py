@@ -409,7 +409,7 @@ def eaglehell_main():
                     from modules.scripts.miscellaneous.machanger import machanger_main
                     machanger_main()
                 elif miscellaneous_select == '2':
-                    from modules.scripts.miscellaneous.arp_spoofer import arpspoof_main
+                    from modules.scripts.miscellaneous.arpspoof import arpspoof_main
                     arpspoof_main()
                 elif miscellaneous_select == '3':
                     pass
