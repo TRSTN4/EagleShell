@@ -51,6 +51,7 @@ We **heavily** support people who have **created** a python script and want to s
 ### Linux Installation
 
 ```
+cd /opt
 git clone https://github.com/TRSTN4/EagleShell.git
 cd EagleShell
 python3 setup.py
@@ -63,6 +64,7 @@ When a **new version** is out, you have **two methods** to _update_:
 ##### 1. Use the built-in update.py
 
 ```
+cd /opt
 cd EagleShell
 python3 update.py
 ```
@@ -70,6 +72,7 @@ python3 update.py
 ##### 2. Use Git Commands
 
 ```
+cd /opt
 cd EagleShell
 git fetch
 git reset --hard origin/master
