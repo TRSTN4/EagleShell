@@ -404,8 +404,9 @@ def eaglehell_main():
             print('\t1): MACHANGER - Change MAC Address')
             print('\t2): EXIF - Image Metadata Extractor')
             print('\t3): CRYPT - Encrypter and Decrypter')
-            print('\t4): Back')
-            print('\t5): Exit')
+            print('\t4): HASHING - Text and File Hashing')
+            print('\t5): Back')
+            print('\t6): Exit')
             print('')
             while True:
                 miscellaneous_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
@@ -419,8 +420,11 @@ def eaglehell_main():
                     from modules.scripts.miscellaneous.crypt import crypt_main
                     crypt_main()
                 elif miscellaneous_select == '4':
-                    scripts()
+                    from modules.scripts.miscellaneous.hashing import hashing_main
+                    hashing_main()
                 elif miscellaneous_select == '5':
+                    scripts()
+                elif miscellaneous_select == '6':
                     exit_shell()
                 elif miscellaneous_select == 'help' or miscellaneous_select == '?':
                     from assets.commands import help_list
