@@ -150,7 +150,7 @@ def hashing_main():
                 exit_shell()
             except FileNotFoundError:
                 print('\u001b[31m[-] Invalid Input.')
-                hashing_files()
+                set_file_hash_input()
 
         def read_file(file):
             try:
