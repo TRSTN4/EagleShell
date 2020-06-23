@@ -403,7 +403,7 @@ def eaglehell_main():
             print('')
             print('\t1): MACHANGER - Change MAC Address')
             print('\t2): EXIF - Image Metadata Extractor')
-            print('\t3): Soon')
+            print('\t3): CRYPT - Encrypter and Decrypter')
             print('\t4): Back')
             print('\t5): Exit')
             print('')
@@ -416,7 +416,8 @@ def eaglehell_main():
                     from modules.scripts.miscellaneous.exif import exif_main
                     exif_main()
                 elif miscellaneous_select == '3':
-                    pass
+                    from modules.scripts.miscellaneous.crypt import crypt_main
+                    crypt_main()
                 elif miscellaneous_select == '4':
                     scripts()
                 elif miscellaneous_select == '5':

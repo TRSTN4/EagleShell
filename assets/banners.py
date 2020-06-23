@@ -23,3 +23,5 @@ arpspoof_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scrip
 packetsniffer_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Network | [Script] PACKETSNIFFER'
 subscan_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Scanning | [Script] SUBSCAN'
 exif_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] EXIF'
+crypt_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] CRYPT'
+hashing_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] HASHING'
