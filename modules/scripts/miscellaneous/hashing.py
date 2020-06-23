@@ -7,7 +7,6 @@ from assets.banners import hashing_banner
 from assets.designs import *
 from assets.properties import clear_screen
 import hashlib
-import sys
 import os
 
 
@@ -150,6 +149,11 @@ def hashing_main():
                 exit_shell()
             except FileNotFoundError:
                 print('\u001b[31m[-] Invalid Input.')
+                os.system('sleep 2')
+                set_file_hash_input()
+            except IsADirectoryError:
+                print('\u001b[31m[-] Invalid Input.')
+                os.system('sleep 2')
                 set_file_hash_input()
 
         def read_file(file):
@@ -174,10 +178,9 @@ def hashing_main():
         def file_hashing():
             try:
                 global file_content
-                if __name__ == "__main__":
-                    # read some file
-                    file_content = read_file(hashing_file_path)
-                    result_file_hashing()
+                # read some file
+                file_content = read_file(hashing_file_path)
+                result_file_hashing()
             except KeyboardInterrupt:
                 exit_shell()
 
@@ -193,22 +196,22 @@ def hashing_main():
                 print(author)
                 print('Output:')
                 print('')
-                print('\tTEXT SET: ' + str(hashing_text_set))
+                print('\tFILE SET: ' + hashing_file_path)
                 print('')
                 # some chksums:
                 # hash with MD5 (not recommended)
-                print("MD5:", hashlib.md5(file_content).hexdigest())
+                print("\t\u001b[31mMD5:", hashlib.md5(file_content).hexdigest())
                 # hash with SHA-2 (SHA-256 & SHA-512)
-                print("SHA-256:", hashlib.sha256(file_content).hexdigest())
-                print("SHA-512:", hashlib.sha512(file_content).hexdigest())
+                print("\t\u001b[32mSHA-256:", hashlib.sha256(file_content).hexdigest())
+                print("\t\u001b[33mSHA-512:", hashlib.sha512(file_content).hexdigest())
                 # hash with SHA-3
-                print("SHA-3-256:", hashlib.sha3_256(file_content).hexdigest())
-                print("SHA-3-512:", hashlib.sha3_512(file_content).hexdigest())
+                print("\t\u001b[34mSHA-3-256:", hashlib.sha3_256(file_content).hexdigest())
+                print("\t\u001b[35mSHA-3-512:", hashlib.sha3_512(file_content).hexdigest())
                 # hash with BLAKE2
                 # 256-bit BLAKE2 (or BLAKE2s)
-                print("BLAKE2c:", hashlib.blake2s(file_content).hexdigest())
+                print("\t\u001b[36mBLAKE2c:", hashlib.blake2s(file_content).hexdigest())
                 # 512-bit BLAKE2 (or BLAKE2b)
-                print("BLAKE2b:", hashlib.blake2b(file_content).hexdigest())
+                print("\t\u001b[36mBLAKE2b:", hashlib.blake2b(file_content).hexdigest())
                 print('\u001b[37m')
                 print('\t1): New')
                 print('\t2): Exit')
