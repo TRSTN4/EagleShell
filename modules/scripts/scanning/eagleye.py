@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-# EagleEye Network Scanner Script
+# EagleEye - Network Scanner Script
 
 # Imports all needed variables and packages
 from assets.banners import eagleye_banner
 from assets.designs import *
 from assets.properties import clear_screen
+from eagleshell import eagleshell_main
 import os
 import scapy.all as scapy
 import netifaces
@@ -33,9 +34,20 @@ def eagleye_main():
             print('\tNetwork IP Example: 10.10.10.0')
             print('\tNetwork Range Example: 24')
             print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
+            print('')
             while True:
                 network_ip_set = input('\u001b[33mNETWORK IP \u001b[37m> ').lower()
+                if network_ip_set == 'z':
+                    eagleye_main()
+                elif network_ip_set == 'x':
+                    exit_shell()
                 network_range_set = input('\u001b[33mNETWORK RANGE \u001b[37m> ').lower()
+                if network_range_set == 'z':
+                    eagleye_main()
+                elif network_range_set == 'x':
+                    exit_shell()
                 scan_result = scan()
                 print_result(scan_result)
         except KeyboardInterrupt:
@@ -94,14 +106,17 @@ def eagleye_main():
                 else:
                     print('\t' + client["ip"] + "\t\t" + client["mac"])
             print('')
-            print('\t1): New')
-            print('\t2): Exit')
+            print('\tY): New')
+            print('\tZ): Menu')
+            print('\tX): Exit')
             print('')
             while True:
                 eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
-                if eagleshell_cmd == '1':
+                if eagleshell_cmd == 'y':
                     eagleye_main()
-                elif eagleshell_cmd == '2':
+                elif eagleshell_cmd == 'z':
+                    eagleye_main()
+                elif eagleshell_cmd == 'x':
                     exit_shell()
                 else:
                     print('\u001b[31m[-] Invalid Input.')

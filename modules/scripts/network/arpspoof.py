@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-# ARPSpoofer ARP Spoofer Script
+# ARPSpoof - ARP Spoof Script
 
 # Imports all needed variables and packages
 from assets.banners import arpspoof_banner
 from assets.designs import *
 from assets.properties import clear_screen
+from eagleshell import eagleshell_main
 import scapy.all as scapy
 import time
 import sys
@@ -36,9 +37,20 @@ def arpspoof_main():
             print('\tGATEWAY = Router IP')
             print('\tExample: 192.168.1.2')
             print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
+            print('')
             while True:
                 rhost_set = input('\u001b[33mRHOST \u001b[37m> ').lower()
+                if rhost_set == 'z':
+                    arpspoof_main()
+                elif rhost_set == 'x':
+                    exit_shell()
                 gateway_set = input('\u001b[33mGATEWAY \u001b[37m> ').lower()
+                if gateway_set == 'z':
+                    arpspoof_main()
+                elif gateway_set == 'x':
+                    exit_shell()
                 process()
         except KeyboardInterrupt:
             exit_shell()
@@ -121,14 +133,17 @@ def arpspoof_main():
             print('')
             print('\tPACKETS SENT: ' + str(sent_packets_count))
             print('')
-            print('\t1): New')
-            print('\t2): Exit')
+            print('\tY): New')
+            print('\tZ): Menu')
+            print('\tX): Exit')
             print('')
             while True:
-                result_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
-                if result_cmd == '1':
+                eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
+                if eagleshell_cmd == 'y':
                     arpspoof_main()
-                elif result_cmd == '2':
+                elif eagleshell_cmd == 'z':
+                    eagleshell_main()
+                elif eagleshell_cmd == 'x':
                     exit_shell()
                 else:
                     print('\u001b[31m[-] Invalid Input.')

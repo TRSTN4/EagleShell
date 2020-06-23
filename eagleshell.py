@@ -11,7 +11,7 @@ import os
 
 
 # Main function
-def eaglehell_main():
+def eagleshell_main():
 
     # Function that shows menu
     def menu():
@@ -474,8 +474,8 @@ def eaglehell_main():
                     from modules.scripts.network.arpspoof import arpspoof_main
                     arpspoof_main()
                 elif network_select == '2':
-                    from modules.scripts.network.packetsniffer import packetsniffer_main
-                    packetsniffer_main()
+                    from modules.scripts.network.packetsniff import packetsniff_main
+                    packetsniff_main()
                 elif network_select == '3':
                     pass
                 elif network_select == 'z':
@@ -552,4 +552,4 @@ def eaglehell_main():
     menu()
 
 
-eaglehell_main()
+eagleshell_main()

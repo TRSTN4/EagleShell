@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-# MaChanger MAC Address Changer Script
+# MaChanger - MAC Address Changer Script
 
 # Imports all the needed variables and packages
 from assets.banners import machanger_banner
 from assets.designs import *
 from assets.properties import clear_screen
+from eagleshell import eagleshell_main
 import subprocess
 import netifaces
 import os
@@ -30,10 +31,17 @@ def machanger_main():
             print('Interface:')
             ips()
             print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
+            print('')
             while True:
                 interface_set = input('\u001b[33mINTERFACE \u001b[37m> ').lower()
                 if interface_set == 'wlan0' or interface_set == 'wlan1' or interface_set == 'wlan2' or interface_set == 'wlan3' or interface_set == 'mon0' or interface_set == 'mon1' or interface_set == 'mon2' or interface_set == 'mon3' or interface_set == 'wlp5s0' or interface_set == 'wlp5s1' or interface_set == 'wlp5s2' or interface_set == 'wlp5s3' or interface_set == 'eth0' or interface_set == 'eth1' or interface_set == 'eth2' or interface_set == 'eth3':
                     mac()
+                elif interface_set == 'z':
+                    eagleshell_main()
+                elif interface_set == 'x':
+                    exit_shell()
                 else:
                     print('\u001b[31m[-] Invalid Interface.')
                     continue
@@ -57,8 +65,15 @@ def machanger_main():
             print('\tExample 1: 00:11:22:33:44:55')
             print('\tExample 2: 12:22:33:44:55:66')
             print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
+            print('')
             while True:
                 mac_set = input('\u001b[33mNEW MAC \u001b[37m> ').lower()
+                if mac_set == 'z':
+                    machanger_main()
+                elif mac_set == 'x':
+                    exit_shell()
                 print('')
                 functions()
         except KeyboardInterrupt:
@@ -134,14 +149,17 @@ def machanger_main():
             print('')
             print('\tCURRENT MAC: ' + color + current_mac + color + '\u001b[37m')
             print('')
-            print('\t1): New')
-            print('\t2): Exit')
+            print('\tY): New')
+            print('\tZ): Menu')
+            print('\tX): Exit')
             print('')
             while True:
                 eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
-                if eagleshell_cmd == '1':
+                if eagleshell_cmd == 'y':
                     machanger_main()
-                elif eagleshell_cmd == '2':
+                elif eagleshell_cmd == 'z':
+                    eagleshell_main()
+                elif eagleshell_cmd == 'x':
                     exit_shell()
                 else:
                     print('\u001b[31m[-] Invalid Input.')

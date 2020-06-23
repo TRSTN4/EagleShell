@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-# SubScan Sub Domain Scanner Script
+# SubScan - Sub Domain Scanner Script
 
 # Imports all needed variables and packages
 from assets.banners import subscan_banner
 from assets.designs import *
 from assets.properties import clear_screen
+from eagleshell import eagleshell_main
 import requests
 import os
 
@@ -28,7 +29,14 @@ def subscan_main():
             print('')
             print('\tExample: google.com')
             print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
+            print('')
             website_set = input('\u001b[33mWEBSITE \u001b[37m> ').lower()
+            if website_set == 'z':
+                eagleshell_main()
+            elif website_set == 'x':
+                exit_shell()
             wordlist()
         except KeyboardInterrupt:
             exit_shell()
@@ -53,6 +61,9 @@ def subscan_main():
             print('\t3): 1000 Words')
             print('\t4): 10000 Words')
             print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
+            print('')
             while True:
                 wordlist_set = input('\u001b[33mWORDLIST \u001b[37m> ').lower()
                 if wordlist_set == '1':
@@ -67,6 +78,10 @@ def subscan_main():
                 elif wordlist_set == '4':
                     subdomain_list = "subdomains-10000.txt"
                     output()
+                if wordlist_set == 'z':
+                    subscan_main()
+                elif wordlist_set == 'x':
+                    exit_shell()
                 else:
                     print('\u001b[31m[-] Invalid Input.')
                     continue
@@ -147,14 +162,17 @@ def subscan_main():
             print('\t------')
             print('\tSUBDOMAINS FOUND: ' + str(total_found))
             print('')
-            print('\t1): New')
-            print('\t2): Exit')
+            print('\tY): New')
+            print('\tZ): Menu')
+            print('\tX): Exit')
             print('')
             while True:
-                result_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
-                if result_cmd == '1':
+                eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
+                if eagleshell_cmd == 'y':
                     subscan_main()
-                elif result_cmd == '2':
+                elif eagleshell_cmd == 'z':
+                    eagleshell_main()
+                elif eagleshell_cmd == 'x':
                     exit_shell()
                 else:
                     print('\u001b[31m[-] Invalid Input.')

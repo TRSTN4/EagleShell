@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-# RSGen Reverse Shell Generator Script
+# Hashing - Text and File Hashing
 
 # Imports all variables and packages
 from assets.banners import hashing_banner
 from assets.designs import *
 from assets.properties import clear_screen
+from eagleshell import eagleshell_main
 import hashlib
 import os
 
@@ -30,22 +31,29 @@ def hashing_main():
             print('\t1): Text Hashing')
             print('\t2): File Hashing')
             print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
+            print('')
             while True:
                 hashing_set = input('\u001b[33mHASHING \u001b[37m> ').lower()
                 if hashing_set == '1':
                     hashing_text()
                 elif hashing_set == '2':
                     hashing_files()
+                elif hashing_set == 'z':
+                    eagleshell_main()
+                elif hashing_set == 'x':
+                    exit_shell()
                 else:
                     print('\u001b[31m[-] Invalid Input.')
                     continue
         except KeyboardInterrupt:
             exit_shell()
 
-    #
+    # Main function for text hashing
     def hashing_text():
 
-        #
+        # Function that takes input
         def set_text_hash_input():
             try:
                 global hashing_text_set
@@ -62,12 +70,19 @@ def hashing_main():
                 print('\tPaste Your Text')
                 print('\tExample: SomeRandomText123')
                 print('')
+                print('\tZ): Back')
+                print('\tX): Exit')
+                print('')
                 hashing_text_set = input('\u001b[33mTEXT \u001b[37m> ')
+                if hashing_text_set == 'z':
+                    hashing_main()
+                elif hashing_text_set == 'x':
+                    exit_shell()
                 hash_txt_process()
             except KeyboardInterrupt:
                 exit_shell()
 
-        #
+        # Function that does text hashing
         def hash_txt_process():
             try:
                 # encode it to bytes using UTF-8 encoding
@@ -78,6 +93,7 @@ def hashing_main():
             except KeyboardInterrupt:
                 exit_shell()
 
+        # Function that displays result for text hashing
         def result_text_hashing():
             try:
                 os.system(clear_screen)
@@ -106,14 +122,17 @@ def hashing_main():
                 # 512-bit BLAKE2 (or BLAKE2b)
                 print("\t\u001b[36mBLAKE2b:", hashlib.blake2b(message).hexdigest())
                 print('\u001b[37m')
-                print('\t1): New')
-                print('\t2): Exit')
+                print('\tY): New')
+                print('\tZ): Menu')
+                print('\tX): Exit')
                 print('')
                 while True:
                     eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
-                    if eagleshell_cmd == '1':
+                    if eagleshell_cmd == 'y':
                         hashing_main()
-                    elif eagleshell_cmd == '2':
+                    elif eagleshell_cmd == 'z':
+                        eagleshell_main()
+                    elif eagleshell_cmd == 'x':
                         exit_shell()
                     else:
                         print('\u001b[31m[-] Invalid Input.')
@@ -123,10 +142,10 @@ def hashing_main():
 
         set_text_hash_input()
 
-    #
+    # Main function for file hashing
     def hashing_files():
 
-        #
+        # Function that takes input for file hashing
         def set_file_hash_input():
             try:
                 global hashing_file_path
@@ -143,7 +162,14 @@ def hashing_main():
                 print('\tInput File Path')
                 print('\tExample: /tmp/images/car.jpeg')
                 print('')
+                print('\tZ): Back')
+                print('\tX): Exit')
+                print('')
                 hashing_file_path = input('\u001b[33mPATH \u001b[37m> ')
+                if hashing_file_path == 'z':
+                    hashing_main()
+                elif hashing_file_path == 'x':
+                    exit_shell()
                 file_hashing()
             except KeyboardInterrupt:
                 exit_shell()
@@ -156,6 +182,7 @@ def hashing_main():
                 os.system('sleep 2')
                 set_file_hash_input()
 
+        # Function that does file hashing process
         def read_file(file):
             try:
                 """Reads an entire file and returns file bytes."""
@@ -175,6 +202,7 @@ def hashing_main():
             except KeyboardInterrupt:
                 exit_shell()
 
+        # Function that execute read file
         def file_hashing():
             try:
                 global file_content
@@ -184,6 +212,7 @@ def hashing_main():
             except KeyboardInterrupt:
                 exit_shell()
 
+        # Function that displays file hashing result
         def result_file_hashing():
             try:
                 os.system(clear_screen)
@@ -213,14 +242,17 @@ def hashing_main():
                 # 512-bit BLAKE2 (or BLAKE2b)
                 print("\t\u001b[36mBLAKE2b:", hashlib.blake2b(file_content).hexdigest())
                 print('\u001b[37m')
-                print('\t1): New')
-                print('\t2): Exit')
+                print('\tY): New')
+                print('\tZ): Menu')
+                print('\tX): Exit')
                 print('')
                 while True:
                     eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
-                    if eagleshell_cmd == '1':
+                    if eagleshell_cmd == 'y':
                         hashing_main()
-                    elif eagleshell_cmd == '2':
+                    elif eagleshell_cmd == 'z':
+                        eagleshell_main()
+                    elif eagleshell_cmd == 'x':
                         exit_shell()
                     else:
                         print('\u001b[31m[-] Invalid Input.')

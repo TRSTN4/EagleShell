@@ -1,18 +1,19 @@
 #!/usr/bin/python3
 
-# PacketSniffer Packet Sniffer Script
+# PacketSniff - Packet Sniffer Script
 
 # Imports all needed variables and packages
 from assets.banners import packetsniffer_banner
 from assets.designs import *
 from assets.properties import clear_screen
+from eagleshell import eagleshell_main
 import os
 import netifaces
 import scapy.all as scapy
 from scapy.layers import http
 
 # Main function
-def packetsniffer_main():
+def packetsniff_main():
 
     # Function that takes user input
     def configuration():
@@ -30,11 +31,18 @@ def packetsniffer_main():
             print('')
             ips()
             print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
+            print('')
             while True:
                 interface_set = input('\u001b[33mINTERFACE \u001b[37m> ').lower()
                 if interface_set == 'wlan0' or interface_set == 'wlan1' or interface_set == 'wlan2' or interface_set == 'wlan3' or interface_set == 'mon0' or interface_set == 'mon1' or interface_set == 'mon2' or interface_set == 'mon3' or interface_set == 'wlp5s0' or interface_set == 'wlp5s1' or interface_set == 'wlp5s2' or interface_set == 'wlp5s3' or interface_set == 'eth0' or interface_set == 'eth1' or interface_set == 'eth2' or interface_set == 'eth3':
                     output()
                     result()
+                elif interface_set == 'z':
+                    packetsniff_main()
+                elif interface_set == 'x':
+                    exit_shell()
                 else:
                     print('\u001b[31m[-] Invalid Input.')
                     continue
@@ -43,7 +51,7 @@ def packetsniffer_main():
         except OSError:
             print('\u001b[31m[-] Unable To Locate ' + str(interface_set))
             os.system('sleep 2')
-            packetsniffer_main()
+            packetsniff_main()
 
     # Function that displays live output
     def output():
@@ -147,14 +155,17 @@ def packetsniffer_main():
             print('\tTOTAL REQUESTS: ' + str(total_requests))
             print('\tTOTAL CREDENTIALS: ' + str(total_credentials))
             print('')
-            print('\t1): New')
-            print('\t2): Exit')
+            print('\tY): New')
+            print('\tZ): Menu')
+            print('\tX): Exit')
             print('')
             while True:
-                result_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
-                if result_cmd == '1':
-                    packetsniffer_main()
-                elif result_cmd == '2':
+                eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
+                if eagleshell_cmd == 'y':
+                    packetsniff_main()
+                elif eagleshell_cmd == 'z':
+                    eagleshell_main()
+                elif eagleshell_cmd == 'x':
                     exit_shell()
                 else:
                     print('\u001b[31m[-] Invalid Input.')
@@ -170,4 +181,4 @@ def packetsniffer_main():
     configuration()
 
 
-packetsniffer_main()
+packetsniff_main()

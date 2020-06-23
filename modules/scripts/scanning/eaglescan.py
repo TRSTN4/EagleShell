@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-# EagleScan Port Scanner
+# EagleScan - Port Scanner
 
 # Imports all the needed variables and packages
 from assets.banners import eaglscan_banner
 from assets.designs import *
 from assets.properties import clear_screen
+from eagleshell import eagleshell_main
 import os
 import socket
 from datetime import datetime
@@ -31,7 +32,14 @@ def eaglescan_main():
             print('\tSelect Target IP')
             print('\t----------------')
             print('')
+            print('\tZ): New')
+            print('\tX): Exit')
+            print('')
             rhost_set = input('\u001b[33mRHOST \u001b[37m> ').lower()
+            if rhost_set == 'z':
+                eaglescan_main()
+            elif rhost_set == 'x':
+                exit_shell()
             display()
         except KeyboardInterrupt:
             exit_shell()
@@ -98,15 +106,18 @@ def eaglescan_main():
             print('\tRHOST: ' + rhost_set)
             print('')
             print('\tOPEN PORTS: ' + '\u001b[32m' + format(port_list).replace('[', '').replace(']', '').replace("'", ''))
-            print('')
-            print('\t\u001b[37m1): New')
-            print('\t2): Exit')
+            print('\u001b[37m')
+            print('\tY): New')
+            print('\tZ): Menu')
+            print('\tX): Exit')
             print('')
             while True:
                 eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
-                if eagleshell_cmd == '1':
+                if eagleshell_cmd == 'y':
                     eaglescan_main()
-                elif eagleshell_cmd == '2':
+                elif eagleshell_cmd == 'z':
+                    eagleshell_main()
+                elif eagleshell_cmd == 'x':
                     exit_shell()
                 else:
                     print('\u001b[31m[-] Invalid Input.')
