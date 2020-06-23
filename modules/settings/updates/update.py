@@ -39,7 +39,6 @@ def update_main():
                 print('\u001b[0m')
                 os.system('sleep 3')
                 os.system(clear_screen)
-                exit()
             else:
                 print('\n\u001b[31m[-] Please make sure to run this in the EagleShell directory.')
                 print('\u001b[0m')
