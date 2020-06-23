@@ -39,6 +39,7 @@ def update_main():
                 print('\u001b[0m')
                 os.system('sleep 3')
                 os.system(clear_screen)
+                setup_shortcut()
             else:
                 print('\n\u001b[31m[-] Please make sure to run this in the EagleShell directory.')
                 print('\u001b[0m')
@@ -48,6 +49,10 @@ def update_main():
         except KeyboardInterrupt:
             from assets.functions import exit_main
             exit_main()
+
+    def setup_shortcut():
+        from setup import setup_main
+        setup_main()
 
     update()
 
