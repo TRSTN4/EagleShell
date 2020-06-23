@@ -28,7 +28,8 @@ def eaglehell_main():
             # print('\t2): Eagle Listeners')
             print('\t1): Eagle Scripts')
             print('\t2): Settings')
-            print('\t3): Exit')
+            print('')
+            print('\tX): Exit')
             print('')
             while True:
                 menu_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
@@ -40,7 +41,7 @@ def eaglehell_main():
                     scripts()
                 elif menu_select == '2':
                     settings()
-                elif menu_select == '3':
+                elif menu_select == 'x':
                     exit_shell()
                 elif menu_select == 'help' or menu_select == '?':
                     from assets.commands import help_list
@@ -73,8 +74,9 @@ def eaglehell_main():
             print('\t1): Soon')
             print('\t2): Soon')
             print('\t3): Soon')
-            print('\t4): Back')
-            print('\t5): Exit')
+            print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
             print('')
             while True:
                 payloads_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
@@ -84,9 +86,9 @@ def eaglehell_main():
                     pass
                 elif payloads_select == '3':
                     pass
-                elif payloads_select == '4':
+                elif payloads_select == 'z':
                     menu()
-                elif payloads_select == '5':
+                elif payloads_select == 'x':
                     exit_shell()
                 elif payloads_select == 'help' or payloads_select == '?':
                     from assets.commands import help_list
@@ -119,8 +121,9 @@ def eaglehell_main():
             print('\t1): Soon')
             print('\t2): Soon')
             print('\t3): Soon')
-            print('\t4): Back')
-            print('\t5): Exit')
+            print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
             print('')
             while True:
                 listeners_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
@@ -130,9 +133,9 @@ def eaglehell_main():
                     pass
                 elif listeners_select == '3':
                     pass
-                elif listeners_select == '4':
+                elif listeners_select == 'z':
                     menu()
-                elif listeners_select == '5':
+                elif listeners_select == 'x':
                     exit_shell()
                 elif listeners_select == 'help' or listeners_select == '?':
                     from assets.commands import help_list
@@ -168,8 +171,9 @@ def eaglehell_main():
             print('\t4): Privilege Escalation')
             print('\t5): Network')
             print('\t6): Miscellaneous')
-            print('\t7): Back')
-            print('\t8): Exit')
+            print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
             print('')
             while True:
                 scripts_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
@@ -185,9 +189,9 @@ def eaglehell_main():
                     network()
                 elif scripts_select == '6':
                     miscellaneous()
-                elif scripts_select == '7':
+                elif scripts_select == 'z':
                     menu()
-                elif scripts_select == '8':
+                elif scripts_select == 'x':
                     exit_shell()
                 elif scripts_select == 'help' or scripts_select == '?':
                     from assets.commands import help_list
@@ -219,8 +223,9 @@ def eaglehell_main():
             print('\t1): EAGLEYE - Eagle Network Scanner')
             print('\t2): EAGLESCAN - Eagle Port Scanner')
             print('\t3): SUBSCAN - Sub Domain Scanner')
-            print('\t4): Back')
-            print('\t5): Exit')
+            print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
             print('')
             while True:
                 scanning_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
@@ -233,9 +238,9 @@ def eaglehell_main():
                 elif scanning_select == '3':
                     from modules.scripts.scanning.subscan import subscan_main
                     subscan_main()
-                elif scanning_select == '4':
+                elif scanning_select == 'z':
                     scripts()
-                elif scanning_select == '5':
+                elif scanning_select == 'x':
                     exit_shell()
                 elif scanning_select == 'help' or scanning_select == '?':
                     from assets.commands import help_list
@@ -267,8 +272,9 @@ def eaglehell_main():
             print('\t1): Soon')
             print('\t2): Soon')
             print('\t3): Soon')
-            print('\t4): Back')
-            print('\t5): Exit')
+            print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
             print('')
             while True:
                 enumeration_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
@@ -278,9 +284,9 @@ def eaglehell_main():
                     pass
                 elif enumeration_select == '3':
                     pass
-                elif enumeration_select == '4':
+                elif enumeration_select == 'z':
                     scripts()
-                elif enumeration_select == '5':
+                elif enumeration_select == 'x':
                     exit_shell()
                 elif enumeration_select == 'help' or enumeration_select == '?':
                     from assets.commands import help_list
@@ -312,8 +318,9 @@ def eaglehell_main():
             print('\t1): RSGEN - Reverse Shell Generator')
             print('\t2): PGEN - Payload Generator')
             print('\t3): Soon')
-            print('\t4): Back')
-            print('\t5): Exit')
+            print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
             print('')
             while True:
                 exploitation_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
@@ -325,9 +332,9 @@ def eaglehell_main():
                     pgen_main()
                 elif exploitation_select == '3':
                     pass
-                elif exploitation_select == '4':
+                elif exploitation_select == 'z':
                     scripts()
-                elif exploitation_select == '5':
+                elif exploitation_select == 'x':
                     exit_shell()
                 elif exploitation_select == 'help' or exploitation_select == '?':
                     from assets.commands import help_list
@@ -359,8 +366,9 @@ def eaglehell_main():
             print('\t1): Soon')
             print('\t2): Soon')
             print('\t3): Soon')
-            print('\t4): Back')
-            print('\t5): Exit')
+            print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
             print('')
             while True:
                 privilege_escalation_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
@@ -370,9 +378,9 @@ def eaglehell_main():
                     pass
                 elif privilege_escalation_select == '3':
                     pass
-                elif privilege_escalation_select == '4':
+                elif privilege_escalation_select == 'z':
                     scripts()
-                elif privilege_escalation_select == '5':
+                elif privilege_escalation_select == 'x':
                     exit_shell()
                 elif privilege_escalation_select == 'help' or privilege_escalation_select == '?':
                     from assets.commands import help_list
@@ -405,8 +413,9 @@ def eaglehell_main():
             print('\t2): EXIF - Image Metadata Extractor')
             print('\t3): CRYPT - Encrypter and Decrypter')
             print('\t4): HASHING - Text and File Hashing')
-            print('\t5): Back')
-            print('\t6): Exit')
+            print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
             print('')
             while True:
                 miscellaneous_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
@@ -422,9 +431,9 @@ def eaglehell_main():
                 elif miscellaneous_select == '4':
                     from modules.scripts.miscellaneous.hashing import hashing_main
                     hashing_main()
-                elif miscellaneous_select == '5':
+                elif miscellaneous_select == 'z':
                     scripts()
-                elif miscellaneous_select == '6':
+                elif miscellaneous_select == 'x':
                     exit_shell()
                 elif miscellaneous_select == 'help' or miscellaneous_select == '?':
                     from assets.commands import help_list
@@ -455,8 +464,9 @@ def eaglehell_main():
             print('\t1): ARPSPOOF - ARP Spoofer')
             print('\t2): PACKETSNIFFER - Packet Sniffer')
             print('\t3): Soon')
-            print('\t4): Back')
-            print('\t5): Exit')
+            print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
             print('')
             while True:
                 network_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
@@ -468,9 +478,9 @@ def eaglehell_main():
                     packetsniffer_main()
                 elif network_select == '3':
                     pass
-                elif network_select == '4':
+                elif network_select == 'z':
                     scripts()
-                elif network_select == '5':
+                elif network_select == 'x':
                     exit_shell()
                 elif network_select == 'help' or network_select == '?':
                     from assets.commands import help_list
@@ -502,8 +512,9 @@ def eaglehell_main():
             print('\t1): Update')
             print('\t2): Soon')
             print('\t3): Version')
-            print('\t4): Back')
-            print('\t5): Exit')
+            print('')
+            print('\tZ): Back')
+            print('\tX): Exit')
             print('')
             while True:
                 settings_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
@@ -515,9 +526,9 @@ def eaglehell_main():
                 elif settings_select == '3':
                     from assets.commands import eagleshell_version
                     eagleshell_version()
-                elif settings_select == '4':
+                elif settings_select == 'z':
                     menu()
-                elif settings_select == '5':
+                elif settings_select == 'x':
                     exit_shell()
                 elif settings_select == 'help' or settings_select == '?':
                     from assets.commands import help_list
