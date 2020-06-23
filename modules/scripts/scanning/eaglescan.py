@@ -6,7 +6,8 @@
 from assets.banners import eaglscan_banner
 from assets.designs import *
 from assets.properties import clear_screen
-from eagleshell import eagleshell_main
+from assets.redirect import redirect_eagleshell_scanning
+from assets.redirect import redirect_eagleshell_menu
 import os
 import socket
 from datetime import datetime
@@ -32,12 +33,12 @@ def eaglescan_main():
             print('\tSelect Target IP')
             print('\t----------------')
             print('')
-            print('\tZ): New')
+            print('\tZ): Back')
             print('\tX): Exit')
             print('')
             rhost_set = input('\u001b[33mRHOST \u001b[37m> ').lower()
             if rhost_set == 'z':
-                eaglescan_main()
+                redirect_eagleshell_scanning()
             elif rhost_set == 'x':
                 exit_shell()
             display()
@@ -116,7 +117,7 @@ def eaglescan_main():
                 if eagleshell_cmd == 'y':
                     eaglescan_main()
                 elif eagleshell_cmd == 'z':
-                    eagleshell_main()
+                    redirect_eagleshell_menu()
                 elif eagleshell_cmd == 'x':
                     exit_shell()
                 else:

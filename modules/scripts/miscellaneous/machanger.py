@@ -6,7 +6,8 @@
 from assets.banners import machanger_banner
 from assets.designs import *
 from assets.properties import clear_screen
-from eagleshell import eagleshell_main
+from assets.redirect import redirect_eagleshell_miscellaneous
+from assets.redirect import redirect_eagleshell_menu
 import subprocess
 import netifaces
 import os
@@ -39,7 +40,7 @@ def machanger_main():
                 if interface_set == 'wlan0' or interface_set == 'wlan1' or interface_set == 'wlan2' or interface_set == 'wlan3' or interface_set == 'mon0' or interface_set == 'mon1' or interface_set == 'mon2' or interface_set == 'mon3' or interface_set == 'wlp5s0' or interface_set == 'wlp5s1' or interface_set == 'wlp5s2' or interface_set == 'wlp5s3' or interface_set == 'eth0' or interface_set == 'eth1' or interface_set == 'eth2' or interface_set == 'eth3':
                     mac()
                 elif interface_set == 'z':
-                    eagleshell_main()
+                    redirect_eagleshell_miscellaneous()
                 elif interface_set == 'x':
                     exit_shell()
                 else:
@@ -158,7 +159,7 @@ def machanger_main():
                 if eagleshell_cmd == 'y':
                     machanger_main()
                 elif eagleshell_cmd == 'z':
-                    eagleshell_main()
+                    redirect_eagleshell_menu()
                 elif eagleshell_cmd == 'x':
                     exit_shell()
                 else:

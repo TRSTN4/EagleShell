@@ -6,7 +6,8 @@
 from assets.banners import packetsniffer_banner
 from assets.designs import *
 from assets.properties import clear_screen
-from eagleshell import eagleshell_main
+from assets.redirect import redirect_eagleshell_network
+from assets.redirect import redirect_eagleshell_menu
 import os
 import netifaces
 import scapy.all as scapy
@@ -40,7 +41,7 @@ def packetsniff_main():
                     output()
                     result()
                 elif interface_set == 'z':
-                    packetsniff_main()
+                    redirect_eagleshell_network()
                 elif interface_set == 'x':
                     exit_shell()
                 else:
@@ -164,7 +165,7 @@ def packetsniff_main():
                 if eagleshell_cmd == 'y':
                     packetsniff_main()
                 elif eagleshell_cmd == 'z':
-                    eagleshell_main()
+                    redirect_eagleshell_menu()
                 elif eagleshell_cmd == 'x':
                     exit_shell()
                 else:

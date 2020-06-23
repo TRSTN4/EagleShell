@@ -6,7 +6,8 @@
 from assets.banners import subscan_banner
 from assets.designs import *
 from assets.properties import clear_screen
-from eagleshell import eagleshell_main
+from assets.redirect import redirect_eagleshell_scanning
+from assets.redirect import redirect_eagleshell_menu
 import requests
 import os
 
@@ -34,7 +35,7 @@ def subscan_main():
             print('')
             website_set = input('\u001b[33mWEBSITE \u001b[37m> ').lower()
             if website_set == 'z':
-                eagleshell_main()
+                redirect_eagleshell_scanning()
             elif website_set == 'x':
                 exit_shell()
             wordlist()
@@ -171,7 +172,7 @@ def subscan_main():
                 if eagleshell_cmd == 'y':
                     subscan_main()
                 elif eagleshell_cmd == 'z':
-                    eagleshell_main()
+                    redirect_eagleshell_menu()
                 elif eagleshell_cmd == 'x':
                     exit_shell()
                 else:

@@ -6,7 +6,8 @@
 from assets.banners import hashing_banner
 from assets.designs import *
 from assets.properties import clear_screen
-from eagleshell import eagleshell_main
+from assets.redirect import redirect_eagleshell_miscellaneous
+from assets.redirect import redirect_eagleshell_menu
 import hashlib
 import os
 
@@ -41,7 +42,7 @@ def hashing_main():
                 elif hashing_set == '2':
                     hashing_files()
                 elif hashing_set == 'z':
-                    eagleshell_main()
+                    redirect_eagleshell_miscellaneous()
                 elif hashing_set == 'x':
                     exit_shell()
                 else:
@@ -131,7 +132,7 @@ def hashing_main():
                     if eagleshell_cmd == 'y':
                         hashing_main()
                     elif eagleshell_cmd == 'z':
-                        eagleshell_main()
+                        redirect_eagleshell_menu()
                     elif eagleshell_cmd == 'x':
                         exit_shell()
                     else:
@@ -251,7 +252,7 @@ def hashing_main():
                     if eagleshell_cmd == 'y':
                         hashing_main()
                     elif eagleshell_cmd == 'z':
-                        eagleshell_main()
+                        redirect_eagleshell_menu()
                     elif eagleshell_cmd == 'x':
                         exit_shell()
                     else:

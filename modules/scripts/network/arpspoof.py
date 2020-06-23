@@ -6,7 +6,8 @@
 from assets.banners import arpspoof_banner
 from assets.designs import *
 from assets.properties import clear_screen
-from eagleshell import eagleshell_main
+from assets.redirect import redirect_eagleshell_network
+from assets.redirect import redirect_eagleshell_menu
 import scapy.all as scapy
 import time
 import sys
@@ -43,7 +44,7 @@ def arpspoof_main():
             while True:
                 rhost_set = input('\u001b[33mRHOST \u001b[37m> ').lower()
                 if rhost_set == 'z':
-                    arpspoof_main()
+                    redirect_eagleshell_network()
                 elif rhost_set == 'x':
                     exit_shell()
                 gateway_set = input('\u001b[33mGATEWAY \u001b[37m> ').lower()
@@ -142,7 +143,7 @@ def arpspoof_main():
                 if eagleshell_cmd == 'y':
                     arpspoof_main()
                 elif eagleshell_cmd == 'z':
-                    eagleshell_main()
+                    redirect_eagleshell_menu()
                 elif eagleshell_cmd == 'x':
                     exit_shell()
                 else:

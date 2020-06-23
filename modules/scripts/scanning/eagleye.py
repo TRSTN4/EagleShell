@@ -6,7 +6,8 @@
 from assets.banners import eagleye_banner
 from assets.designs import *
 from assets.properties import clear_screen
-from eagleshell import eagleshell_main
+from assets.redirect import redirect_eagleshell_scanning
+from assets.redirect import redirect_eagleshell_menu
 import os
 import scapy.all as scapy
 import netifaces
@@ -40,12 +41,12 @@ def eagleye_main():
             while True:
                 network_ip_set = input('\u001b[33mNETWORK IP \u001b[37m> ').lower()
                 if network_ip_set == 'z':
-                    eagleye_main()
+                    redirect_eagleshell_scanning()
                 elif network_ip_set == 'x':
                     exit_shell()
                 network_range_set = input('\u001b[33mNETWORK RANGE \u001b[37m> ').lower()
                 if network_range_set == 'z':
-                    eagleye_main()
+                    redirect_eagleshell_scanning()
                 elif network_range_set == 'x':
                     exit_shell()
                 scan_result = scan()
@@ -115,7 +116,7 @@ def eagleye_main():
                 if eagleshell_cmd == 'y':
                     eagleye_main()
                 elif eagleshell_cmd == 'z':
-                    eagleye_main()
+                    redirect_eagleshell_menu()
                 elif eagleshell_cmd == 'x':
                     exit_shell()
                 else:
