@@ -402,7 +402,7 @@ def eaglehell_main():
             print('Scripts:')
             print('')
             print('\t1): MACHANGER - Change MAC Address')
-            print('\t2): Soon')
+            print('\t2): EXIF - Image Metadata Extractor')
             print('\t3): Soon')
             print('\t4): Back')
             print('\t5): Exit')
@@ -413,7 +413,8 @@ def eaglehell_main():
                     from modules.scripts.miscellaneous.machanger import machanger_main
                     machanger_main()
                 elif miscellaneous_select == '2':
-                    pass
+                    from modules.scripts.miscellaneous.exif import exif_main
+                    exif_main()
                 elif miscellaneous_select == '3':
                     pass
                 elif miscellaneous_select == '4':
