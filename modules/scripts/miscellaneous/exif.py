@@ -67,3 +67,8 @@ def exif_main():
     def exit_shell():
         from assets.functions import exit_main
         exit_main()
+
+    configuration()
+
+
+exif_main()
