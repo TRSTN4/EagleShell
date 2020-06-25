@@ -419,13 +419,12 @@ def brute_force():
         while True:
             privilege_escalation_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
             if privilege_escalation_select == '1':
-                from modules.scripts.brute_force.brutessh import brutessh
+                # from modules.scripts.brute_force.brutessh import brutessh
                 # brutessh_main()
                 pass
             elif privilege_escalation_select == '2':
                 from modules.scripts.brute_force.bruteftp import bruteftp_main
-                # bruteftp_main()
-                pass
+                bruteftp_main()
             elif privilege_escalation_select == '3':
                 pass
             elif privilege_escalation_select == 'z':
