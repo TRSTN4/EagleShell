@@ -102,7 +102,7 @@ def bruteftp_main():
     # Function that does the brute force
     def brute_forcing():
         # read the wordlist of passwords
-        passwords = open("/opt/EagleShell/wordlist.txt").read().split("\n")
+        passwords = open("/opt/EagleShell/wordlists/subdomains/subdomains-10000.txt").read().split("\n")
 
         print("[+] Passwords to try:", len(passwords))
 
