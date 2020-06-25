@@ -166,8 +166,9 @@ def scripts():
         print('\t2): Enumeration')
         print('\t3): Exploitation')
         print('\t4): Privilege Escalation')
-        print('\t5): Network')
-        print('\t6): Miscellaneous')
+        print('\t5): Brute Force')
+        print('\t6): Network')
+        print('\t7): Miscellaneous')
         print('')
         print('\tZ): Back')
         print('\tX): Exit')
@@ -183,8 +184,10 @@ def scripts():
             elif scripts_select == '4':
                 privilege_escalation()
             elif scripts_select == '5':
-                network()
+                brute_force()
             elif scripts_select == '6':
+                network()
+            elif scripts_select == '7':
                 miscellaneous()
             elif scripts_select == 'z':
                 menu()
@@ -393,6 +396,56 @@ def privilege_escalation():
     except KeyboardInterrupt:
         exit_shell()
 
+# Function that displays all brute force scripts
+def brute_force():
+    try:
+        os.system(clear_screen)
+        print(logo)
+        print('')
+        print(line)
+        print(privilege_escalation_banner)
+        print(line)
+        print('')
+        print(author)
+        print('Scripts:')
+        print('')
+        print('\t1): SOON - BruteSSH')
+        print('\t2): SOON - BruteFTP')
+        print('\t3): Soon')
+        print('')
+        print('\tZ): Back')
+        print('\tX): Exit')
+        print('')
+        while True:
+            privilege_escalation_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
+            if privilege_escalation_select == '1':
+                from modules.scripts.brute_force.brutessh import brutessh
+                # brutessh_main()
+                pass
+            elif privilege_escalation_select == '2':
+                from modules.scripts.brute_force.bruteftp import bruteftp_main
+                # bruteftp_main()
+                pass
+            elif privilege_escalation_select == '3':
+                pass
+            elif privilege_escalation_select == 'z':
+                scripts()
+            elif privilege_escalation_select == 'x':
+                exit_shell()
+            elif privilege_escalation_select == 'help' or privilege_escalation_select == '?':
+                from assets.commands import help_list
+                help_list()
+            elif privilege_escalation_select == 'exit' or privilege_escalation_select == 'quit':
+                exit_shell()
+            elif privilege_escalation_select == 'version':
+                from assets.commands import eagleshell_version
+                eagleshell_version()
+            else:
+                print('\u001b[31m[-] Invalid Input.')
+                continue
+    except KeyboardInterrupt:
+        exit_shell()
+
 # Function that displays all miscellaneous scripts
 def miscellaneous():
     try:
@@ -407,8 +460,8 @@ def miscellaneous():
         print('Scripts:')
         print('')
         print('\t1): MACHANGER - Change MAC Address')
-        print('\t2): EXIF - Image Metadata Extractor')
-        print('\t3): CRYPT - Encrypter and Decrypter')
+        print('\t2): SOON - EXIF - Image Metadata Extractor')
+        print('\t3): SOON - CRYPT - Encrypter and Decrypter')
         print('\t4): HASHING - Text and File Hashing')
         print('')
         print('\tZ): Back')

@@ -21,3 +21,7 @@ def redirect_eagleshell_network():
 def redirect_eagleshell_miscellaneous():
     from eagleshell import miscellaneous
     miscellaneous()
+
+def redirect_eagleshell_brute_force():
+    from eagleshell import brute_force
+    brute_force()

@@ -25,3 +25,4 @@ subscan_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Script
 exif_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] EXIF'
 crypt_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] CRYPT'
 hashing_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] HASHING'
+bruteftp_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Brute Force | [Script] BRUTEFTP'
