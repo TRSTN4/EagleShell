@@ -19,10 +19,6 @@ def bruteftp_main():
     global q
     global password_found
     global password_tried
-    with q.mutex:
-        q.queue.clear()
-        q.all_tasks_done.notify_all()
-        q.unfinished_tasks = 0
     password_found = ''
     password_tried = 0
     # initialize the queue
@@ -115,8 +111,8 @@ def bruteftp_main():
                 password = q.get()
                 # initialize the FTP server object
                 server = ftplib.FTP()
-                print('\tTRYING PASSWORD: ' + str(password), end='\r')
                 password_tried = password_tried + 1
+                print('\tPASSWORDS TRIED: ' + str(password_tried), end='\r')
                 try:
                     # tries to connect to FTP server with a timeout of 5
                     server.connect(host_set, int(port_set), timeout=5)
@@ -133,6 +129,7 @@ def bruteftp_main():
                         q.queue.clear()
                         q.all_tasks_done.notify_all()
                         q.unfinished_tasks = 0
+                    result()
                 finally:
                     # notify the queue that the task is completed for this password
                     q.task_done()
@@ -158,11 +155,7 @@ def bruteftp_main():
             # wait for the queue to be empty
             q.join()
         except KeyboardInterrupt:
-            with q.mutex:
-                q.queue.clear()
-                q.all_tasks_done.notify_all()
-                q.unfinished_tasks = 0
-            result()
+            pass
 
     def result():
         try:
