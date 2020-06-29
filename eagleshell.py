@@ -163,12 +163,12 @@ def scripts():
         print('Options:')
         print('')
         print('\t1): Scanning')
-        print('\t2): Enumeration')
-        print('\t3): Exploitation')
-        print('\t4): Privilege Escalation')
-        print('\t5): Brute Force')
-        print('\t6): Network')
-        print('\t7): Miscellaneous')
+        # print('\t2): Enumeration')
+        print('\t2): Exploitation')
+        # print('\t4): Privilege Escalation')
+        print('\t3): Brute Force')
+        print('\t4): Network')
+        print('\t5): Miscellaneous')
         print('')
         print('\tZ): Back')
         print('\tX): Exit')
@@ -177,17 +177,17 @@ def scripts():
             scripts_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
             if scripts_select == '1':
                 scanning()
+            # elif scripts_select == '2':
+                # enumeration()
             elif scripts_select == '2':
-                enumeration()
-            elif scripts_select == '3':
                 exploitation()
-            elif scripts_select == '4':
-                privilege_escalation()
-            elif scripts_select == '5':
+            # elif scripts_select == '4':
+                # privilege_escalation()
+            elif scripts_select == '3':
                 brute_force()
-            elif scripts_select == '6':
+            elif scripts_select == '4':
                 network()
-            elif scripts_select == '7':
+            elif scripts_select == '5':
                 miscellaneous()
             elif scripts_select == 'z':
                 menu()
