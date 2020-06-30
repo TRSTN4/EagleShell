@@ -19,13 +19,18 @@ def bruteftp_main():
     global q
     global password_found
     global password_tried
-    global brute
+    global host_set
+    global user_set
+    global port_set
+    global n_threads
+    host_set = ''
+    user_set = ''
+    port_set = ''
+    n_threads = 10
     password_found = ''
     password_tried = 0
     # initialize the queue
     q = queue.Queue()
-    # enables brute forcing
-    brute = 'enabled'
 
     # Function that takes some user input
     def configuration():
@@ -63,6 +68,7 @@ def bruteftp_main():
             print('\tZ): Back')
             print('\tX): Exit')
             print('')
+            os.system('sleep 0.001')
             while True:
                 host_set = input('\u001b[33mHOST \u001b[37m> ').lower()
                 if host_set == 'z':
@@ -88,29 +94,30 @@ def bruteftp_main():
                 process()
         except KeyboardInterrupt:
             exit_shell()
+        except ValueError:
+            print('\u001b[31m[-] Unable To Connect.')
+            os.system('sleep 2')
+            bruteftp_main()
 
     # Function that displays before bruteforce
     def process():
-        try:
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(bruteftp_banner)
-            print(line)
-            print('')
-            print(author)
-            print('Process:')
-            print('')
-            print('\tStatus')
-            print('\t------')
-            print('')
-            print('\tStop: CTRL+C')
-            print('')
-            brute_forcing()
-            result()
-        except KeyboardInterrupt:
-            exit_shell()
+        os.system(clear_screen)
+        print(logo)
+        print('')
+        print(line)
+        print(bruteftp_banner)
+        print(line)
+        print('')
+        print(author)
+        print('Process:')
+        print('')
+        print('\tStatus')
+        print('\t------')
+        print('')
+        print('\tStop: CTRL+C')
+        print('')
+        brute_forcing()
+        result()
 
     # Function that connects to FTP
     def connect_ftp():
@@ -135,7 +142,6 @@ def bruteftp_main():
                     # login failed, wrong credentials
                     pass
                 else:
-                    brute = 'disabled'
                     # correct credentials
                     password_found = password
                     # we found the password, let's clear the queue
@@ -144,35 +150,39 @@ def bruteftp_main():
                         q.all_tasks_done.notify_all()
                         q.unfinished_tasks = 0
                     result()
-                finally:
-                    # notify the queue that the task is completed for this password
-                    q.task_done()
         except KeyboardInterrupt:
-            pass
+            safe_result()
 
     # Function that does the brute force
     def brute_forcing():
-        if brute == 'enabled':
-            try:
-                # read the wordlist of passwords
-                passwords = open("/opt/EagleShell/wordlists/subdomains/subdomains-10000.txt").read().split("\n")
+        try:
+            # read the wordlist of passwords
+            passwords = open("/opt/EagleShell/wordlists/subdomains/subdomains-10000.txt").read().split("\n")
 
-                # put all passwords to the queue
-                for password in passwords:
-                    q.put(password)
+            # put all passwords to the queue
+            for password in passwords:
+                q.put(password)
 
-                # create `n_threads` that runs that function
-                for t in range(int(n_threads)):
-                    thread = Thread(target=connect_ftp)
-                    # will end when the main thread end
-                    thread.daemon = True
-                    thread.start()
-                # wait for the queue to be empty
-                q.join()
-            except KeyboardInterrupt:
-                pass
+            # create `n_threads` that runs that function
+            for t in range(int(n_threads)):
+                thread = Thread(target=connect_ftp)
+                # will end when the main thread end
+                thread.daemon = True
+                thread.start()
+            # wait for the queue to be empty
+            q.join()
+        except KeyboardInterrupt:
+            safe_result()
         else:
             pass
+
+    def safe_result():
+        os.system(clear_screen)
+        with q.mutex:
+            q.queue.clear()
+            q.all_tasks_done.notify_all()
+            q.unfinished_tasks = 0
+        result()
 
     def result():
         try:
@@ -200,10 +210,11 @@ def bruteftp_main():
             print('\tZ): Menu')
             print('\tX): Exit')
             print('')
+            os.system('sleep 0.001')
             while True:
                 eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
                 if eagleshell_cmd == 'y':
-                    bruteftp_main()
+                    safe_new()
                 elif eagleshell_cmd == 'z':
                     redirect_eagleshell_menu()
                 elif eagleshell_cmd == 'x':
@@ -213,6 +224,10 @@ def bruteftp_main():
                     continue
         except KeyboardInterrupt:
             exit_shell()
+
+    def safe_new():
+        os.system('sleep 0.001')
+        bruteftp_main()
 
     # The function where you exit
     def exit_shell():
