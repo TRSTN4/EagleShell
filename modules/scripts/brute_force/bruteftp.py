@@ -7,7 +7,6 @@ from assets.banners import bruteftp_banner
 from assets.designs import *
 from assets.properties import clear_screen
 from assets.redirect import redirect_eagleshell_brute_force
-from assets.redirect import redirect_eagleshell_menu
 import os
 import ftplib
 from threading import Thread
@@ -17,6 +16,7 @@ import queue
 # Main function
 def bruteftp_main():
 
+    # Function that sets all
     def set_all():
         global q
         global password_found
@@ -179,6 +179,7 @@ def bruteftp_main():
         else:
             pass
 
+    # Function that safely redirect to result
     def safe_result():
         os.system(clear_screen)
         with q.mutex:
@@ -187,6 +188,7 @@ def bruteftp_main():
             q.unfinished_tasks = 0
         result()
 
+    # Function that displays result
     def result():
         try:
             os.system(clear_screen)
@@ -229,7 +231,6 @@ def bruteftp_main():
         os.system('sleep 2')
         os.system(clear_screen)
         exit()
-
 
     set_all()
 

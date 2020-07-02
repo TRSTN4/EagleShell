@@ -413,6 +413,7 @@ def brute_force():
         print('\t2): BruteFTP')
         print('\t3): Soon')
         print('')
+
         print('\tZ): Back')
         print('\tX): Exit')
         print('')
