@@ -16,21 +16,24 @@ import queue
 
 # Main function
 def bruteftp_main():
-    global q
-    global password_found
-    global password_tried
-    global host_set
-    global user_set
-    global port_set
-    global n_threads
-    host_set = ''
-    user_set = ''
-    port_set = ''
-    n_threads = 10
-    password_found = ''
-    password_tried = 0
-    # initialize the queue
-    q = queue.Queue()
+
+    def set_all():
+        global q
+        global password_found
+        global password_tried
+        global host_set
+        global user_set
+        global port_set
+        global n_threads
+        host_set = ''
+        user_set = ''
+        port_set = ''
+        n_threads = 10
+        password_found = ''
+        password_tried = 0
+        # initialize the queue
+        q = queue.Queue()
+        configuration()
 
     # Function that takes some user input
     def configuration():
@@ -68,7 +71,7 @@ def bruteftp_main():
             print('\tZ): Back')
             print('\tX): Exit')
             print('')
-            os.system('sleep 0.001')
+            os.system('sleep 0.01')
             while True:
                 host_set = input('\u001b[33mHOST \u001b[37m> ').lower()
                 if host_set == 'z':
@@ -96,7 +99,7 @@ def bruteftp_main():
             exit_shell()
         except ValueError:
             print('\u001b[31m[-] Unable To Connect.')
-            os.system('sleep 2')
+            os.system('sleep 1')
             bruteftp_main()
 
     # Function that displays before bruteforce
@@ -206,18 +209,12 @@ def bruteftp_main():
             else:
                 print('\tPASSWORDS TRIED: \u001b[31m' + str(password_tried) + '\u001b[37m')
             print('')
-            print('\tY): New')
-            print('\tZ): Menu')
             print('\tX): Exit')
             print('')
-            os.system('sleep 0.001')
+            os.system('sleep 0.01')
             while True:
                 eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
-                if eagleshell_cmd == 'y':
-                    safe_new()
-                elif eagleshell_cmd == 'z':
-                    redirect_eagleshell_menu()
-                elif eagleshell_cmd == 'x':
+                if eagleshell_cmd == 'x':
                     exit_shell()
                 else:
                     print('\u001b[31m[-] Invalid Input.')
@@ -225,16 +222,16 @@ def bruteftp_main():
         except KeyboardInterrupt:
             exit_shell()
 
-    def safe_new():
-        os.system('sleep 0.001')
-        bruteftp_main()
-
     # The function where you exit
     def exit_shell():
-        from assets.functions import exit_main
-        exit_main()
+        print('\n\u001b[31m[-] Exiting EagleShell')
+        print('\u001b[0m')
+        os.system('sleep 2')
+        os.system(clear_screen)
+        exit()
 
-    configuration()
+
+    set_all()
 
 
 bruteftp_main()
