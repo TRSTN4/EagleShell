@@ -410,7 +410,7 @@ def brute_force():
         print('Scripts:')
         print('')
         print('\t1): SOON - BruteSSH')
-        print('\t2): SOON - BruteFTP')
+        print('\t2): BruteFTP')
         print('\t3): Soon')
         print('')
         print('\tZ): Back')
