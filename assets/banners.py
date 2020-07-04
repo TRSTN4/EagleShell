@@ -26,3 +26,4 @@ exif_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts |
 crypt_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] CRYPT'
 hashing_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] HASHING'
 bruteftp_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Brute Force | [Script] BRUTEFTP'
+brutessh_banner = '\u001b[36;1m [Version] ' + version + ' | [Module] Eagle Scripts | [Option] Brute Force | [Script] BRUTESSH'

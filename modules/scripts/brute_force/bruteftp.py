@@ -42,6 +42,7 @@ def bruteftp_main():
             global user_set
             global port_set
             global n_threads
+            global wordlist_set
             os.system(clear_screen)
             print(logo)
             print('')
@@ -68,6 +69,10 @@ def bruteftp_main():
             print('\tThreads Input')
             print('\tExample: 10')
             print('')
+            # number of threads to spawn
+            print('\tWordlist Input')
+            print('\tExample: /usr/share/wordlists/rockyou.txt')
+            print('')
             print('\tZ): Back')
             print('\tX): Exit')
             print('')
@@ -90,9 +95,14 @@ def bruteftp_main():
                     exit_shell()
                 threads_set = input('\u001b[33mTHREADS \u001b[37m> ').lower()
                 n_threads = threads_set
-                if port_set == 'z':
+                if threads_set == 'z':
                     redirect_eagleshell_brute_force()
-                elif port_set == 'x':
+                elif threads_set == 'x':
+                    exit_shell()
+                wordlist_set = input('\u001b[33mWORDLIST \u001b[37m> ').lower()
+                if wordlist_set == 'z':
+                    redirect_eagleshell_brute_force()
+                elif wordlist_set == 'x':
                     exit_shell()
                 process()
         except KeyboardInterrupt:
@@ -160,7 +170,7 @@ def bruteftp_main():
     def brute_forcing():
         try:
             # read the wordlist of passwords
-            passwords = open("/opt/EagleShell/wordlists/subdomains/subdomains-10000.txt").read().split("\n")
+            passwords = open(wordlist_set).read().split("\n")
 
             # put all passwords to the queue
             for password in passwords:
