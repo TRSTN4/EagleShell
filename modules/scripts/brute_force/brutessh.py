@@ -93,9 +93,9 @@ def brutessh_main():
 
     def process():
         # read the file
-        wordlist = open(wordlist_set).read().splitlines()
+        passwords = open(wordlist_set).read().split("\n")
         # brute-force
-        for password in wordlist:
+        for password in passwords:
             if is_ssh_open(host_set, user_set, password):
                 # if combo is valid, save it to a file
                 open("credentials.txt", "w").write(f"{user_set}@{host_set}:{password}")

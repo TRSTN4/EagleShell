@@ -409,7 +409,7 @@ def brute_force():
         print(author)
         print('Scripts:')
         print('')
-        print('\t1): SOON - BruteSSH')
+        print('\t1): BruteSSH')
         print('\t2): BruteFTP')
         print('\t3): Soon')
         print('')
@@ -420,15 +420,14 @@ def brute_force():
         while True:
             privilege_escalation_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
             if privilege_escalation_select == '1':
-                # from modules.scripts.brute_force.brutessh import brutessh
-                # brutessh_main()
+                from modules.scripts.brute_force.brutessh import brutessh
+                brutessh_main()
                 pass
             elif privilege_escalation_select == '2':
                 from modules.scripts.brute_force.bruteftp import bruteftp_main
                 bruteftp_main()
             elif privilege_escalation_select == '3':
-                from modules.scripts.brute_force.brutessh import brutessh_main
-                brutessh_main()
+                pass
             elif privilege_escalation_select == 'z':
                 scripts()
             elif privilege_escalation_select == 'x':
