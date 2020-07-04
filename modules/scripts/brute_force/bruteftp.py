@@ -69,7 +69,7 @@ def bruteftp_main():
             print('\tThreads Input')
             print('\tExample: 10')
             print('')
-            # number of threads to spawn
+            # wordlist to use
             print('\tWordlist Input')
             print('\tExample: /usr/share/wordlists/rockyou.txt')
             print('')

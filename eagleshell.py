@@ -427,7 +427,8 @@ def brute_force():
                 from modules.scripts.brute_force.bruteftp import bruteftp_main
                 bruteftp_main()
             elif privilege_escalation_select == '3':
-                pass
+                from modules.scripts.brute_force.brutessh import brutessh_main
+                brutessh_main()
             elif privilege_escalation_select == 'z':
                 scripts()
             elif privilege_escalation_select == 'x':

