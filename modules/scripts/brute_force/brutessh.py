@@ -80,6 +80,10 @@ def brutessh_main():
                 process()
         except KeyboardInterrupt:
             exit_shell()
+        except ValueError:
+            print('\u001b[31m[-] Unable To Connect.')
+            os.system('sleep 1')
+            brutessh_main()
         except FileNotFoundError:
             print('\u001b[31m[-] Unable To Connect.')
             os.system('sleep 1')

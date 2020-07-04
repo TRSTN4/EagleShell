@@ -111,6 +111,10 @@ def bruteftp_main():
             print('\u001b[31m[-] Unable To Connect.')
             os.system('sleep 1')
             bruteftp_main()
+        except FileNotFoundError:
+            print('\u001b[31m[-] Unable To Connect.')
+            os.system('sleep 1')
+            bruteftp_main()
 
     # Function that displays before bruteforce
     def process():
