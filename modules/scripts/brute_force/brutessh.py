@@ -56,7 +56,7 @@ def brutessh_main():
             print('')
             # wordlist to use
             print('\tWordlist Input')
-            print('\tExample: /usr/share/wordlists/rockyou.txt')
+            print('\tExample: /opt/EagleShell/wordlists/default-credentials/ssh-default-cedentials.txt')
             print('')
             print('\tZ): Back')
             print('\tX): Exit')
@@ -80,6 +80,10 @@ def brutessh_main():
                 process()
         except KeyboardInterrupt:
             exit_shell()
+        except FileNotFoundError:
+            print('\u001b[31m[-] Unable To Connect.')
+            os.system('sleep 1')
+            brutessh_main()
 
     # Function that displays before bruteforce
     def process():
@@ -156,9 +160,21 @@ def brutessh_main():
             print('Result:')
             print('')
             if len(password_found) > 1:
+                print('\tHOST: \u001b[32;1m' + host_set + '\u001b[37m')
+                print('')
+                print('\tUSERNAME: \u001b[32;1m' + user_set + '\u001b[37m')
+                print('')
                 print('\tPASSWORD: \u001b[32;1m' + password_found + '\u001b[37m')
+                print('')
+                print('\tWORDLIST: \u001b[32;1m' + wordlist_set + '\u001b[37m')
             else:
+                print('\t\u001b[37mHOST: \u001b[31m' + host_set + '\u001b[37m')
+                print('')
+                print('\t\u001b[37mUSERNAME: \u001b[31m' + user_set + '\u001b[37m')
+                print('')
                 print('\t\u001b[37mPASSWORD: \u001b[31mNot Found.\u001b[37m')
+                print('')
+                print('\t\u001b[37mWORDLIST: \u001b[31m' + wordlist_set + '\u001b[37m')
             print('')
             if len(password_found) > 1:
                 print('\tPASSWORDS TRIED: \u001b[32;1m' + str(password_tried) + '\u001b[37m')
