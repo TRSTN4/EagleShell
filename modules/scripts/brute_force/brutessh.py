@@ -53,15 +53,15 @@ def brutessh_main():
                     redirect_eagleshell_brute_force()
                 elif host_set == 'x':
                     exit_shell()
-                user_set = input('\u001b[33mUSER \u001b[37m> ').lower()
-                if user_set == 'z':
+                user_set = input('\u001b[33mUSER \u001b[37m> ')
+                if user_set == 'z' or user_set == 'Z':
                     redirect_eagleshell_brute_force()
-                elif user_set == 'x':
+                elif user_set == 'x' or user_set == 'Z':
                     exit_shell()
-                wordlist_set = input('\u001b[33mWORDLIST \u001b[37m> ').lower()
-                if wordlist_set == 'z':
+                wordlist_set = input('\u001b[33mWORDLIST \u001b[37m> ')
+                if wordlist_set == 'z' or wordlist_set == 'Z':
                     redirect_eagleshell_brute_force()
-                elif wordlist_set == 'x':
+                elif wordlist_set == 'x' or wordlist_set == 'X':
                     exit_shell()
                 process()
         except KeyboardInterrupt:
