@@ -71,7 +71,7 @@ def bruteftp_main():
             print('')
             # wordlist to use
             print('\tWordlist Input')
-            print('\tExample: /usr/share/wordlists/rockyou.txt')
+            print('\tExample: /usr/share/wordlists/mypasswords.txt')
             print('')
             print('\tZ): Back')
             print('\tX): Exit')
@@ -108,11 +108,11 @@ def bruteftp_main():
         except KeyboardInterrupt:
             exit_shell()
         except ValueError:
-            print('\u001b[31m[-] Unable To Connect.')
+            print('\t\u001b[31m[-] Unable To Connect.')
             os.system('sleep 1')
             bruteftp_main()
         except FileNotFoundError:
-            print('\u001b[31m[-] Unable To Connect.')
+            print('\t\u001b[31m[-] Unable To Connect.')
             os.system('sleep 1')
             bruteftp_main()
 

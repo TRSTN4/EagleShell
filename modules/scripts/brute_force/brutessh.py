@@ -54,9 +54,9 @@ def brutessh_main():
             print('\tUser Input:')
             print('\tExample: admin')
             print('')
-            # wordlist to use
+            # password wordlist to brute force
             print('\tWordlist Input')
-            print('\tExample: /opt/EagleShell/wordlists/default-credentials/ssh-default-cedentials.txt')
+            print('\tExample: /usr/share/wordlists/mypasswords.txt')
             print('')
             print('\tZ): Back')
             print('\tX): Exit')
@@ -81,11 +81,11 @@ def brutessh_main():
         except KeyboardInterrupt:
             exit_shell()
         except ValueError:
-            print('\u001b[31m[-] Unable To Connect.')
+            print('\t\u001b[31m[-] Unable To Connect.')
             os.system('sleep 1')
             brutessh_main()
         except FileNotFoundError:
-            print('\u001b[31m[-] Unable To Connect.')
+            print('\t\u001b[31m[-] Unable To Connect.')
             os.system('sleep 1')
             brutessh_main()
 
@@ -132,6 +132,10 @@ def brutessh_main():
             # sleep for a minute
             time.sleep(60)
             return is_ssh_open(hostname, username, password)
+        except paramiko.ssh_exception.NoValidConnectionsError:
+            print("\t\u001b[31m[!] Host: " + hostname + " is unreachable, timed out.")
+            os.system('sleep 1')
+            brutessh_main()
         except KeyboardInterrupt:
             result()
         else:
