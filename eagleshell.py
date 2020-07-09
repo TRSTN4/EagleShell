@@ -29,7 +29,7 @@ def menu():
         print('\tX): Exit')
         print('')
         while True:
-            menu_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
+            menu_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()r
             # if menu_select == '1':
             # payloads()
             # elif menu_select == '2':
@@ -420,7 +420,7 @@ def brute_force():
         while True:
             privilege_escalation_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
             if privilege_escalation_select == '1':
-                from modules.scripts.brute_force.brutessh import brutessh
+                from modules.scripts.brute_force.brutessh import brutessh_main
                 brutessh_main()
                 pass
             elif privilege_escalation_select == '2':
