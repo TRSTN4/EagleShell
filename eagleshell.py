@@ -29,7 +29,7 @@ def menu():
         print('\tX): Exit')
         print('')
         while True:
-            menu_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()r
+            menu_select = input('\u001b[33mEagleShell \u001b[37m> ').lower()
             # if menu_select == '1':
             # payloads()
             # elif menu_select == '2':
