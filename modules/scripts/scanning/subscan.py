@@ -1,22 +1,17 @@
 #!/usr/bin/python3
 
-# SubScan - Sub Domain Scanner Script
-
-# Imports all needed variables and packages
 from assets.banners import subscan_banner
-from assets.designs import *
 from assets.properties import clear_screen
-from .
+from assets.designs import logo, line, author
+from assets.shortcuts import Exit
+from .scanning import Scanning
 import requests
 import os
 
-# Main Function
-def subscan_main():
 
-    # Function that takes input
-    def configuration():
+class SubScan:
+    def __init__(self):
         try:
-            global website_set
             os.system(clear_screen)
             print(logo)
             print('')
@@ -32,17 +27,17 @@ def subscan_main():
             print('\tZ): Back')
             print('\tX): Exit')
             print('')
-            website_set = input('\u001b[33mWEBSITE \u001b[37m> ').lower()
-            if website_set == 'z':
-                redirect_eagleshell_scanning()
-            elif website_set == 'x':
-                exit_shell()
-            wordlist()
+            self.website_set = input('\u001b[33mWEBSITE \u001b[37m> ').lower()
+            if self.website_set == 'z':
+                Scanning()
+            elif self.website_set == 'x':
+                Exit()
+            else:
+                self.wordlist()
         except KeyboardInterrupt:
-            exit_shell()
+            Exit()
 
-    # Function that sets wordlist
-    def wordlist():
+    def wordlist(self):
         try:
             global wordlist_set
             global subdomain_list
@@ -68,28 +63,28 @@ def subscan_main():
                 wordlist_set = input('\u001b[33mWORDLIST \u001b[37m> ').lower()
                 if wordlist_set == '1':
                     subdomain_list = "subdomains-100.txt"
-                    output()
+                    self.output()
                 elif wordlist_set == '2':
                     subdomain_list = "subdomains-500.txt"
-                    output()
+                    self.output()
                 elif wordlist_set == '3':
                     subdomain_list = "subdomains-1000.txt"
-                    output()
+                    self.output()
                 elif wordlist_set == '4':
                     subdomain_list = "subdomains-10000.txt"
-                    output()
+                    self.output()
                 if wordlist_set == 'z':
-                    subscan_main()
+                    Scanning()
                 elif wordlist_set == 'x':
-                    exit_shell()
+                    Exit()
                 else:
                     print('\u001b[31m[-] Invalid Input.')
                     continue
         except KeyboardInterrupt:
-            exit_shell()
+            Exit()
 
     # Function that displays output
-    def output():
+    def output(self):
         try:
             os.system(clear_screen)
             print(logo)
@@ -105,18 +100,18 @@ def subscan_main():
             print('\t--------')
             print('\tStop: CTRL+C')
             print('')
-            subsdomain_scan()
+            self.subsdomain_scan()
         except KeyboardInterrupt:
-            exit_shell()
+            Exit()
 
     # Function that scans subdomains
-    def subsdomain_scan():
+    def subsdomain_scan(self):
         try:
             global total_found
             total_found = 0
 
             # the domain to scan for subdomains
-            domain = website_set
+            domain = self.website_set
 
             # read all subdomains
             file = open("/opt/EagleShell/wordlists/subdomains/" + subdomain_list)
@@ -138,10 +133,10 @@ def subscan_main():
                     print("\t\u001b[33;1m[+] \u001b[32;1mDiscovered SubDomain \u001b[37;1m>> \u001b[36;1m" + str(url))
                     total_found = total_found + 1
         except KeyboardInterrupt:
-            result()
+            self.result()
 
     # Function that displays result
-    def result():
+    def result(self):
         try:
             os.system(clear_screen)
             print(logo)
@@ -155,7 +150,7 @@ def subscan_main():
             print('')
             print('\tInput')
             print('\t-----')
-            print('\tWEBSITE: ' + website_set)
+            print('\tWEBSITE: ' + self.website_set)
             print('\tWORDLIST: ' + subdomain_list)
             print('')
             print('\tOutput')
@@ -169,23 +164,13 @@ def subscan_main():
             while True:
                 eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
                 if eagleshell_cmd == 'y':
-                    subscan_main()
+                    SubScan()
                 elif eagleshell_cmd == 'z':
-                    redirect_eagleshell_menu()
+                    Scanning()
                 elif eagleshell_cmd == 'x':
-                    exit_shell()
+                    Exit()
                 else:
                     print('\u001b[31m[-] Invalid Input.')
                     continue
         except KeyboardInterrupt:
-            exit_shell()
-
-    # The function where you exit
-    def exit_shell():
-        from assets.functions import exit_main
-        exit_main()
-
-    configuration()
-
-
-subscan_main()
+            Exit()

@@ -23,7 +23,6 @@ class BruteForce:
             print('')
             print('\t1): BruteSSH')
             print('\t2): BruteFTP')
-            print('\t3): Soon')
             print('')
             print('\tZ): Back')
             print('\tX): Exit')
@@ -37,8 +36,6 @@ class BruteForce:
                 elif privilege_escalation_select == '2':
                     from modules.scripts.brute_force.bruteftp import bruteftp_main
                     bruteftp_main()
-                elif privilege_escalation_select == '3':
-                    pass
                 elif privilege_escalation_select == 'z':
                     from ..scripts import Scripts
                     Scripts()

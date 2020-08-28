@@ -37,8 +37,8 @@ class Scanning:
                     from modules.scripts.scanning.eaglescan import eaglescan_main
                     eaglescan_main()
                 elif scanning_select == '3':
-                    from modules.scripts.scanning.subscan import subscan_main
-                    subscan_main()
+                    from modules.scripts.scanning.subscan import SubScan
+                    SubScan()
                 elif scanning_select == 'z':
                     from ..scripts import Scripts
                     Scripts()
