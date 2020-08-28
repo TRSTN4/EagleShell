@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-# Color Variables
 RED = '\u001b[31m'          # Red
 GREEN = '\u001b[32m'        # Green
 YELLOW = '\u001b[33m'       # Yellow

@@ -1,17 +1,10 @@
 #!/usr/bin/python3
 
-# EagleShell Updater Shortcut
+
+class Update:
+    def __init__(self):
+        from modules.settings.installation.update import Update
+        Update()
 
 
-# Main shortcut update function
-def update_shortcut_main():
-
-    # Function that imports update script
-    def update_shortcut():
-        from modules.settings.updates.update import update_main
-        update_main()
-
-    update_shortcut()
-
-
-update_shortcut_main()
+Update()

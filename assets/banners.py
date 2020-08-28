@@ -1,11 +1,9 @@
 #!/usr/bin/python3
 
-# Imports all the needed variables
 from assets.properties import version
 from assets.properties import total_scripts
 from assets.colors import *
 
-# Banner Variables
 payloads_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Payloads | [Total] 0 Payloads Available'
 listeners_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Listeners | [Total] 0 Listeners Available'
 scripts_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Total] ' + total_scripts +' Scripts Available'
