@@ -6,11 +6,9 @@
 from assets.banners import eaglscan_banner
 from assets.designs import *
 from assets.properties import clear_screen
-from assets.redirect import redirect_eagleshell_scanning
-from assets.redirect import redirect_eagleshell_menu
-import os
-import socket
 from datetime import datetime
+import socket
+import os
 
 
 # Main function

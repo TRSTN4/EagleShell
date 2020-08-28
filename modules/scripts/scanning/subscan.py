@@ -6,8 +6,7 @@
 from assets.banners import subscan_banner
 from assets.designs import *
 from assets.properties import clear_screen
-from assets.redirect import redirect_eagleshell_scanning
-from assets.redirect import redirect_eagleshell_menu
+from .
 import requests
 import os
 
