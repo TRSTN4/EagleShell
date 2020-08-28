@@ -28,6 +28,7 @@
   <a href="#support">Support</a> •
   <a href="#license">License</a>
 </p>
+
 ---
 
 ## About
@@ -51,7 +52,6 @@ We **heavily** support people who have **created** a python script and want to s
 ### Linux Installation
 
 ```
-cd /opt
 git clone https://github.com/TRSTN4/EagleShell.git
 cd EagleShell
 python3 setup.py
@@ -64,7 +64,6 @@ When a **new version** is out, you have **two methods** to _update_:
 ##### 1. Use the built-in update.py
 
 ```
-cd /opt
 cd EagleShell
 python3 update.py
 ```
@@ -72,7 +71,6 @@ python3 update.py
 ##### 2. Use Git Commands
 
 ```
-cd /opt
 cd EagleShell
 git fetch
 git reset --hard origin/master
@@ -114,6 +112,6 @@ Reach out to us here:
 
 ## License
 
-[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-orange.svg?style=flat-square)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+EagleShell is released under "[GNU General Public License v2.0](https://github.com/TRSTN4/EagleShell/blob/master/docs/LICENSE.md)".
 
 - Copyright © EagleShell.
