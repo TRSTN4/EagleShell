@@ -1,135 +1,90 @@
 #!/usr/bin/python3
 
-# EagleScan - Port Scanner
-
-# Imports all the needed variables and packages
 from assets.banners import eaglscan_banner
-from assets.designs import *
 from assets.properties import clear_screen
-from datetime import datetime
+from assets.designs import logo, line, author
+from assets.shortcuts import Exit
+from .scanning import Scanning
+from assets.prefixes import eagleshell_prefix, invalid_input_prefix, rhost_prefix
+from assets.colors import *
 import socket
 import os
 
 
-# Main function
-def eaglescan_main():
+class EagleScan:
+    def __init__(self):
+        self.port_list = []
+        self.configuration()
+        self.scanner()
+        self.result()
 
-    # Function that takes user input
-    def configuration():
+    def header(self):
+        os.system(clear_screen)
+        print(logo)
+        print('')
+        print(line)
+        print(eaglscan_banner)
+        print(line)
+        print('')
+        print(author)
+
+    def configuration(self):
         try:
-            global rhost_set
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(eaglscan_banner)
-            print(line)
-            print('')
-            print(author)
-            print('Configuration:')
-            print('')
+            self.header()
+            print('Configuration:\n')
             print('\tSelect Target IP')
-            print('\t----------------')
-            print('')
+            print('\t----------------\n')
             print('\tZ): Back')
-            print('\tX): Exit')
-            print('')
-            rhost_set = input('\u001b[33mRHOST \u001b[37m> ').lower()
-            if rhost_set == 'z':
-                redirect_eagleshell_scanning()
-            elif rhost_set == 'x':
-                exit_shell()
-            display()
+            print('\tX): Exit\n')
+            self.rhost_set = input(rhost_prefix).lower()
+            if self.rhost_set == 'z':
+                Scanning()
+            elif self.rhost_set == 'x':
+                Exit()
         except KeyboardInterrupt:
-            exit_shell()
+            Exit()
 
-    # Function that displays port scanning progress
-    def display():
+    def scanner(self):
         try:
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(eaglscan_banner)
-            print(line)
-            print('')
-            print(author)
-            print('Scanning:')
-            start()
-            result()
+            self.header()
+            print('Scanning:\n')
+            print('\tScanning target ' + self.rhost_set + '\n')
+            try:
+                for port in range(1, 65535):
+                    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    socket.setdefaulttimeout(1)
+                    final_result = s.connect_ex((self.rhost_set, port))
+                    if final_result == 0:
+                        print('\tPort {} is open'.format(port))
+                        self.port_list.append(format(port))
+            except socket.gaierror:
+                print('Hostname could not be resolved.')
+                EagleScan()
+            except socket.error:
+                print("Couldn't connect to server.")
+                EagleScan()
         except KeyboardInterrupt:
-            exit_shell()
+            self.result()
 
-    # Function that starts scanning the ports
-    def start():
-        global port_list
-        port_list = []
-        print('')
-        print("\tScanning target " + rhost_set)
-        print("\tTime started: " + str(datetime.now()))
-        print('')
-
+    def result(self):
         try:
-            for port in range(1, 65535):
-                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                socket.setdefaulttimeout(1)
-                final_result = s.connect_ex((rhost_set, port))
-                if final_result == 0:
-                    print("\tPort {} is open".format(port))
-                    port_list.append(format(port))
-
-        except KeyboardInterrupt:
-            exit_shell()
-
-        except socket.gaierror:
-            print("Hostname could not be resolved.")
-            configuration()
-
-        except socket.error:
-            print("Couldn't connect to server.")
-            configuration()
-
-    # Function that displays result
-    def result():
-        try:
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(eaglscan_banner)
-            print(line)
-            print('')
-            print(author)
-            print('Output:')
-            print('')
-            print('\tRHOST: ' + rhost_set)
-            print('')
-            print('\tOPEN PORTS: ' + '\u001b[32m' + format(port_list).replace('[', '').replace(']', '').replace("'", ''))
-            print('\u001b[37m')
-            print('\tY): New')
+            self.header()
+            print('Output:\n')
+            print('\tRHOST: ' + self.rhost_set + '\n')
+            print('\tOPEN PORTS: ' + '\u001b[32m' + format(self.port_list).replace('[', '').replace(']', '').replace("'", ''))
+            print(WHITE + '\tY): New')
             print('\tZ): Menu')
-            print('\tX): Exit')
-            print('')
+            print('\tX): Exit\n')
             while True:
-                eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
-                if eagleshell_cmd == 'y':
-                    eaglescan_main()
-                elif eagleshell_cmd == 'z':
-                    redirect_eagleshell_menu()
-                elif eagleshell_cmd == 'x':
-                    exit_shell()
+                cmd = input(eagleshell_prefix).lower()
+                if cmd == 'y':
+                    EagleScan()
+                elif cmd == 'z':
+                    Scanning()
+                elif cmd == 'x':
+                    Exit()
                 else:
-                    print('\u001b[31m[-] Invalid Input.')
+                    print(invalid_input_prefix)
                     continue
         except KeyboardInterrupt:
-            exit_shell()
-
-    # Function that exit
-    def exit_shell():
-        from assets.functions import exit_main
-        exit_main()
-
-    configuration()
-
-
-eaglescan_main()
+            Exit()

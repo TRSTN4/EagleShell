@@ -4,7 +4,7 @@ from assets.banners import scanning_banner
 from assets.properties import clear_screen
 from assets.designs import logo, line, author
 from assets.shortcuts import Exit
-from assets.prefixes import eagleshell_prefix, invalid_input
+from assets.prefixes import eagleshell_prefix, invalid_input_prefix
 import os
 
 
@@ -34,8 +34,8 @@ class Scanning:
                     from modules.scripts.scanning.eagleye import eagleye_main
                     eagleye_main()
                 elif scanning_select == '2':
-                    from modules.scripts.scanning.eaglescan import eaglescan_main
-                    eaglescan_main()
+                    from modules.scripts.scanning.eaglescan import EagleScan
+                    EagleScan()
                 elif scanning_select == '3':
                     from modules.scripts.scanning.subscan import SubScan
                     SubScan()
@@ -45,7 +45,7 @@ class Scanning:
                 elif scanning_select == 'x':
                     Exit()
                 else:
-                    print(invalid_input)
+                    print(invalid_input_prefix)
                     continue
         except KeyboardInterrupt:
             Exit()

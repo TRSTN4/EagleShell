@@ -2,7 +2,7 @@
 
 from assets.properties import clear_screen, version
 from assets.designs import logo, eagle, author
-from assets.prefixes import eagleshell_prefix, invalid_input
+from assets.prefixes import eagleshell_prefix, invalid_input_prefix
 from assets.shortcuts import Exit
 from assets.colors import *
 import os
@@ -42,7 +42,7 @@ class Modules:
                 elif menu_select == 'x':
                     Exit()
                 else:
-                    print(invalid_input)
+                    print(invalid_input_prefix)
                     continue
         except KeyboardInterrupt:
             Exit()

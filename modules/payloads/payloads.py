@@ -4,7 +4,7 @@ from assets.banners import payloads_banner
 from assets.properties import clear_screen
 from assets.designs import logo, line, author
 from assets.shortcuts import Exit
-from assets.prefixes import eagleshell_prefix, invalid_input
+from assets.prefixes import eagleshell_prefix, invalid_input_prefix
 import os
 
 
@@ -42,7 +42,7 @@ class Payloads:
                 elif payloads_select == 'x':
                     Exit()
                 else:
-                    print(invalid_input)
+                    print(invalid_input_prefix)
                     continue
         except KeyboardInterrupt:
             Exit()
