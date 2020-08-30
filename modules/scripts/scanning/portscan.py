@@ -1,40 +1,37 @@
 #!/usr/bin/python3
 
-from assets.banners import eaglscan_banner
-from assets.properties import clear_screen
+from assets.banners import portscan_banner
+from assets.colors import *
 from assets.designs import logo, line, author
+from assets.prefixes import eagleshell_prefix, invalid_input_prefix, rhost_prefix
+from assets.properties import clear_screen
 from assets.shortcuts import Exit
 from .scanning import Scanning
-from assets.prefixes import eagleshell_prefix, invalid_input_prefix, rhost_prefix
-from assets.colors import *
-import socket
 import os
+import socket
 
 
-class EagleScan:
+class PortScan:
     def __init__(self):
         self.port_list = []
         self.configuration()
-        self.scanner()
+        self.scan_target()
         self.result()
 
     def header(self):
         os.system(clear_screen)
         print(logo)
-        print('')
-        print(line)
-        print(eaglscan_banner)
-        print(line)
-        print('')
+        print('\n' + line)
+        print(portscan_banner)
+        print(line + '\n')
         print(author)
 
     def configuration(self):
         try:
             self.header()
-            print('Configuration:\n')
-            print('\tSelect Target IP')
-            print('\t----------------\n')
-            print('\tZ): Back')
+            print('RHOST:')
+            print('\n\tExample: 192.168.1.128')
+            print('\n\tZ): Back')
             print('\tX): Exit\n')
             self.rhost_set = input(rhost_prefix).lower()
             if self.rhost_set == 'z':
@@ -44,7 +41,7 @@ class EagleScan:
         except KeyboardInterrupt:
             Exit()
 
-    def scanner(self):
+    def scan_target(self):
         try:
             self.header()
             print('Scanning:\n')
@@ -59,10 +56,10 @@ class EagleScan:
                         self.port_list.append(format(port))
             except socket.gaierror:
                 print('Hostname could not be resolved.')
-                EagleScan()
+                PortScan()
             except socket.error:
                 print("Couldn't connect to server.")
-                EagleScan()
+                PortScan()
         except KeyboardInterrupt:
             self.result()
 
@@ -70,15 +67,21 @@ class EagleScan:
         try:
             self.header()
             print('Output:\n')
-            print('\tRHOST: ' + self.rhost_set + '\n')
-            print('\tOPEN PORTS: ' + '\u001b[32m' + format(self.port_list).replace('[', '').replace(']', '').replace("'", ''))
-            print(WHITE + '\tY): New')
+            if len(self.port_list) < 1:
+                print('\tRHOST: ' + RED + BOLD + self.rhost_set + WHITE)
+            else:
+                print('\tRHOST: ' + GREEN + BOLD + self.rhost_set + WHITE)
+            if len(self.port_list) < 1:
+                print('\n\tOPEN PORTS: ' + RED + BOLD + 'NONE' + WHITE)
+            else:
+                print('\n\tOPEN PORTS: ' + GREEN + BOLD + format(self.port_list).replace('[', '').replace(']', '').replace("'", '') + WHITE)
+            print('\n\tY): New')
             print('\tZ): Menu')
             print('\tX): Exit\n')
             while True:
                 cmd = input(eagleshell_prefix).lower()
                 if cmd == 'y':
-                    EagleScan()
+                    PortScan()
                 elif cmd == 'z':
                     Scanning()
                 elif cmd == 'x':

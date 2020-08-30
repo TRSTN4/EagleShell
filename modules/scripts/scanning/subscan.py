@@ -1,182 +1,112 @@
 #!/usr/bin/python3
 
 from assets.banners import subscan_banner
-from assets.properties import clear_screen
+from assets.colors import *
 from assets.designs import logo, line, author
+from assets.prefixes import invalid_input_prefix, website_prefix, wordlist_prefix, eagleshell_prefix
+from assets.properties import clear_screen
 from assets.shortcuts import Exit
 from .scanning import Scanning
-import requests
 import os
+import requests
 
 
-def subscan_main():
-    def configuration():
+class SubScan:
+    def __init__(self):
+        self.configuration()
+        self.sub_scan()
+        self.result()
+
+    def header(self):
+        os.system(clear_screen)
+        print(logo)
+        print('\n' + line)
+        print(subscan_banner)
+        print(line + '\n')
+        print(author)
+
+    def configuration(self):
         try:
-            global website_set
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(subscan_banner)
-            print(line)
-            print('')
-            print(author)
-            print('Configuration:')
-            print('')
-            print('\tExample: google.com')
-            print('')
-            print('\tZ): Back')
-            print('\tX): Exit')
-            print('')
-            website_set = input('\u001b[33mWEBSITE \u001b[37m> ').lower()
-            if website_set == 'z':
+            self.header()
+            print('Website:')
+            print('\n\tExample: google.com')
+            print('\n\tZ): Back')
+            print('\tX): Exit\n')
+            self.web_set = input(website_prefix).lower()
+            if self.web_set == 'z':
                 Scanning()
-            elif website_set == 'x':
+            elif self.web_set == 'x':
                 Exit()
-            else:
-                wordlist()
-        except KeyboardInterrupt:
-            Exit()
-
-    def wordlist():
-        try:
-            global wordlist_set
-            global subdomain_list
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(subscan_banner)
-            print(line)
-            print('')
-            print(author)
+            self.header()
             print('Wordlist:')
-            print('')
-            print('\t1): 100 Words')
-            print('\t2): 500 Words')
-            print('\t3): 1000 Words')
-            print('\t4): 10000 Words')
-            print('')
-            print('\tZ): Back')
-            print('\tX): Exit')
-            print('')
-            while True:
-                wordlist_set = input('\u001b[33mWORDLIST \u001b[37m> ').lower()
-                if wordlist_set == '1':
-                    subdomain_list = "subdomains-100.txt"
-                    output()
-                elif wordlist_set == '2':
-                    subdomain_list = "subdomains-500.txt"
-                    output()
-                elif wordlist_set == '3':
-                    subdomain_list = "subdomains-1000.txt"
-                    output()
-                elif wordlist_set == '4':
-                    subdomain_list = "subdomains-10000.txt"
-                    output()
-                if wordlist_set == 'z':
-                    Scanning()
-                elif wordlist_set == 'x':
-                    Exit()
-                else:
-                    print('\u001b[31m[-] Invalid Input.')
-                    continue
+            print('\n\tExample: /usr/share/wordlists/mylist.txt')
+            print('\n\tZ): Back')
+            print('\tX): Exit\n')
+            self.sub_list_set = input(wordlist_prefix).lower()
+            if self.sub_list_set == 'z':
+                Scanning()
+            elif self.sub_list_set == 'x':
+                Exit()
         except KeyboardInterrupt:
             Exit()
 
-    # Function that displays output
-    def output():
+    def sub_scan(self):
         try:
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(subscan_banner)
-            print(line)
-            print('')
-            print(author)
+            self.header()
             print('Output:')
-            print('')
-            print('\tControls')
+            print('\n\tControls')
             print('\t--------')
-            print('\tStop: CTRL+C')
-            print('')
-            subsdomain_scan()
-        except KeyboardInterrupt:
-            Exit()
-
-    # Function that scans subdomains
-    def subsdomain_scan():
-        try:
-            global total_found
-            total_found = 0
-
-            # the domain to scan for subdomains
-            domain = website_set
-
-            # read all subdomains
-            file = open("/opt/EagleShell/wordlists/subdomains/" + subdomain_list)
-            # read all content
+            print('\tStop: CTRL+C\n')
+            self.total_found = 0
+            domain = self.web_set
+            file = open(self.sub_list_set)
             content = file.read()
-            # split by new lines
             subdomains = content.splitlines()
-
             for subdomain in subdomains:
-                # construct the url
-                url = f"http://{subdomain}.{domain}"
+                url = f"http://" + subdomain + "." + domain
                 try:
-                    # if this raises an ERROR, that means the subdomain does not exist
                     requests.get(url)
-                except requests.ConnectionError:
-                    # if the subdomain does not exist, just pass, print nothing
+                except requests.exceptions.HTTPError:
                     pass
                 else:
-                    print("\t\u001b[33;1m[+] \u001b[32;1mDiscovered SubDomain \u001b[37;1m>> \u001b[36;1m" + str(url))
-                    total_found = total_found + 1
+                    print(YELLOW + BOLD + '\t[+] ' + GREEN + BOLD + 'Discovered SubDomain ' + WHITE + BOLD + '>> ' + BLUE + BOLD + str(url))
+                    self.total_found = self.total_found + 1
         except KeyboardInterrupt:
-            result()
+            self.result()
 
-    # Function that displays result
-    def result():
+    def result(self):
         try:
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(subscan_banner)
-            print(line)
-            print('')
-            print(author)
+            self.header()
             print('Result:')
-            print('')
-            print('\tInput')
+            print('\n\tInput')
             print('\t-----')
-            print('\tWEBSITE: ' + website_set)
-            print('\tWORDLIST: ' + subdomain_list)
-            print('')
-            print('\tOutput')
+            if self.total_found < 1:
+                print('\tWEBSITE: ' + RED + BOLD + self.web_set + WHITE)
+            else:
+                print('\tWEBSITE: ' + GREEN + BOLD + self.web_set + WHITE)
+            if self.total_found < 1:
+                print('\tWORDLIST: ' + RED + BOLD + self.sub_list_set + WHITE)
+            else:
+                print('\tWORDLIST: ' + GREEN + BOLD + self.sub_list_set + WHITE)
+            print('\n\tOutput')
             print('\t------')
-            print('\tSUBDOMAINS FOUND: ' + str(total_found))
-            print('')
-            print('\tY): New')
+            if self.total_found < 1:
+                print('\tSUBDOMAINS FOUND: ' + RED + BOLD + '0' + WHITE)
+            else:
+                print('\tSUBDOMAINS FOUND: ' + GREEN + BOLD + str(self.total_found) + WHITE)
+            print('\n\tY): New')
             print('\tZ): Menu')
-            print('\tX): Exit')
-            print('')
+            print('\tX): Exit\n')
             while True:
-                eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
-                if eagleshell_cmd == 'y':
-                    subscan_main()
-                elif eagleshell_cmd == 'z':
+                cmd = input(eagleshell_prefix).lower()
+                if cmd == 'y':
+                    SubScan()
+                elif cmd == 'z':
                     Scanning()
-                elif eagleshell_cmd == 'x':
+                elif cmd == 'x':
                     Exit()
                 else:
-                    print('\u001b[31m[-] Invalid Input.')
+                    print(invalid_input_prefix)
                     continue
         except KeyboardInterrupt:
             Exit()
-
-    configuration()
-
-
-subscan_main()

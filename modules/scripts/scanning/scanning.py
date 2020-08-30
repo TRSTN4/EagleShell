@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 from assets.banners import scanning_banner
-from assets.properties import clear_screen
 from assets.designs import logo, line, author
-from assets.shortcuts import Exit
 from assets.prefixes import eagleshell_prefix, invalid_input_prefix
+from assets.properties import clear_screen
+from assets.shortcuts import Exit
 import os
 
 
@@ -13,29 +13,24 @@ class Scanning:
         try:
             os.system(clear_screen)
             print(logo)
-            print('')
-            print(line)
+            print('\n' + line)
             print(scanning_banner)
-            print(line)
-            print('')
+            print(line + '\n')
             print(author)
             print('Scripts:')
-            print('')
-            print('\t1): EAGLEYE - Network Scanner')
+            print('\n\t1): EAGLEYE - Network Scanner')
             print('\t2): EAGLESCAN - Port Scanner')
             print('\t3): SUBSCAN - Sub Domain Scanner')
-            print('')
-            print('\tZ): Back')
-            print('\tX): Exit')
-            print('')
+            print('\n\tZ): Back')
+            print('\tX): Exit\n')
             while True:
                 scanning_select = input(eagleshell_prefix).lower()
                 if scanning_select == '1':
-                    from modules.scripts.scanning.eagleye import eagleye_main
-                    eagleye_main()
+                    from modules.scripts.scanning.eagleye import NetScan
+                    NetScan()
                 elif scanning_select == '2':
-                    from modules.scripts.scanning.eaglescan import EagleScan
-                    EagleScan()
+                    from modules.scripts.scanning.eaglescan import PortScan
+                    PortScan()
                 elif scanning_select == '3':
                     from modules.scripts.scanning.subscan import SubScan
                     SubScan()
