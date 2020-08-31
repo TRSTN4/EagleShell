@@ -18,18 +18,18 @@ class Scanning:
             print(line + '\n')
             print(author)
             print('Scripts:')
-            print('\n\t1): EAGLEYE - Network Scanner')
-            print('\t2): EAGLESCAN - Port Scanner')
-            print('\t3): SUBSCAN - Sub Domain Scanner')
+            print('\n\t1): NetScan - Network Scanner')
+            print('\t2): PortScan - Port Scanner')
+            print('\t3): SubScan - Sub Domain Scanner')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:
                 scanning_select = input(eagleshell_prefix).lower()
                 if scanning_select == '1':
-                    from modules.scripts.scanning.eagleye import NetScan
+                    from modules.scripts.scanning.netscan import NetScan
                     NetScan()
                 elif scanning_select == '2':
-                    from modules.scripts.scanning.eaglescan import PortScan
+                    from modules.scripts.scanning.portscan import PortScan
                     PortScan()
                 elif scanning_select == '3':
                     from modules.scripts.scanning.subscan import SubScan
