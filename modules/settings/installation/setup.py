@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 
-from assets.banners import update_banner
-from assets.properties import clear_screen
-from assets.designs import logo, author, line
-from assets.prefixes import eagleshell_prefix
-from assets.shortcuts import Exit
+from assets.banners import setup_banner
 from assets.colors import *
+from assets.designs import logo, author
+from assets.prefixes import eagleshell_prefix
+from assets.properties import clear_screen
+from assets.shortcuts import Exit
 import os
 
 
@@ -14,11 +14,7 @@ class Setup:
         try:
             os.system(clear_screen)
             print(logo)
-            print('')
-            print(line)
-            print(update_banner)
-            print(line)
-            print('')
+            print(setup_banner)
             print(author)
             print('Update:\n')
             print(WHITE + '\tAre you ready to setup EagleShell? ' + GREEN + 'Y' + WHITE + '/' + RED + 'N')
