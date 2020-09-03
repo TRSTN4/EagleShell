@@ -12,8 +12,8 @@ class Scripts:
     def __init__(self):
         try:
             os.system(clear_screen)
-            print(logo)
             print(scripts_banner)
+            print(logo)
             print(author)
             print('Options:')
             print('\n\t1): Scanning')
