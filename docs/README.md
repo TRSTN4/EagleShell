@@ -88,7 +88,6 @@ This _config_ is **updated** (at a random time), so make sure you **come back** 
 | Clean Navigation          |      ✔️       |
 | Categorized               |      ✔️       |
 | Time Saver                |      ✔️       |
-| 24/7 Support              |      ✔️       |
 
 ## Contributing
 
