@@ -1,30 +1,31 @@
 #!/usr/bin/python3
 
-from assets.properties import version
-from assets.properties import total_scripts
+from assets.properties import version, total_scripts, total_exploits, total_settings
 from assets.colors import *
 
-payloads_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Payloads | [Total] 0 Payloads Available'
-listeners_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Listeners | [Total] 0 Listeners Available'
-scripts_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Total] ' + total_scripts +' Scripts Available'
-settings_banner = CYAN + '[Version] ' + version + ' | [Module] Settings | [Total] 0 Settings Available'
+scripts_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Total] ' + total_scripts + ' Scripts Available'
+exploits_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Exploits | [Total] ' + total_exploits + ' Listeners Available'
+settings_banner = CYAN + '[Version] ' + version + ' | [Module] Settings | [Total] ' + total_settings + ' Settings Available'
+
 scanning_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Scanning'
 enumeration_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Enumeration'
-network_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Network'
-privilege_escalation_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Privilege Escalation'
 exploitation_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Exploitation'
+privilege_escalation_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Privilege Escalation'
 brute_force_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Brute Force'
+network_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Network'
 miscellaneous_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous'
+
+netscan_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Scanning | [Script] NetScan'
+portscan_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Scanning | [Script] PortScan'
+subscan_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Scanning | [Script] SubScan'
+
 rsgen_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Exploitation | [Script] RSGEN'
 machanger_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] MACHANGER'
-netscan_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Scanning | [Script] EAGLEYE'
-portscan_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Scanning | [Script] EAGLESCAN'
 pgen_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Exploitation | [Script] PGEN'
 update_banner = CYAN + '[Version] ' + version + ' | [Module] Settings | [Option] Update | [Script] UPDATE'
-setup_banner = CYAN + '[Version] ' + version + ' | [Module] None | [Option] None | [Script] SETUP'
+setup_banner = CYAN + '[Version] ' + version + ' | [Module] None | [Option] None | [Script] Setup'
 arpspoof_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Network | [Script] ARPSPOOF'
 packetsniffer_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Network | [Script] PACKETSNIFFER'
-subscan_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Scanning | [Script] EagleClaw'
 exif_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] EXIF'
 crypt_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] CRYPT'
 hashing_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] HASHING'
