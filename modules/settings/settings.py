@@ -2,7 +2,7 @@
 
 from assets.banners import settings_banner
 from assets.properties import clear_screen
-from assets.designs import logo, line, author
+from assets.designs import logo, author
 from assets.shortcuts import Exit
 from assets.prefixes import eagleshell_prefix, invalid_input_prefix
 import os
@@ -13,9 +13,7 @@ class Settings:
         try:
             os.system(clear_screen)
             print(logo)
-            print('\n' + line)
             print(settings_banner)
-            print(line + '\n')
             print(author)
             print('Options:')
             print('\n\t1): Setup')

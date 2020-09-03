@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 from assets.banners import scanning_banner
-from assets.designs import logo, line, author
+from assets.designs import logo, author
 from assets.prefixes import eagleshell_prefix, invalid_input_prefix
 from assets.properties import clear_screen
 from assets.shortcuts import Exit
@@ -13,9 +13,7 @@ class Scanning:
         try:
             os.system(clear_screen)
             print(logo)
-            print('\n' + line)
             print(scanning_banner)
-            print(line + '\n')
             print(author)
             print('Scripts:')
             print('\n\t1): NetScan - Network Scanner')
