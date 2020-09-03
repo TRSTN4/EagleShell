@@ -3,9 +3,9 @@
 from assets.properties import version, total_scripts, total_exploits, total_settings
 from assets.colors import *
 
-scripts_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Total] ' + total_scripts + ' Scripts Available'
-exploits_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Exploits | [Total] ' + total_exploits + ' Listeners Available'
-settings_banner = CYAN + '[Version] ' + version + ' | [Module] Settings | [Total] ' + total_settings + ' Settings Available'
+scripts_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Total] ' + str(total_scripts) + ' Scripts Available'
+exploits_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Exploits | [Total] ' + str(total_exploits) + ' Listeners Available'
+settings_banner = CYAN + '[Version] ' + version + ' | [Module] Settings | [Total] ' + str(total_settings) + ' Settings Available'
 
 scanning_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Scanning'
 enumeration_banner = CYAN + '[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Enumeration'
