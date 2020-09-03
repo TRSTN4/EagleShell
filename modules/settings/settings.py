@@ -16,20 +16,18 @@ class Settings:
             print(settings_banner)
             print(author)
             print('Options:')
-            print('\n\t1): Setup')
+            print('\n\t1): Update')
             print('\t2): Version')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:
                 settings_select = input(eagleshell_prefix).lower()
                 if settings_select == '1':
-                    from modules.settings.updates.update import update_main
-                    update_main()
+                    from modules.settings.installation.update import Update
+                    Update()
                 elif settings_select == '2':
-                    pass
-                elif settings_select == '3':
-                    from assets.commands import eagleshell_version
-                    eagleshell_version()
+                    from modules.settings.other.version import Version
+                    Version()
                 elif settings_select == 'z':
                     from ..modules import Modules
                     Modules()
