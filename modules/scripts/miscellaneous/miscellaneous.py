@@ -16,26 +16,26 @@ class Miscellaneous:
             print(miscellaneous_banner)
             print(author)
             print('Scripts:')
-            print('\n\t1): MACHANGER - Change MAC Address')
-            print('\t2): SOON - EXIF - Image Metadata Extractor')
+            print('\n\t1): HASHING - Text and File Hashing')
+            print('\t2): MACHANGER - Change MAC Address')
             print('\t3): SOON - CRYPT - Encrypter and Decrypter')
-            print('\t4): HASHING - Text and File Hashing')
+            print('\t4): SOON - EXIF - Image Metadata Extractor')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:
                 miscellaneous_select = input(eagleshell_prefix).lower()
                 if miscellaneous_select == '1':
+                    from modules.scripts.miscellaneous.hashing import Hashing
+                    Hashing()
+                elif miscellaneous_select == '2':
                     from modules.scripts.miscellaneous.machanger import machanger_main
                     machanger_main()
-                elif miscellaneous_select == '2':
-                    from modules.scripts.miscellaneous.exif import exif_main
-                    exif_main()
                 elif miscellaneous_select == '3':
                     from modules.scripts.miscellaneous.crypt import crypt_main
                     crypt_main()
                 elif miscellaneous_select == '4':
-                    from modules.scripts.miscellaneous.hashing import hashing_main
-                    hashing_main()
+                    from modules.scripts.miscellaneous.exif import exif_main
+                    exif_main()
                 elif miscellaneous_select == 'z':
                     from ..scripts import Scripts
                     Scripts()

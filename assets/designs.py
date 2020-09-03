@@ -11,5 +11,5 @@ logo = YELLOW + '''
 '''
 
 
-author = '''\u001b[37mCreated By TRSTN4
+author = WHITE + '''Created By TRSTN4
 --------------------------'''
