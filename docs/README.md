@@ -96,7 +96,7 @@ Got **something interesting** you'd like to **share**? Learn about [contributing
 
 ## Author
 
-| ![TRSTN4](https://lh3.googleusercontent.com/-LmbLfR2v0VY/XuyjPluXgOI/AAAAAAAAAX0/QtFfEdX6GicErk6oE48CnHcozTqiBup_ACEwYBhgLKtMDAL1OcqyegBMXFtbwQAVw__A5Rcfz3YWUFKwOI2XQAU7odQo7xt_8kH0I2n70kvDxAueRASy9eoX006ihsw3kA6-nw335Hl3O2NhMpypNVrI_o6snu-yR2Ny4RAm9qLJURdZ0RH-nmNk-OTCWr7gdyMojf_ez_6G0xorQh8swVYAZltAIFl4HrHsVAEp8z7CpjguHrWPTcoGP8MkkS2Q6Xs4JO9DmyIJ4P5a4nkaf-7pV4uOwLSkpdgHDVqA2e295FGHxielTnRamoLcpA2_9SRHfDN40rKmwMVNRU4FXD2mYiDwDk5402knxAgqME8TRHcQA01T97O4ZQ8uh5K_TwZ0l8crOmSNJGclOlnmX1ivjybE1p_tZRh9xd-CBFLlNjfC1BQ1gLZ2gImoHHXZAHdi5yuzjrbTkbmeD9cMoFjEU49atZ0di2PWCZYNQqX8PZufAE_mD4lHjzvxmXV-C7HhOdL-NSP6Fh996Bif79HDT3ikGt2o10urY-9xRTBmWTPG-nv90m9J0g4Y22_CZDtKg4LAlIC9blDYMDPJB8nFvdM5ezvSOiKLeN5zZEcNDgYzEL5LcdDTvTIEpmHjmTr54kURT7MR-YYI6EaqmocFEIfUwpsuy9wU/w280-h280-p/TLogo.png) |
+| ![TRSTN4](https://media1.giphy.com/media/jtKnHAgIrCJjJeHaGd/giphy.gif) |
 | ------------------------------------------------------------ |
 | **TRSTN4**                                                   |
 
