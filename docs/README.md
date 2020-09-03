@@ -39,10 +39,6 @@
 
 We **heavily** support people who have **created** a python script and want to share it with us to **merge** with **EagleShell**. Of course **you** get the **credits** for **your script**. Learn more about [contributing here](https://github.com/TRSTN4/EagleShell/blob/master/docs/CONTRIBUTING.md).
 
-<img src="https://i.imgur.com/Rdch1dH.png" width="400px" />
-
-
-
 ## Installation
 
 ##### Downloading and installing steps:
