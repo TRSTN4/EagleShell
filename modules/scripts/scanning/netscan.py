@@ -2,7 +2,7 @@
 
 from assets.banners import netscan_banner
 from assets.colors import *
-from assets.designs import logo, line, author
+from assets.designs import logo, author
 from assets.prefixes import eagleshell_prefix, invalid_input_prefix, net_ip_prefix, net_range_prefix
 from assets.properties import clear_screen
 from assets.shortcuts import Exit
@@ -21,9 +21,7 @@ class NetScan:
     def header(self):
         os.system(clear_screen)
         print(logo)
-        print('\n' + line)
         print(netscan_banner)
-        print(line + '\n')
         print(author)
 
     def configuration(self):

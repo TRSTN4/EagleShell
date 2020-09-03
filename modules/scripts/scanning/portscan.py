@@ -2,7 +2,7 @@
 
 from assets.banners import portscan_banner
 from assets.colors import *
-from assets.designs import logo, line, author
+from assets.designs import logo, author
 from assets.prefixes import eagleshell_prefix, invalid_input_prefix, rhost_prefix
 from assets.properties import clear_screen
 from assets.shortcuts import Exit
@@ -21,9 +21,7 @@ class PortScan:
     def header(self):
         os.system(clear_screen)
         print(logo)
-        print('\n' + line)
         print(portscan_banner)
-        print(line + '\n')
         print(author)
 
     def configuration(self):
