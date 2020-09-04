@@ -54,9 +54,9 @@ class Hashing:
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             self.hashing_text_set = input(text_prefix)
-            if self.hashing_text_set == 'z':
+            if self.hashing_text_set == 'z' or self.hashing_text_set == 'Z':
                 Miscellaneous()
-            elif self.hashing_text_set == 'x':
+            elif self.hashing_text_set == 'x' or self.hashing_text_set == 'X':
                 Exit()
             else:
                 self.message = self.hashing_text_set.encode()
@@ -102,9 +102,9 @@ class Hashing:
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             self.hashing_file_path = input(path_prefix)
-            if self.hashing_file_path == 'z':
+            if self.hashing_file_path == 'z' or self.hashing_file_path == 'Z':
                 Miscellaneous()
-            elif self.hashing_file_path == 'x':
+            elif self.hashing_file_path == 'x' or self.hashing_file_path == 'X':
                 Exit()
             else:
                 self.hashing_file()

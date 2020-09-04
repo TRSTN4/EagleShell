@@ -40,10 +40,10 @@ class SubScan:
             print('\n\tExample: /usr/share/wordlists/mylist.txt')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
-            self.sub_list_set = input(wordlist_prefix).lower()
-            if self.sub_list_set == 'z':
+            self.sub_list_set = input(wordlist_prefix)
+            if self.sub_list_set == 'z' or self.sub_list_set == 'Z':
                 Scanning()
-            elif self.sub_list_set == 'x':
+            elif self.sub_list_set == 'x' or self.sub_list_set == 'X':
                 Exit()
         except KeyboardInterrupt:
             Exit()

