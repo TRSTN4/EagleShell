@@ -12,13 +12,11 @@ import requests
 from urllib.request import urlparse, urljoin
 from bs4 import BeautifulSoup
 
-internal_urls = set()
-external_urls = set()
-total_urls_visited = 0
-
 
 class LinkExtract:
     def __init__(self):
+        self.internal_urls = set()
+        self.external_urls = set()
         self.total_urls_visited = 0
         self.configuration()
         self.result()
@@ -34,7 +32,8 @@ class LinkExtract:
             self.header()
             print('Configuration:')
             print('\n\tPaste Your URL')
-            print('\tExample: http://mysite.com')
+            print('\tExample 1: http://mysite.com')
+            print('\tExample 2: mysite.com')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             self.url_set = input(url_prefix)
@@ -42,18 +41,32 @@ class LinkExtract:
                 Web()
             elif self.url_set == 'x' or self.url_set == 'X':
                 Exit()
+            if 'http://' in self.url_set or 'https://' in self.url_set:
+                pass
+            else:
+                self.url_set = 'http://' + self.url_set
+            self.header()
+            print('Output:')
+            print('\n\tControls')
+            print('\t--------')
+            print('\tStop: CTRL+C\n')
             self.crawl(self.url_set)
             self.result()
         except KeyboardInterrupt:
             Exit()
 
     def crawl(self, url, max_urls=50):
-        self.total_urls_visited += 1
-        links = self.get_all_website_links(url)
-        for link in links:
-            if self.total_urls_visited > max_urls:
-                break
-            self.crawl(link, max_urls=max_urls)
+        try:
+            self.total_urls_visited += 1
+            links = self.get_all_website_links(url)
+            for link in links:
+                if self.total_urls_visited > max_urls:
+                    break
+                self.crawl(link, max_urls=max_urls)
+        except requests.exceptions.ConnectionError:
+            print(RED + "\n\t[-] URL does not exist." + WHITE)
+            os.system('sleep 2')
+            LinkExtract()
 
     def get_all_website_links(self, url):
         try:
@@ -69,19 +82,19 @@ class LinkExtract:
                 href = parsed_href.scheme + "://" + parsed_href.netloc + parsed_href.path
                 if not self.is_valid(href):
                     continue
-                if href in internal_urls:
+                if href in self.internal_urls:
                     continue
                 if domain_name not in href:
-                    if href not in external_urls:
-                        print(MAGENTA + f"[!] External link: {href}" + WHITE)
-                        external_urls.add(href)
+                    if href not in self.external_urls:
+                        print(YELLOW + '\t[!] ' + MAGENTA + 'External Link Found ' + WHITE + '>> ' + BLUE + f"{href}" + WHITE)
+                        self.external_urls.add(href)
                     continue
-                print(GREEN + f"[*] Internal link: {href}" + WHITE)
+                print(YELLOW + '\t[+] ' + GREEN + 'Internal Link Found ' + WHITE + '>> ' + BLUE + f"{href}" + WHITE)
                 urls.add(href)
-                internal_urls.add(href)
+                self.internal_urls.add(href)
             return urls
         except KeyboardInterrupt:
-            Exit()
+            self.result()
 
     def is_valid(self, url):
         parsed = urlparse(url)
@@ -91,9 +104,9 @@ class LinkExtract:
         try:
             self.header()
             print('Result:')
-            print("\n[+] Total Internal links:", len(internal_urls))
-            print("[+] Total External links:", len(external_urls))
-            print("[+] Total URLs:", len(external_urls) + len(internal_urls))
+            print(GREEN, "\n\tTotal Internal Links:", len(self.internal_urls), WHITE)
+            print(MAGENTA, "\tTotal External Links:", len(self.external_urls), WHITE)
+            print(BLUE, "\tTotal URLs:", len(self.external_urls) + len(self.internal_urls), WHITE)
             print('\n\tY): New')
             print('\tZ): Menu')
             print('\tX): Exit\n')
