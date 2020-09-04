@@ -106,11 +106,11 @@ class MaChanger:
     def result(self):
         try:
             self.header()
-            print('Output:')
             if self.succ_fail == True:
                 color = GREEN
             else:
                 color = RED
+            print('Result:')
             print('\n\tINTERFACE SET: ' + color + self.interface_set + WHITE)
             print('\n\tMAC SET: ' + color + self.mac_set + WHITE)
             print('\n\t---------------------------------------------')
