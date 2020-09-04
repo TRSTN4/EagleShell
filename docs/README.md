@@ -107,6 +107,6 @@ Reach out to us here:
 
 ## License
 
-EagleShell is released under "[GNU General Public License v2.0](https://github.com/TRSTN4/EagleShell/blob/master/docs/LICENSE.md)".
+EagleShell is released under "[GNU General Public License v2.0](https://github.com/TRSTN4/EagleShell/blob/master/LICENSE)".
 
 - Copyright © EagleShell.
