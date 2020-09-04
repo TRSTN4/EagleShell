@@ -22,7 +22,8 @@ class Scripts:
             print('\t4): Privilege Escalation')
             print('\t5): Brute Force')
             print('\t6): Network')
-            print('\t7): Miscellaneous')
+            print('\t7): Web')
+            print('\t8): Miscellaneous')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:
@@ -46,7 +47,7 @@ class Scripts:
                     from .network.network import Network
                     Network()
                 elif scripts_select == '7':
-                    from .
+                    from .web.web import Web
                     Web()
                 elif scripts_select == '8':
                     from .miscellaneous.miscellaneous import Miscellaneous

@@ -13,6 +13,7 @@ exploitation_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scr
 privilege_escalation_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Privilege Escalation\n'
 brute_force_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Brute Force\n'
 network_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Network\n'
+web_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Web\n'
 miscellaneous_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous\n'
 
 netscan_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Scanning | [Script] NetScan\n'

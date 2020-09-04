@@ -2,7 +2,7 @@
 
 total_mass_updates = 2
 total_modules = 2
-total_categories = 7
+total_categories = 8
 total_scripts = 10
 total_exploits = 1
 total_settings = 2
