@@ -14,3 +14,4 @@ text_prefix = YELLOW + 'TEXT ' + WHITE + '> '
 path_prefix = YELLOW + 'PATH ' + WHITE + '> '
 interface_prefix = YELLOW + 'INTERFACE ' + WHITE + '> '
 new_mac_prefix = YELLOW + 'NEW MAC ' + WHITE + '> '
+unavailable_interface_prefix = RED + '[+] Unavailable Interface.' + WHITE

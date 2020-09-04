@@ -3,7 +3,7 @@
 from assets.banners import machanger_banner
 from assets.colors import *
 from assets.designs import logo, author
-from assets.prefixes import invalid_input_prefix, eagleshell_prefix, interface_prefix, new_mac_prefix
+from assets.prefixes import invalid_input_prefix, eagleshell_prefix, interface_prefix, new_mac_prefix, unavailable_interface_prefix
 from assets.properties import clear_screen
 from assets.shortcuts import Exit
 from .miscellaneous import Miscellaneous
@@ -15,6 +15,8 @@ import re
 
 class MaChanger:
     def __init__(self):
+        self.allowed_interface_list = ['wlan0', 'wlan1', 'wlan2', 'wlan3', 'mon0', 'mon1', 'mon2', 'mon3', 'wlp5s0', 'wlp5s1', 'wlp5s2', 'wlp5s3', 'eth0', 'eth1', 'eth2', 'eth3']
+        self.disallowed_interface_list = ['lo', 'tun0', 'tun1', 'tun2', 'tun3', 'mon1', 'mon2', 'mon3', 'wlp5s0', 'wlp5s1', 'wlp5s2', 'wlp5s3', 'eth0', 'eth1', 'eth2', 'eth3']
         self.configuration()
 
     def header(self):
@@ -25,20 +27,21 @@ class MaChanger:
 
     def configuration(self):
         try:
-            print('Interface:')
+            self.header()
+            print('Configuration:')
             self.interfaces()
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:
                 self.interface_set = input(interface_prefix).lower()
-                if self.interface_set == 'wlan0' or self.interface_set == 'wlan1' or self.interface_set == 'wlan2' or self.interface_set == 'wlan3' or self.interface_set == 'mon0' or self.interface_set == 'mon1' or self.interface_set == 'mon2' or self.interface_set == 'mon3' or self.interface_set == 'wlp5s0' or self.interface_set == 'wlp5s1' or self.interface_set == 'wlp5s2' or self.interface_set == 'wlp5s3' or self.interface_set == 'eth0' or self.interface_set == 'eth1' or self.interface_set == 'eth2' or self.interface_set == 'eth3':
+                if self.interface_set in self.allowed_interface_list:
                     self.set_mac()
                 elif self.interface_set == 'z':
                     Miscellaneous()
                 elif self.interface_set == 'x':
                     Exit()
                 else:
-                    print(invalid_input_prefix)
+                    print(unavailable_interface_prefix)
                     continue
         except KeyboardInterrupt:
             Exit()
@@ -46,10 +49,10 @@ class MaChanger:
     def interfaces(self):
         x = netifaces.interfaces()
         for i in x:
-            if i == 'wlan0' or i == 'wlan1' or i == 'wlan2' or i == 'wlan3' or i == 'mon0' or i == 'mon1' or i == 'mon2' or i == 'mon3' or i == 'wlp5s0' or i == 'wlp5s1' or i == 'wlp5s2' or i == 'wlp5s3' or i == 'eth0' or i == 'eth1' or i == 'eth2' or i == 'eth3':
-                print('\n\t[+] Available Interface: ' + i)
-            elif i != 'lo' or i != 'tun0' or i != 'tun1' or i != 'tun2' or i != 'tun3':
-                print('\n\t[-] Unavailable Interface: ' + i)
+            if i in self.allowed_interface_list:
+                print(GREEN + '\n\t[+] Available Interface: ' + i + WHITE)
+            elif self.disallowed_interface_list != i:
+                print(RED + '\n\t[-] Unavailable Interface: ' + i + WHITE)
 
     def set_mac(self):
         try:
@@ -66,14 +69,21 @@ class MaChanger:
                 elif self.mac_set == 'x':
                     Exit()
                 else:
-                    self.functions()
+                    self.run_tasks()
         except KeyboardInterrupt:
             Exit()
 
-    def change_mac(self):
-        os.system("ifconfig " + self.interface_set + " down" + " >/dev/null 2>&1")
-        os.system("ifconfig " + self.interface_set + " hw " + " ether " + self.mac_set + " >/dev/null 2>&1")
-        os.system("ifconfig " + self.interface_set + " up" + " >/dev/null 2>&1")
+    def run_tasks(self):
+        self.change_mac()
+        self.current_mac = self.get_current_mac()
+        if self.current_mac == self.mac_set:
+            self.confirmed = 'MAC address was successfully changed.'
+            self.succ_fail = True
+            self.result()
+        else:
+            self.confirmed = 'MAC address did not get changed.'
+            self.succ_fail = False
+            self.result()
 
     def get_current_mac(self):
         try:
@@ -84,27 +94,28 @@ class MaChanger:
             else:
                 pass
         except subprocess.CalledProcessError:
-            print('print')
+            print(RED + '[-] Failed.. Please Try Again.' + WHITE)
+            os.system('sleep 1')
+            Exit()
 
-    def functions(self):
-        self.current_mac = self.get_current_mac()
-        self.change_mac()
-        if self.current_mac == self.mac_set:
-            self.confirmed = GREEN + "MAC address was successfully changed." + WHITE
-            self.result()
-        else:
-            self.confirmed = RED + "MAC address did not get changed." + WHITE
-            self.result()
+    def change_mac(self):
+        os.system("ifconfig " + self.interface_set + " down" + " >/dev/null 2>&1")
+        os.system("ifconfig " + self.interface_set + " hw " + " ether " + self.mac_set + " >/dev/null 2>&1")
+        os.system("ifconfig " + self.interface_set + " up" + " >/dev/null 2>&1")
 
     def result(self):
         try:
             self.header()
             print('Output:')
-            print('\n\tINTERFACE SET: ' + self.interface_set)
-            print('\n\tMAC SET: ' + self.mac_set)
+            if self.succ_fail == True:
+                color = GREEN
+            else:
+                color = RED
+            print('\n\tINTERFACE SET: ' + color + self.interface_set + WHITE)
+            print('\n\tMAC SET: ' + color + self.mac_set + WHITE)
             print('\n\t---------------------------------------------')
-            print('\n\tRESULT: ' + self.confirmed)
-            print('\n\tCURRENT MAC: ' + self.current_mac)
+            print('\n\tRESULT: ' + color + self.confirmed + WHITE)
+            print('\n\tCURRENT MAC: ' + color + self.current_mac + WHITE)
             print('\n\tY): New')
             print('\tZ): Menu')
             print('\tX): Exit\n')
