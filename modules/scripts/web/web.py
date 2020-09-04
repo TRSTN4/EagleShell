@@ -16,13 +16,14 @@ class Web:
             print(web_banner)
             print(author)
             print('Scripts:')
-            print('\n\t1): SOON')
+            print('\n\t1): LinkExtract')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:
                 miscellaneous_select = input(eagleshell_prefix).lower()
                 if miscellaneous_select == '1':
-                    pass
+                    from modules.scripts.web.linkextract import LinkExtract
+                    LinkExtract()
                 elif miscellaneous_select == 'z':
                     from ..scripts import Scripts
                     Scripts()

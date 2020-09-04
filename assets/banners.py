@@ -4,7 +4,6 @@ from assets.properties import version, total_scripts, total_exploits, total_sett
 from assets.colors import *
 
 scripts_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Total] ' + str(total_scripts) + ' Scripts Available\n'
-exploits_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Exploits | [Total] ' + str(total_exploits) + ' Listeners Available\n'
 settings_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Settings | [Total] ' + str(total_settings) + ' Settings Available\n'
 
 scanning_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Scanning\n'
@@ -31,6 +30,8 @@ exif_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [
 crypt_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] CRYPT\n'
 bruteftp_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Brute Force | [Script] BRUTEFTP\n'
 brutessh_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Brute Force | [Script] BRUTESSH\n'
+
+linkextract_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Web | [Script] LinkExtract\n'
 
 update_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Settings | [Option] Update | [Script] Update\n'
 setup_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Settings | [Option] Setup | [Script] Setup\n'
