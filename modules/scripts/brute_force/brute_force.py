@@ -16,8 +16,8 @@ class BruteForce:
             print(brute_force_banner)
             print(author)
             print('Scripts:')
-            print('\n\t1): BruteSSH')
-            print('\t2): BruteFTP')
+            print('\n\t1): SOON - BruteSSH')
+            print('\t2): SOON - BruteFTP')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:

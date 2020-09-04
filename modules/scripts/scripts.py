@@ -46,6 +46,9 @@ class Scripts:
                     from .network.network import Network
                     Network()
                 elif scripts_select == '7':
+                    from .
+                    Web()
+                elif scripts_select == '8':
                     from .miscellaneous.miscellaneous import Miscellaneous
                     Miscellaneous()
                 elif scripts_select == 'z':
