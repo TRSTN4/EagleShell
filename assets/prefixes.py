@@ -16,3 +16,6 @@ interface_prefix = YELLOW + 'INTERFACE ' + WHITE + '> '
 new_mac_prefix = YELLOW + 'NEW MAC ' + WHITE + '> '
 unavailable_interface_prefix = RED + '[+] Unavailable Interface.' + WHITE
 unable_to_connect_prefix = RED + '[-] Unable To Connect.' + WHITE
+user_prefix = YELLOW + 'USER ' + WHITE + '> '
+rport_prefix = YELLOW + 'RPORT ' + WHITE + '> '
+threads_prefix = YELLOW + 'THREADS ' + WHITE + '> '

