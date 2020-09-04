@@ -6,7 +6,7 @@ from assets.designs import logo, author
 from assets.prefixes import invalid_input_prefix, website_prefix, wordlist_prefix, eagleshell_prefix
 from assets.properties import clear_screen
 from assets.shortcuts import Exit
-from .scanning import Scanning
+from modules.scripts.web.web import Web
 import os
 import requests
 
@@ -32,7 +32,7 @@ class SubScan:
             print('\tX): Exit\n')
             self.web_set = input(website_prefix).lower()
             if self.web_set == 'z':
-                Scanning()
+                Web()
             elif self.web_set == 'x':
                 Exit()
             self.header()
@@ -42,7 +42,7 @@ class SubScan:
             print('\tX): Exit\n')
             self.sub_list_set = input(wordlist_prefix)
             if self.sub_list_set == 'z' or self.sub_list_set == 'Z':
-                Scanning()
+                Web()
             elif self.sub_list_set == 'x' or self.sub_list_set == 'X':
                 Exit()
         except KeyboardInterrupt:
@@ -104,7 +104,7 @@ class SubScan:
                 if cmd == 'y':
                     SubScan()
                 elif cmd == 'z':
-                    Scanning()
+                    Web()
                 elif cmd == 'x':
                     Exit()
                 else:

@@ -17,17 +17,21 @@ class Web:
             print(author)
             print('Scripts:')
             print('\n\t1): LinkExtract')
+            print('\n\t2): SubScan')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:
-                miscellaneous_select = input(eagleshell_prefix).lower()
-                if miscellaneous_select == '1':
+                web_select = input(eagleshell_prefix).lower()
+                if web_select == '1':
                     from modules.scripts.web.linkextract import LinkExtract
                     LinkExtract()
-                elif miscellaneous_select == 'z':
+                elif web_select == '2':
+                    from modules.scripts.web.subscan import SubScan
+                    SubScan()
+                elif web_select == 'z':
                     from ..scripts import Scripts
                     Scripts()
-                elif miscellaneous_select == 'x':
+                elif web_select == 'x':
                     Exit()
                 else:
                     print(invalid_input_prefix)

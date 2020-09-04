@@ -17,21 +17,23 @@ miscellaneous_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Sc
 
 netscan_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Scanning | [Script] NetScan\n'
 portscan_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Scanning | [Script] PortScan\n'
-subscan_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Scanning | [Script] SubScan\n'
-
-hashing_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] HASHING\n'
-machanger_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] MACHANGER\n'
 
 rsgen_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Exploitation | [Script] RSGEN\n'
 pgen_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Exploitation | [Script] PGEN\n'
+
 arpspoof_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Network | [Script] ARPSPOOF\n'
 packetsniffer_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Network | [Script] PACKETSNIFFER\n'
-exif_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] EXIF\n'
-crypt_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] CRYPT\n'
+
 bruteftp_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Brute Force | [Script] BRUTEFTP\n'
 brutessh_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Brute Force | [Script] BRUTESSH\n'
 
 linkextract_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Web | [Script] LinkExtract\n'
+subscan_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Web | [Script] SubScan\n'
+
+hashing_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] HASHING\n'
+machanger_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] MACHANGER\n'
+exif_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] EXIF\n'
+crypt_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Miscellaneous | [Script] CRYPT\n'
 
 update_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Settings | [Option] Update | [Script] Update\n'
 setup_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Settings | [Option] Setup | [Script] Setup\n'
