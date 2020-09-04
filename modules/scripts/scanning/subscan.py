@@ -69,6 +69,10 @@ class SubScan:
                 else:
                     print(YELLOW + BOLD + '\t[+] ' + GREEN + BOLD + 'Discovered SubDomain ' + WHITE + BOLD + '>> ' + BLUE + BOLD + str(url))
                     self.total_found = self.total_found + 1
+        except UnicodeError:
+            print(RED + '[+] Wordlist Size Too Big..' + WHITE)
+            os.system('sleep 2')
+            Exit()
         except KeyboardInterrupt:
             self.result()
 
