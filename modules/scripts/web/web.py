@@ -17,7 +17,7 @@ class Web:
             print(author)
             print('Scripts:')
             print('\n\t1): LinkExtract')
-            print('\n\t2): SubScan')
+            print('\t2): SubScan')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:
