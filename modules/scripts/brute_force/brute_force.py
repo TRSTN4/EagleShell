@@ -23,8 +23,8 @@ class BruteForce:
             while True:
                 privilege_escalation_select = input(eagleshell_prefix).lower()
                 if privilege_escalation_select == '1':
-                    from modules.scripts.brute_force.brutessh import brutessh_main
-                    brutessh_main()
+                    from modules.scripts.brute_force.brutessh import BruteSSH
+                    BruteSSH()
                     pass
                 elif privilege_escalation_select == '2':
                     from modules.scripts.brute_force.bruteftp import BruteFTP

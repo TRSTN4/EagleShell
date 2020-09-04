@@ -34,7 +34,7 @@ class BruteSSH:
             self.header()
             print('Configuration:')
             print('\n\tHost Input')
-            print('\tExample: 10.10.10.15')
+            print('\tExample: 192.168.1.123')
             print('\n\tUser Input:')
             print('\tExample: admin')
             print('\n\tWordlist Input')

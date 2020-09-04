@@ -15,16 +15,12 @@ from threading import Thread
 
 class BruteFTP:
     def __init__(self):
-        self.host_set = ''
-        self.user_set = ''
-        self.rport_set = ''
         self.n_threads = 10
         self.password_found = ''
         self.password_tried = 0
         self.q = queue.Queue()
         self.configuration()
         self.brute_forcing()
-        self.result()
 
     def header(self):
         os.system(clear_screen)
@@ -37,7 +33,7 @@ class BruteFTP:
             self.header()
             print('Configuration:')
             print('\n\tRHOST Input')
-            print('\tExample: 10.10.10.15\n')
+            print('\tExample: 192.168.1.123\n')
             print('\n\tUser Input:')
             print('\tExample: admin\n')
             print('\n\tRPORT Input')
@@ -77,14 +73,6 @@ class BruteFTP:
                 elif self.wordlist_set == 'x' or self.wordlist_set == 'X':
                     Exit()
                 break
-        except ValueError:
-            print('\t' + unable_to_connect_prefix)
-            os.system('sleep 1')
-            BruteFTP()
-        except FileNotFoundError:
-            print('\t' + unable_to_connect_prefix)
-            os.system('sleep 1')
-            BruteFTP()
         except KeyboardInterrupt:
             Exit()
 
@@ -103,10 +91,12 @@ class BruteFTP:
                 thread.daemon = True
                 thread.start()
             self.q.join()
+        except FileNotFoundError or IsADirectoryError or ValueError:
+            print(unable_to_connect_prefix)
+            os.system('sleep 2')
+            Exit()
         except KeyboardInterrupt:
-            self.safe_result()
-        else:
-            pass
+            self.result()
 
     def connect_ftp(self):
         try:
@@ -127,16 +117,12 @@ class BruteFTP:
                         self.q.all_tasks_done.notify_all()
                         self.q.unfinished_tasks = 0
                     self.result()
+        except OSError:
+            print(unable_to_connect_prefix)
+            os.system('sleep 2')
+            Exit()
         except KeyboardInterrupt:
-            self.safe_result()
-
-    def safe_result(self):
-        os.system(clear_screen)
-        with self.q.mutex:
-            self.q.queue.clear()
-            self.q.all_tasks_done.notify_all()
-            self.q.unfinished_tasks = 0
-        self.result()
+            self.result()
 
     def result(self):
         try:
@@ -150,17 +136,10 @@ class BruteFTP:
                 print('\tPASSWORDS TRIED: ' + GREEN + str(self.password_tried) + WHITE)
             else:
                 print('\tPASSWORDS TRIED: ' + RED + str(self.password_tried) + WHITE)
-            print('\n\tY): New')
-            print('\tZ): Menu')
-            print('\tX): Exit\n')
-            os.system('sleep 0.01')
+            print('\n\tX): Exit\n')
             while True:
                 cmd = input(eagleshell_prefix).lower()
-                if cmd == 'y':
-                    BruteFTP()
-                elif cmd == 'z':
-                    BruteForce()
-                elif cmd == 'x':
+                if cmd == 'x':
                     Exit()
                 else:
                     print(invalid_input_prefix)
