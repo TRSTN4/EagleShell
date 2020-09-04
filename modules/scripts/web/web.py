@@ -17,19 +17,11 @@ class Web:
             print(author)
             print('Scripts:')
             print('\n\t1): SOON')
-            print('\t2): SOON')
-            print('\t3): SOON')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:
                 miscellaneous_select = input(eagleshell_prefix).lower()
                 if miscellaneous_select == '1':
-                    pass
-                elif miscellaneous_select == '2':
-                    pass
-                elif miscellaneous_select == '3':
-                    pass
-                elif miscellaneous_select == '4':
                     pass
                 elif miscellaneous_select == 'z':
                     from ..scripts import Scripts

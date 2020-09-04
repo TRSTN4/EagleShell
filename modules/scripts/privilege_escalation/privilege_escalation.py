@@ -17,17 +17,11 @@ class PrivilegeEscalation:
             print(author)
             print('Scripts:')
             print('\n\t1): Soon')
-            print('\t2): Soon')
-            print('\t3): Soon')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:
                 privilege_escalation_select = input(eagleshell_prefix).lower()
                 if privilege_escalation_select == '1':
-                    pass
-                elif privilege_escalation_select == '2':
-                    pass
-                elif privilege_escalation_select == '3':
                     pass
                 elif privilege_escalation_select == 'z':
                     from ..scripts import Scripts

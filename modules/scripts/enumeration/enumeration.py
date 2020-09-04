@@ -17,17 +17,11 @@ class Enumeration:
             print(author)
             print('Scripts:')
             print('\n\t1): Soon')
-            print('\t2): Soon')
-            print('\t3): Soon')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:
                 enumeration_select = input(eagleshell_prefix).lower()
                 if enumeration_select == '1':
-                    pass
-                elif enumeration_select == '2':
-                    pass
-                elif enumeration_select == '3':
                     pass
                 elif enumeration_select == 'z':
                     from ..scripts import Scripts

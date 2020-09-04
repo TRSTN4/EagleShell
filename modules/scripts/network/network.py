@@ -18,7 +18,6 @@ class Network:
             print('Scripts:')
             print('\n\t1): SOON - ARPSPOOF - ARP Spoofer')
             print('\t2): SOON - PACKETSNIFFER - Packet Sniffer')
-            print('\t3): Soon')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:
@@ -29,8 +28,6 @@ class Network:
                 elif network_select == '2':
                     from modules.scripts.network.packetsniff import packetsniff_main
                     packetsniff_main()
-                elif network_select == '3':
-                    pass
                 elif network_select == 'z':
                     from ..scripts import Scripts
                     Scripts()

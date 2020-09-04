@@ -19,3 +19,4 @@ unable_to_connect_prefix = RED + '[-] Unable To Connect.' + WHITE
 user_prefix = YELLOW + 'USER ' + WHITE + '> '
 rport_prefix = YELLOW + 'RPORT ' + WHITE + '> '
 threads_prefix = YELLOW + 'THREADS ' + WHITE + '> '
+image_prefix = YELLOW + 'IMAGE ' + WHITE + '> '

@@ -1,74 +1,49 @@
 #!/usr/bin/python3
 
-# Exif Extract Image Metadata Script
-
-# Imports all variables and packages
 from assets.banners import exif_banner
-from assets.banners import exif_banner
-from assets.designs import *
 from assets.properties import clear_screen
+from assets.designs import logo, author
+from assets.shortcuts import Exit
+from assets.prefixes import eagleshell_prefix, invalid_input_prefix, image_prefix
 import os
-from PIL import Image
-from PIL.ExifTags import TAGS
+from pillow import Image
+from pillow.ExifTags import TAGS
 
 
-def exif_main():
+class Exif:
+    def __init__(self):
+        self.configuration()
+        self.extractor()
 
-    def configuration():
+    def header(self):
+        os.system(clear_screen)
+        print(logo)
+        print(exif_banner)
+        print(author)
+
+    def configuration(self):
         try:
-            global image_set
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(exif_banner)
-            print(line)
-            print('')
-            print(author)
+            self.header()
             print('Configuration:')
-            print('')
-            print('\tINFO:')
+            print('\n\tINFO:')
             print('\t-----')
             print('\tSupported Extensions:')
             print('\t".jpg", ".jpeg"')
-            print('')
-            print('\tInput:')
+            print('\n\tInput:')
             print('\t------')
             print('\tInput Path To Image Location')
-            print('\tExample: /tmp/images/puppy.jpg')
-            print('')
-            image_set = input('\u001b[33mIMAGE \u001b[37m> ').lower()
-            extractor()
+            print('\tExample: /tmp/images/puppy.jpg\n')
+            self.image_set = input(image_prefix).lower()
         except KeyboardInterrupt:
-            exit_shell()
+            Exit()
 
-
-    def extractor():
-        # path to the image
-        imagename = image_set
-
-        # read the image data using PIL
+    def extractor(self):
+        imagename = self.image_set
         image = Image.open(imagename)
-
-        # extract EXIF data
         exifdata = image.getexif()
-
-        # iterating over all EXIF data fields
         for tag_id in exifdata:
-            # get the tag name, instead of human unreadable tag id
             tag = TAGS.get(tag_id, tag_id)
             data = exifdata.get(tag_id)
-            # decode bytes
             if isinstance(data, bytes):
                 data = data.decode()
             print(f"{tag:25}: {data}")
-
-    # The function where you exit
-    def exit_shell():
-        from assets.functions import exit_main
-        exit_main()
-
-    configuration()
-
-
-exif_main()
