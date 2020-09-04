@@ -18,8 +18,8 @@ class Miscellaneous:
             print('Scripts:')
             print('\n\t1): HASHING - Text and File Hashing')
             print('\t2): MACHANGER - Change MAC Address')
-            print('\t3): SOON - CRYPT - Encrypter and Decrypter')
-            print('\t4): SOON - EXIF - Image Metadata Extractor')
+            print('\t3): SOON - EXIF - Image Metadata Extractor')
+            print('\t4): SOON - CRYPT - Encrypter and Decrypter')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:
@@ -31,11 +31,11 @@ class Miscellaneous:
                     from modules.scripts.miscellaneous.machanger import MaChanger
                     MaChanger()
                 elif miscellaneous_select == '3':
+                    from modules.scripts.miscellaneous.exif import Exif
+                    Exif()
+                elif miscellaneous_select == '4':
                     from modules.scripts.miscellaneous.crypt import crypt_main
                     crypt_main()
-                elif miscellaneous_select == '4':
-                    from modules.scripts.miscellaneous.exif import exif_main
-                    exif_main()
                 elif miscellaneous_select == 'z':
                     from ..scripts import Scripts
                     Scripts()
