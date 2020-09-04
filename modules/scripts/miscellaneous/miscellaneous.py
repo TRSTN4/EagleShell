@@ -28,8 +28,8 @@ class Miscellaneous:
                     from modules.scripts.miscellaneous.hashing import Hashing
                     Hashing()
                 elif miscellaneous_select == '2':
-                    from modules.scripts.miscellaneous.machanger import machanger_main
-                    machanger_main()
+                    from modules.scripts.miscellaneous.machanger import MaChanger
+                    MaChanger()
                 elif miscellaneous_select == '3':
                     from modules.scripts.miscellaneous.crypt import crypt_main
                     crypt_main()
