@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from assets.properties import version, total_scripts, total_exploits, total_settings
+from assets.properties import version, total_scripts, total_settings
 from assets.colors import *
 
 scripts_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Total] ' + str(total_scripts) + ' Scripts Available\n'
