@@ -6,7 +6,7 @@ from assets.designs import logo, author
 from assets.prefixes import invalid_input_prefix, eagleshell_prefix, interface_prefix, new_mac_prefix, unavailable_interface_prefix
 from assets.properties import clear_screen
 from assets.shortcuts import Exit
-from .miscellaneous import Miscellaneous
+from .network import Network
 import os
 import subprocess
 import netifaces
@@ -37,7 +37,7 @@ class MaChanger:
                 if self.interface_set in self.allowed_interface_list:
                     self.set_mac()
                 elif self.interface_set == 'z':
-                    Miscellaneous()
+                    Network()
                 elif self.interface_set == 'x':
                     Exit()
                 else:
@@ -65,7 +65,7 @@ class MaChanger:
             while True:
                 self.mac_set = input(new_mac_prefix).lower()
                 if self.mac_set == 'z':
-                    Miscellaneous()
+                    Network()
                 elif self.mac_set == 'x':
                     Exit()
                 else:
@@ -124,7 +124,7 @@ class MaChanger:
                 if cmd == 'y':
                     MaChanger()
                 elif cmd == 'z':
-                    Miscellaneous()
+                    Network()
                 elif cmd == 'x':
                     Exit()
                 else:

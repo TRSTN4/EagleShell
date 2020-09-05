@@ -16,16 +16,20 @@ class Network:
             print(network_banner)
             print(author)
             print('Scripts:')
-            print('\n\t1): SOON - ARPSPOOF - ARP Spoofer')
+            print('\n\t1): MaChanger - Mac Address Changer')
+            print('\t2): SOON - PACKETSNIFFER - Packet Sniffer')
             print('\t2): SOON - PACKETSNIFFER - Packet Sniffer')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:
                 network_select = input(eagleshell_prefix).lower()
                 if network_select == '1':
+                    from modules.scripts.network.machanger import MaChanger
+                    MaChanger()
+                elif network_select == '2':
                     from modules.scripts.network.arpspoof import arpspoof_main
                     arpspoof_main()
-                elif network_select == '2':
+                elif network_select == '3':
                     from modules.scripts.network.packetsniff import packetsniff_main
                     packetsniff_main()
                 elif network_select == 'z':
