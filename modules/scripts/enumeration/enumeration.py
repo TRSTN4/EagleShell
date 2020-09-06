@@ -16,7 +16,7 @@ class Enumeration:
             print(enumeration_banner)
             print(author)
             print('Scripts:')
-            print('\n\t1): Soon')
+            print('\n\t1): Soon - EagleEnum - Linux PE Enumeration Script')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:

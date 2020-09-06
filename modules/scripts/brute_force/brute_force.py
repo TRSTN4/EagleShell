@@ -25,7 +25,6 @@ class BruteForce:
                 if privilege_escalation_select == '1':
                     from modules.scripts.brute_force.brutessh import BruteSSH
                     BruteSSH()
-                    pass
                 elif privilege_escalation_select == '2':
                     from modules.scripts.brute_force.bruteftp import BruteFTP
                     BruteFTP()

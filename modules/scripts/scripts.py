@@ -52,6 +52,9 @@ class Scripts:
                 elif scripts_select == '8':
                     from .miscellaneous.miscellaneous import Miscellaneous
                     Miscellaneous()
+                elif scripts_select == '9':
+                    from .miscellaneous.miscellaneous import Miscellaneous
+                    Miscellaneous()
                 elif scripts_select == 'z':
                     from ..modules import Modules
                     Modules()

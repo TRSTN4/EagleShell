@@ -3,7 +3,7 @@
 from assets.colors import *
 
 eagleshell_prefix = YELLOW + 'EagleShell ' + WHITE + '> '
-invalid_input_prefix = RED + '[-] Invalid Input.' + WHITE
+invalid_input_prefix = RED + '[-] Invalid Input.\n' + WHITE
 rhost_prefix = YELLOW + 'RHOST ' + WHITE + '> '
 net_ip_prefix = YELLOW + 'NETWORK IP ' + WHITE + '> '
 net_range_prefix = YELLOW + 'NETWORK RANGE ' + WHITE + '> '

@@ -16,8 +16,8 @@ class Web:
             print(web_banner)
             print(author)
             print('Scripts:')
-            print('\n\t1): LinkExtract')
-            print('\t2): SubScan')
+            print('\n\t1): LinkExtract -  Extract All Website Links')
+            print('\t2): SubScan - Sub Domain Scanner')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:

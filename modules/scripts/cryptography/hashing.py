@@ -6,7 +6,7 @@ from assets.designs import logo, author
 from assets.prefixes import invalid_input_prefix, eagleshell_prefix, hashing_prefix, text_prefix, path_prefix
 from assets.properties import clear_screen
 from assets.shortcuts import Exit
-from .miscellaneous import Miscellaneous
+from modules.scripts.miscellaneous.miscellaneous import Miscellaneous
 import os
 import hashlib
 

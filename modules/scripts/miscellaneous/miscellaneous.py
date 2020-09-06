@@ -16,22 +16,14 @@ class Miscellaneous:
             print(miscellaneous_banner)
             print(author)
             print('Scripts:')
-            print('\n\t1): HASHING - Text and File Hashing')
             print('\t2): SOON - EXIF - Image Metadata Extractor')
-            print('\t3): SOON - CRYPT - Encrypter and Decrypter')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:
                 miscellaneous_select = input(eagleshell_prefix).lower()
                 if miscellaneous_select == '1':
-                    from modules.scripts.miscellaneous.hashing import Hashing
-                    Hashing()
-                elif miscellaneous_select == '2':
                     from modules.scripts.miscellaneous.exif import Exif
                     Exif()
-                elif miscellaneous_select == '3':
-                    from modules.scripts.miscellaneous.crypt import crypt_main
-                    crypt_main()
                 elif miscellaneous_select == 'z':
                     from ..scripts import Scripts
                     Scripts()
