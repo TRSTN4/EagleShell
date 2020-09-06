@@ -16,7 +16,7 @@ class PrivilegeEscalation:
             print(privilege_escalation_banner)
             print(author)
             print('Scripts:')
-            print('\n\t1): Soon')
+            print('\n\t1): Soon - EagleEnum - PE Enumeration Script')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:
