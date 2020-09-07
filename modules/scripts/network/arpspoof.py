@@ -14,7 +14,8 @@ import sys
 
 
 class ARPSpoof:
-    def __int__(self):
+    def __init__(self):
+        self.sent_packets_count = 0
         self.configuration()
         self.process()
 
@@ -49,7 +50,6 @@ class ARPSpoof:
 
     def process(self):
         try:
-            self.sent_packets_count = 0
             while True:
                 self.spoof(self.rhost_set, self.gateway_set)
                 self.spoof(self.gateway_set, self.rhost_set)

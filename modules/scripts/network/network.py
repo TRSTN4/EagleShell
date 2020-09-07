@@ -30,8 +30,8 @@ class Network:
                     from modules.scripts.network.arpspoof import ARPSpoof
                     ARPSpoof()
                 elif network_select == '3':
-                    from modules.scripts.network.packetsniff import packetsniff_main
-                    packetsniff_main()
+                    from modules.scripts.network.packetsniff import PacketSniff
+                    PacketSniff()
                 elif network_select == 'z':
                     from ..scripts import Scripts
                     Scripts()

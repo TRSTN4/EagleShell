@@ -1,113 +1,94 @@
 #!/usr/bin/python3
 
-# PacketSniff - Packet Sniffer Script
-
-# Imports all needed variables and packages
 from assets.banners import packetsniffer_banner
-from assets.designs import *
+from assets.colors import *
+from assets.designs import logo, author
+from assets.prefixes import invalid_input_prefix, eagleshell_prefix, interface_prefix
 from assets.properties import clear_screen
-from assets.redirect import redirect_eagleshell_network
-from assets.redirect import redirect_eagleshell_menu
+from assets.shortcuts import Exit
+from .network import Network
 import os
 import netifaces
 import scapy.all as scapy
 from scapy.layers import http
 
-# Main function
-def packetsniff_main():
 
-    # Function that takes user input
-    def configuration():
-        try:
-            global interface_set
+class PacketSniff:
+    def __init__(self):
+        self.allowed_interface_list = ['wlan0', 'wlan1', 'wlan2', 'wlan3', 'mon0', 'mon1', 'mon2', 'mon3', 'wlp5s0', 'wlp5s1', 'wlp5s2', 'wlp5s3', 'eth0', 'eth1', 'eth2', 'eth3']
+        self.disallowed_interface_list = ['lo', 'tun0', 'tun1', 'tun2', 'tun3', 'mon1', 'mon2', 'mon3', 'wlp5s0', 'wlp5s1', 'wlp5s2', 'wlp5s3', 'eth0', 'eth1', 'eth2', 'eth3']
+        self.total_credentials = 0
+        self.total_requests = 0
+        self.configuration()
+        self.sniff()
+        self.result()
+
+    def header(self):
             os.system(clear_screen)
             print(logo)
-            print('')
-            print(line)
             print(packetsniffer_banner)
-            print(line)
-            print('')
             print(author)
+
+    def configuration(self):
+        try:
+            self.header()
             print('Configuration:')
-            print('')
-            ips()
-            print('')
-            print('\tZ): Back')
-            print('\tX): Exit')
-            print('')
+            self.interfaces()
+            print('\n\tZ): Back')
+            print('\tX): Exit\n')
             while True:
-                interface_set = input('\u001b[33mINTERFACE \u001b[37m> ').lower()
-                if interface_set == 'wlan0' or interface_set == 'wlan1' or interface_set == 'wlan2' or interface_set == 'wlan3' or interface_set == 'mon0' or interface_set == 'mon1' or interface_set == 'mon2' or interface_set == 'mon3' or interface_set == 'wlp5s0' or interface_set == 'wlp5s1' or interface_set == 'wlp5s2' or interface_set == 'wlp5s3' or interface_set == 'eth0' or interface_set == 'eth1' or interface_set == 'eth2' or interface_set == 'eth3':
-                    output()
-                    result()
-                elif interface_set == 'z':
-                    redirect_eagleshell_network()
-                elif interface_set == 'x':
-                    exit_shell()
+                self.interface_set = input(interface_prefix).lower()
+                if self.interface_set in self.allowed_interface_list:
+                    break
+                elif self.interface_set == 'z':
+                    Network()
+                elif self.interface_set == 'x':
+                    Exit()
                 else:
-                    print('\u001b[31m[-] Invalid Input.')
+                    print(invalid_input_prefix)
                     continue
         except KeyboardInterrupt:
-            exit_shell()
-        except OSError:
-            print('\u001b[31m[-] Unable To Locate ' + str(interface_set))
-            os.system('sleep 2')
-            packetsniff_main()
+            Exit()
 
-    # Function that displays live output
-    def output():
+    def interfaces(self):
+        x = netifaces.interfaces()
+        for i in x:
+            if i in self.allowed_interface_list:
+                print(GREEN + '\n\t[+] Available Interface: ' + i + WHITE)
+            elif self.disallowed_interface_list != i:
+                print(RED + '\n\t[-] Unavailable Interface: ' + i + WHITE)
+
+    def sniff(self):
         try:
-            global total_requests
-            global total_credentials
-            total_requests = 0
-            total_credentials = 0
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(packetsniffer_banner)
-            print(line)
-            print('')
-            print(author)
+            self.header()
             print('Output:')
-            print('')
-            print('\tControls')
+            print('\n\tControls')
             print('\t--------')
-            print('\tStop: CTRL+C')
-            print('')
-            sniff(interface_set)
+            print('\tStop: CTRL+C\n')
+            scapy.sniff(iface=self.interface_set, store=False, prn=self.process_sniffed_packet)
         except KeyboardInterrupt:
-            result()
+            self.result()
 
-    # Function that shows all available and unavailable interfaces
-    def ips():
+    def process_sniffed_packet(self, packet):
         try:
-            x = netifaces.interfaces()
-
-            for i in x:
-                if i == 'wlan0' or i == 'wlan1' or i == 'wlan2' or i == 'wlan3' or i == 'mon0' or i == 'mon1' or i == 'mon2' or i == 'mon3' or i == 'wlp5s0' or i == 'wlp5s1' or i == 'wlp5s2' or i == 'wlp5s3' or i == 'eth0' or i == 'eth1' or i == 'eth2' or i == 'eth3':
-                    print('\n\t[+] Available Interface: ' + i)
-                elif i != 'lo' or i != 'tun0' or i != 'tun1' or i != 'tun2' or i != 'tun3':
-                    print('\n\t[-] Unavailable Interface: ' + i)
+            if packet.haslayer(http.HTTPRequest):
+                url = self.get_url(packet)
+                print(YELLOW + '\t[+] ' + GREEN + 'HTTP Request ' + WHITE + '>> ' + BLUE + url.decode() + WHITE)
+                self.total_requests = self.total_requests + 1
+                login_info = self.get_login_info(packet)
+                if login_info:
+                    print(YELLOW + '\t[!] ' + MAGENTA + 'Possible Credentials Found ' + WHITE + '>> ' + BLUE + login_info + WHITE)
+                self.total_credentials = self.total_credentials + 1
         except KeyboardInterrupt:
-            exit_shell()
+            self.result()
 
-    # Function that sniffs
-    def sniff(interface):
-        try:
-            scapy.sniff(iface=interface, store=False, prn=process_sniffed_packet)
-        except KeyboardInterrupt:
-            result()
-
-    # Function that gets urls
-    def get_url(packet):
+    def get_url(self, packet):
         try:
             return packet[http.HTTPRequest].Host + packet[http.HTTPRequest].Path
         except KeyboardInterrupt:
-            result()
+            self.result()
 
-    # Function that gets login info
-    def get_login_info(packet):
+    def get_login_info(self, packet):
         try:
             if packet.haslayer(scapy.Raw):
                 load = str(packet[scapy.Raw].load)
@@ -116,70 +97,32 @@ def packetsniff_main():
                     if keywords in load:
                         return load
         except KeyboardInterrupt:
-            result()
+            self.result()
 
-    # Function that displays packets
-    def process_sniffed_packet(packet):
+    def result(self):
         try:
-            global total_requests
-            global total_credentials
-            if packet.haslayer(http.HTTPRequest):
-                url = get_url(packet)
-                print("\t\u001b[33;1m[+] \u001b[32;1mHTTP Request \u001b[37;1m>> \u001b[36;1m" + url.decode())
-                total_requests = total_requests + 1
-                login_info = get_login_info(packet)
-                if login_info:
-                    print("\t\u001b[33;1m[+] \u001b[32;1mPossible Credentials \u001b[37;1m>> \u001b[43m\u001b[31m" + login_info + "\u001b[0m\u001b[31;1m")
-                    total_credentials = total_credentials + 1
-        except KeyboardInterrupt:
-            result()
-
-    # Function that displays result
-    def result():
-        try:
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(packetsniffer_banner)
-            print(line)
-            print('')
-            print(author)
+            self.header()
             print('Result:')
-            print('')
-            print('\tInput')
+            print('\n\tInput')
             print('\t-----')
-            print('\tINTERFACE: ' + interface_set)
-            print('')
-            print('\tOutput')
+            print('\tINTERFACE: ' + GREEN + self.interface_set + WHITE)
+            print('\n\tOutput')
             print('\t------')
-            print('\tTOTAL REQUESTS: ' + str(total_requests))
-            print('\tTOTAL CREDENTIALS: ' + str(total_credentials))
-            print('')
-            print('\tY): New')
+            print('\tTOTAL REQUESTS: ' + GREEN + str(self.total_requests) + WHITE)
+            print('\tTOTAL CREDENTIALS: ' + GREEN + str(self.total_credentials) + WHITE)
+            print('\n\tY): New')
             print('\tZ): Menu')
-            print('\tX): Exit')
-            print('')
+            print('\tX): Exit\n')
             while True:
-                eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
-                if eagleshell_cmd == 'y':
-                    packetsniff_main()
-                elif eagleshell_cmd == 'z':
-                    redirect_eagleshell_menu()
-                elif eagleshell_cmd == 'x':
-                    exit_shell()
+                cmd = input(eagleshell_prefix).lower()
+                if cmd == 'y':
+                    PacketSniff()
+                elif cmd == 'z':
+                    Network()
+                elif cmd == 'x':
+                    Exit()
                 else:
-                    print('\u001b[31m[-] Invalid Input.')
+                    print(invalid_input_prefix)
                     continue
         except KeyboardInterrupt:
-            exit_shell()
-
-    # Function that exit
-    def exit_shell():
-        from assets.functions import exit_main
-        exit_main()
-
-    configuration()
-
-
-packetsniff_main()
+            Exit()

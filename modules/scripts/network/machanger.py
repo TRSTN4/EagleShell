@@ -33,7 +33,7 @@ class MAChanger:
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:
-                self.interface_set = input(interface_prefix).lower()
+                self.interface_set = input(interface_prefix)
                 if self.interface_set in self.allowed_interface_list:
                     self.set_mac()
                 elif self.interface_set == 'z':
