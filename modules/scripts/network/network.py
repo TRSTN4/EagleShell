@@ -18,7 +18,7 @@ class Network:
             print('Scripts:')
             print('\n\t1): MAChanger - MAC Address Changer')
             print('\t2): ARPSpoof - ARP Spoofer')
-            print('\t2): SOON - PACKETSNIFFER - Packet Sniffer')
+            print('\t3): PacketSniff - Packet Sniffer')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:

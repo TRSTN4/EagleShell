@@ -8,7 +8,7 @@ from assets.properties import clear_screen
 from assets.shortcuts import Exit
 from .network import Network
 import os
-import scapy.all as scapy
+from scapy.all import Ether, ARP, srp as scapy
 import time
 import sys
 
@@ -95,9 +95,9 @@ class ARPSpoof:
         try:
             self.header()
             print('Result:')
-            print('\n\tRHOST: ' + self.rhost_set)
-            print('\tGATEWAY: ' + self.gateway_set)
-            print('\n\tPACKETS SENT: ' + str(self.sent_packets_count))
+            print('\n\tRHOST: ' + GREEN + self.rhost_set + WHITE)
+            print('\tGATEWAY: ' + GREEN + self.gateway_set + WHITE)
+            print('\n\tPACKETS SENT: ' + GREEN + str(self.sent_packets_count) + WHITE)
             print('\n\tY): New')
             print('\tZ): Menu')
             print('\tX): Exit\n')
