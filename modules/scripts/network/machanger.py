@@ -13,7 +13,7 @@ import netifaces
 import re
 
 
-class MaChanger:
+class MAChanger:
     def __init__(self):
         self.allowed_interface_list = ['wlan0', 'wlan1', 'wlan2', 'wlan3', 'mon0', 'mon1', 'mon2', 'mon3', 'wlp5s0', 'wlp5s1', 'wlp5s2', 'wlp5s3', 'eth0', 'eth1', 'eth2', 'eth3']
         self.disallowed_interface_list = ['lo', 'tun0', 'tun1', 'tun2', 'tun3', 'mon1', 'mon2', 'mon3', 'wlp5s0', 'wlp5s1', 'wlp5s2', 'wlp5s3', 'eth0', 'eth1', 'eth2', 'eth3']
@@ -122,7 +122,7 @@ class MaChanger:
             while True:
                 cmd = input(eagleshell_prefix).lower()
                 if cmd == 'y':
-                    MaChanger()
+                    MAChanger()
                 elif cmd == 'z':
                     Network()
                 elif cmd == 'x':
