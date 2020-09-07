@@ -76,8 +76,6 @@ git pull
 
 ## Features
 
-This _config_ is **updated** (at a random time), so make sure you **come back** here to **check** for **updates**.Features
-
 |                           | 🦅 EagleShell |
 | ------------------------- | :----------: |
 | Merge Your Custom Scripts |      ✔️       |
