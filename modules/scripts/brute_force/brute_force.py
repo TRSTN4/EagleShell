@@ -1,20 +1,14 @@
 #!/usr/bin/python3
 
-from assets.banners import brute_force_banner
-from assets.properties import clear_screen
-from assets.designs import logo, author
+from assets.headers import brute_force_header
 from assets.shortcuts import Exit
 from assets.prefixes import eagleshell_prefix, invalid_input_prefix
-import os
 
 
 class BruteForce:
     def __init__(self):
         try:
-            os.system(clear_screen)
-            print(logo)
-            print(brute_force_banner)
-            print(author)
+            brute_force_header()
             print('Scripts:')
             print('\n\t1): SOON - BruteSSH')
             print('\t2): SOON - BruteFTP')

@@ -1,13 +1,10 @@
 #!/usr/bin/python3
 
-from assets.banners import packetsniffer_banner
+from assets.headers import packetsniff_header
 from assets.colors import *
-from assets.designs import logo, author
 from assets.prefixes import invalid_input_prefix, eagleshell_prefix, interface_prefix
-from assets.properties import clear_screen
 from assets.shortcuts import Exit
 from .network import Network
-import os
 import netifaces
 import scapy.all as scapy
 from scapy.layers import http
@@ -23,15 +20,9 @@ class PacketSniff:
         self.sniff()
         self.result()
 
-    def header(self):
-            os.system(clear_screen)
-            print(logo)
-            print(packetsniffer_banner)
-            print(author)
-
     def configuration(self):
         try:
-            self.header()
+            packetsniff_header()
             print('Configuration:')
             self.interfaces()
             print('\n\tZ): Back')
@@ -60,7 +51,7 @@ class PacketSniff:
 
     def sniff(self):
         try:
-            self.header()
+            packetsniff_header()
             print('Output:')
             print('\n\tControls')
             print('\t--------')
@@ -101,7 +92,7 @@ class PacketSniff:
 
     def result(self):
         try:
-            self.header()
+            packetsniff_header()
             print('Result:')
             print('\n\tInput')
             print('\t-----')

@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 
-from assets.banners import update_banner
+from assets.headers import update_header
 from assets.colors import *
-from assets.designs import logo, author
 from assets.prefixes import eagleshell_prefix
 from assets.properties import clear_screen
 from assets.shortcuts import Exit
@@ -12,10 +11,7 @@ import os
 class Update:
     def __init__(self):
         try:
-            os.system(clear_screen)
-            print(logo)
-            print(update_banner)
-            print(author)
+            update_header()
             print('Update:\n')
             print(WHITE + '\tAre you inside the EagleShell Directory? ' + GREEN + 'Y' + WHITE + '/' + RED + 'N')
             print(WHITE + '\t--------------------------------------------\n')

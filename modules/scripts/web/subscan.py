@@ -1,10 +1,8 @@
 #!/usr/bin/python3
 
-from assets.banners import subscan_banner
+from assets.headers import subscan_header
 from assets.colors import *
-from assets.designs import logo, author
 from assets.prefixes import invalid_input_prefix, website_prefix, wordlist_prefix, eagleshell_prefix
-from assets.properties import clear_screen
 from assets.shortcuts import Exit
 from modules.scripts.web.web import Web
 import os
@@ -17,15 +15,9 @@ class SubScan:
         self.sub_scan()
         self.result()
 
-    def header(self):
-        os.system(clear_screen)
-        print(logo)
-        print(subscan_banner)
-        print(author)
-
     def configuration(self):
         try:
-            self.header()
+            subscan_header()
             print('Website:')
             print('\n\tExample: google.com')
             print('\n\tZ): Back')
@@ -35,7 +27,7 @@ class SubScan:
                 Web()
             elif self.web_set == 'x':
                 Exit()
-            self.header()
+            subscan_header()
             print('Wordlist:')
             print('\n\tExample: /usr/share/wordlists/mylist.txt')
             print('\n\tZ): Back')
@@ -50,7 +42,7 @@ class SubScan:
 
     def sub_scan(self):
         try:
-            self.header()
+            subscan_header()
             print('Output:')
             print('\n\tControls')
             print('\t--------')
@@ -78,7 +70,7 @@ class SubScan:
 
     def result(self):
         try:
-            self.header()
+            subscan_header()
             print('Result:')
             print('\n\tInput')
             print('\t-----')

@@ -1,10 +1,8 @@
 #!/usr/bin/python3
 
-from assets.banners import brutessh_banner
+from assets.headers import brutessh_header
 from assets.colors import *
-from assets.designs import logo, author
 from assets.prefixes import invalid_input_prefix, eagleshell_prefix, rhost_prefix, wordlist_prefix, user_prefix, unable_to_connect_prefix
-from assets.properties import clear_screen
 from assets.shortcuts import Exit
 from .brute_force import BruteForce
 import os
@@ -23,15 +21,9 @@ class BruteSSH:
         self.configuration()
         self.set_ready()
 
-    def header(self):
-        os.system(clear_screen)
-        print(logo)
-        print(brutessh_banner)
-        print(author)
-
     def configuration(self):
         try:
-            self.header()
+            brutessh_header()
             print('Configuration:')
             print('\n\tHost Input')
             print('\tExample: 192.168.1.123')
@@ -72,7 +64,7 @@ class BruteSSH:
             self.result()
 
     def brute_forcing(self, hostname, username, password):
-        self.header()
+        brutessh_header()
         print('Process:')
         print('\n\tStatus')
         print('\t------')
@@ -106,7 +98,7 @@ class BruteSSH:
 
     def result(self):
         try:
-            self.header()
+            brutessh_header()
             if self.succ_fail:
                 color = GREEN
             else:

@@ -1,10 +1,8 @@
 #!/usr/bin/python3
 
-from assets.banners import linkextract_banner
+from assets.headers import linkextract_header
 from assets.colors import *
-from assets.designs import logo, author
 from assets.prefixes import invalid_input_prefix, eagleshell_prefix, url_prefix
-from assets.properties import clear_screen
 from assets.shortcuts import Exit
 from .web import Web
 import os
@@ -21,15 +19,9 @@ class LinkExtract:
         self.configuration()
         self.result()
 
-    def header(self):
-        os.system(clear_screen)
-        print(logo)
-        print(linkextract_banner)
-        print(author)
-
     def configuration(self):
         try:
-            self.header()
+            linkextract_header()
             print('Configuration:')
             print('\n\tPaste Your URL')
             print('\tExample 1: http://mysite.com')
@@ -45,7 +37,7 @@ class LinkExtract:
                 pass
             else:
                 self.url_set = 'http://' + self.url_set
-            self.header()
+            linkextract_header()
             print('Output:')
             print('\n\tControls')
             print('\t--------')
@@ -102,7 +94,7 @@ class LinkExtract:
 
     def result(self):
         try:
-            self.header()
+            linkextract_header()
             print('Result:')
             print(GREEN, "\n\tTotal Internal Links:", len(self.internal_urls), WHITE)
             print(MAGENTA, "\tTotal External Links:", len(self.external_urls), WHITE)

@@ -1,20 +1,14 @@
 #!/usr/bin/python3
 
-from assets.banners import settings_banner
-from assets.properties import clear_screen
-from assets.designs import logo, author
+from assets.headers import settings_header
 from assets.shortcuts import Exit
 from assets.prefixes import eagleshell_prefix, invalid_input_prefix
-import os
 
 
 class Settings:
     def __init__(self):
         try:
-            os.system(clear_screen)
-            print(logo)
-            print(settings_banner)
-            print(author)
+            settings_header()
             print('Options:')
             print('\n\t1): Update')
             print('\t2): Version')

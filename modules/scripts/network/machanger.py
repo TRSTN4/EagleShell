@@ -1,10 +1,8 @@
 #!/usr/bin/python3
 
-from assets.banners import machanger_banner
+from assets.headers import machanger_header
 from assets.colors import *
-from assets.designs import logo, author
 from assets.prefixes import invalid_input_prefix, eagleshell_prefix, interface_prefix, new_mac_prefix, unavailable_interface_prefix
-from assets.properties import clear_screen
 from assets.shortcuts import Exit
 from .network import Network
 import os
@@ -19,15 +17,9 @@ class MAChanger:
         self.disallowed_interface_list = ['lo', 'tun0', 'tun1', 'tun2', 'tun3', 'mon1', 'mon2', 'mon3', 'wlp5s0', 'wlp5s1', 'wlp5s2', 'wlp5s3', 'eth0', 'eth1', 'eth2', 'eth3']
         self.configuration()
 
-    def header(self):
-        os.system(clear_screen)
-        print(logo)
-        print(machanger_banner)
-        print(author)
-
     def configuration(self):
         try:
-            self.header()
+            machanger_header()
             print('Configuration:')
             self.interfaces()
             print('\n\tZ): Back')
@@ -56,7 +48,7 @@ class MAChanger:
 
     def set_mac(self):
         try:
-            self.header()
+            machanger_header()
             print('MAC Address:')
             print('\n\tExample 1: 00:11:22:33:44:55')
             print('\tExample 2: 12:22:33:44:55:66')
@@ -105,7 +97,7 @@ class MAChanger:
 
     def result(self):
         try:
-            self.header()
+            machanger_header()
             if self.succ_fail == True:
                 color = GREEN
             else:

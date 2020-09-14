@@ -1,20 +1,14 @@
 #!/usr/bin/python3
 
-from assets.banners import scripts_banner
-from assets.properties import clear_screen
-from assets.designs import logo, author
+from assets.headers import scripts_header
 from assets.shortcuts import Exit
 from assets.prefixes import eagleshell_prefix, invalid_input_prefix
-import os
 
 
 class Scripts:
     def __init__(self):
         try:
-            os.system(clear_screen)
-            print(logo)
-            print(scripts_banner)
-            print(author)
+            scripts_header()
             print('Options:')
             print('\n\t1): Scanning')
             print('\t2): Enumeration')

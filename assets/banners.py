@@ -24,7 +24,7 @@ pgen_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [
 
 machanger_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Network | [Script] MaChanger\n'
 arpspoof_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Network | [Script] ARPSpoof\n'
-packetsniffer_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Network | [Script] PacketSniffer\n'
+packetsniff_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Network | [Script] PacketSniff\n'
 
 bruteftp_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Brute Force | [Script] BruteFTP\n'
 brutessh_banner = YELLOW + '\n[Version] ' + version + ' | [Module] Eagle Scripts | [Option] Brute Force | [Script] BruteSSH\n'

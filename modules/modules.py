@@ -1,20 +1,14 @@
 #!/usr/bin/python3
 
-from assets.properties import clear_screen, version
-from assets.designs import logo, author
+from assets.headers import modules_header
 from assets.prefixes import eagleshell_prefix, invalid_input_prefix
 from assets.shortcuts import Exit
-from assets.colors import *
-import os
 
 
 class Modules:
     def __init__(self):
         try:
-            os.system(clear_screen)
-            print(logo)
-            print(WHITE + '\nVersion: ' + version)
-            print(author)
+            modules_header()
             print('Modules:\n')
             print('\t1): Eagle Scripts')
             print('\t2): Settings')

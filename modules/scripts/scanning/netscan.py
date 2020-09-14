@@ -1,13 +1,10 @@
 #!/usr/bin/python3
 
-from assets.banners import netscan_banner
+from assets.headers import netscan_header
 from assets.colors import *
-from assets.designs import logo, author
 from assets.prefixes import eagleshell_prefix, invalid_input_prefix, net_ip_prefix, net_range_prefix
-from assets.properties import clear_screen
 from assets.shortcuts import Exit
 from .scanning import Scanning
-import os
 import netifaces
 import scapy.all as scapy
 
@@ -18,15 +15,9 @@ class NetScan:
         self.scan_result = self.net_scanner()
         self.result(self.scan_result)
 
-    def header(self):
-        os.system(clear_screen)
-        print(logo)
-        print(netscan_banner)
-        print(author)
-
     def configuration(self):
         try:
-            self.header()
+            netscan_header()
             print('Network:')
             self.netifaces()
             print('\n\t-------------------------\n')
@@ -71,7 +62,7 @@ class NetScan:
 
     def result(self, results_list):
         try:
-            self.header()
+            netscan_header()
             print('Result:\n')
             print("\tIP\t\t\tMAC Address")
             print('\t-----------------------------------------')

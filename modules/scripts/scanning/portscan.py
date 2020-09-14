@@ -1,13 +1,10 @@
 #!/usr/bin/python3
 
-from assets.banners import portscan_banner
+from assets.headers import portscan_header
 from assets.colors import *
-from assets.designs import logo, author
 from assets.prefixes import eagleshell_prefix, invalid_input_prefix, rhost_prefix
-from assets.properties import clear_screen
 from assets.shortcuts import Exit
 from .scanning import Scanning
-import os
 import socket
 
 
@@ -18,15 +15,9 @@ class PortScan:
         self.scan_target()
         self.result()
 
-    def header(self):
-        os.system(clear_screen)
-        print(logo)
-        print(portscan_banner)
-        print(author)
-
     def configuration(self):
         try:
-            self.header()
+            portscan_header()
             print('RHOST:')
             print('\n\tExample: 192.168.1.128')
             print('\n\tZ): Back')
@@ -41,7 +32,7 @@ class PortScan:
 
     def scan_target(self):
         try:
-            self.header()
+            portscan_header()
             print('Scanning:\n')
             print('\tScanning target ' + self.rhost_set + '\n')
             try:
@@ -63,7 +54,7 @@ class PortScan:
 
     def result(self):
         try:
-            self.header()
+            portscan_header()
             print('Output:\n')
             if len(self.port_list) < 1:
                 print('\tRHOST: ' + RED + BOLD + self.rhost_set + WHITE)

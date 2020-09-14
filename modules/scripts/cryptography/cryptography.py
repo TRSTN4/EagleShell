@@ -1,20 +1,14 @@
 #!/usr/bin/python3
 
-from assets.banners import cryptography_banner
-from assets.properties import clear_screen
-from assets.designs import logo, author
+from assets.headers import cryptography_header
 from assets.shortcuts import Exit
 from assets.prefixes import eagleshell_prefix, invalid_input_prefix
-import os
 
 
 class Cryptography:
     def __init__(self):
         try:
-            os.system(clear_screen)
-            print(logo)
-            print(cryptography_banner)
-            print(author)
+            cryptography_header()
             print('Scripts:')
             print('\n\t1): Hashing - Text and File Hashing')
             print('\t2): SOON - Crypt - Encrypter and Decrypter')

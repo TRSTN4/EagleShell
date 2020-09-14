@@ -1,20 +1,14 @@
 #!/usr/bin/python3
 
-from assets.banners import privilege_escalation_banner
-from assets.properties import clear_screen
-from assets.designs import logo, author
+from assets.headers import privilege_escalation_header
 from assets.shortcuts import Exit
 from assets.prefixes import eagleshell_prefix, invalid_input_prefix
-import os
 
 
 class PrivilegeEscalation:
     def __init__(self):
         try:
-            os.system(clear_screen)
-            print(logo)
-            print(privilege_escalation_banner)
-            print(author)
+            privilege_escalation_header()
             print('Scripts:')
             print('\n\t1): SOON')
             print('\n\tZ): Back')

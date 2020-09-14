@@ -1,10 +1,8 @@
 #!/usr/bin/python3
 
-from assets.banners import bruteftp_banner
+from assets.headers import bruteftp_header
 from assets.colors import *
-from assets.designs import logo, author
 from assets.prefixes import invalid_input_prefix, eagleshell_prefix, rhost_prefix, wordlist_prefix, unable_to_connect_prefix, user_prefix, rport_prefix, threads_prefix
-from assets.properties import clear_screen
 from assets.shortcuts import Exit
 from .brute_force import BruteForce
 import os
@@ -22,15 +20,9 @@ class BruteFTP:
         self.configuration()
         self.brute_forcing()
 
-    def header(self):
-        os.system(clear_screen)
-        print(logo)
-        print(bruteftp_banner)
-        print(author)
-
     def configuration(self):
         try:
-            self.header()
+            bruteftp_header()
             print('Configuration:')
             print('\n\tRHOST Input')
             print('\tExample: 192.168.1.123\n')
@@ -78,7 +70,7 @@ class BruteFTP:
 
     def brute_forcing(self):
         try:
-            self.header()
+            bruteftp_header()
             print('Process:')
             print('\n\tStatus')
             print('\t------')
@@ -126,7 +118,7 @@ class BruteFTP:
 
     def result(self):
         try:
-            self.header()
+            bruteftp_header()
             print('Result:\n')
             if len(self.password_found) > 1:
                 print(WHITE + '\tPASSWORD: ' + GREEN + self.password_found + WHITE)

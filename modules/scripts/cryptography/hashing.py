@@ -1,10 +1,8 @@
 #!/usr/bin/python3
 
-from assets.banners import hashing_banner
+from assets.headers import hashing_header
 from assets.colors import *
-from assets.designs import logo, author
 from assets.prefixes import invalid_input_prefix, eagleshell_prefix, hashing_prefix, text_prefix, path_prefix
-from assets.properties import clear_screen
 from assets.shortcuts import Exit
 from modules.scripts.miscellaneous.miscellaneous import Miscellaneous
 import os
@@ -15,15 +13,9 @@ class Hashing:
     def __init__(self):
         self.configuration()
 
-    def header(self):
-        os.system(clear_screen)
-        print(logo)
-        print(hashing_banner)
-        print(author)
-
     def configuration(self):
         try:
-            self.header()
+            hashing_header()
             print('Configuration:')
             print('\n\t1): Text Hashing')
             print('\t2): File Hashing')
@@ -47,7 +39,7 @@ class Hashing:
 
     def text_hashing(self):
         try:
-            self.header()
+            hashing_header()
             print('Input:')
             print('\n\tType Your Text')
             print('\tExample: SomeRandomText123')
@@ -66,7 +58,7 @@ class Hashing:
 
     def result_text(self):
         try:
-            self.header()
+            hashing_header()
             print('Output:')
             print('\n\tText Input: ' + str(self.hashing_text_set) + '\n')
             print(RED + "\tMD5:", hashlib.md5(self.message).hexdigest())
@@ -95,7 +87,7 @@ class Hashing:
 
     def file_hashing_input(self):
         try:
-            self.header()
+            hashing_header()
             print('Input:')
             print('\n\tFile Path')
             print('\tExample: /tmp/images/car.jpeg')
@@ -136,7 +128,7 @@ class Hashing:
 
     def result_file(self):
         try:
-            self.header()
+            hashing_header()
             print('Output:')
             print('\n\tFile Input: ' + self.hashing_file_path + '\n')
             print(RED + "\tMD5:", hashlib.md5(self.hashed_file).hexdigest())
