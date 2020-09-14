@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/TRSTN4/EagleShell/"><img src="https://media1.giphy.com/media/lPQpnKScZiz2qyZaXx/giphy.gif"></a>
+  <a href="https://github.com/TRSTN4/EagleShell/"><img src="https://media2.giphy.com/media/PiopqT1HJ2uiVJ7B1X/giphy.gif"></a>
 </h1>
 <h4 align="center">A high-quality pentesting tool.</h4>
 
