@@ -11,7 +11,7 @@ class Web:
             web_header()
             print('Scripts:')
             print('\n\t1): LinkExtract -  Extract All Website Links')
-            print('\n\t2) SOON - IMGExtract -  Extract All Website Images')
+            print('\t2): IMGExtract -  Extract All Website Images')
             print('\t3): SubScan - Sub Domain Scanner')
             print('\n\tZ): Back')
             print('\tX): Exit\n')

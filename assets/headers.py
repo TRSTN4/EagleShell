@@ -211,3 +211,11 @@ def packetsniff_header():
     print(logo)
     print(packetsniff_banner)
     print(author)
+
+
+def imgextract_header():
+    from assets.banners import imgextract_banner
+    os.system(clear_screen)
+    print(logo)
+    print(imgextract_banner)
+    print(author)
