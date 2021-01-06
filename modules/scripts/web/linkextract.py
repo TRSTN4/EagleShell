@@ -2,7 +2,7 @@
 
 from assets.headers import linkextract_header
 from assets.colors import *
-from assets.prefixes import invalid_input_prefix, eagleshell_prefix, url_prefix
+from assets.prefixes import invalid_input_prefix, eagleshell_prefix, url_prefix, done_prefix
 from assets.shortcuts import Exit
 from .web import Web
 import os
@@ -84,6 +84,7 @@ class LinkExtract:
                 print(YELLOW + '\t[+] ' + GREEN + 'Internal Link Found ' + WHITE + '>> ' + BLUE + f"{href}" + WHITE)
                 urls.add(href)
                 self.internal_urls.add(href)
+            input(done_prefix).lower()
             return urls
         except KeyboardInterrupt:
             self.result()
