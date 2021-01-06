@@ -3,6 +3,7 @@
 from assets.headers import brute_force_header
 from assets.shortcuts import Exit
 from assets.prefixes import eagleshell_prefix, invalid_input_prefix
+from assets.colors import *
 
 
 class BruteForce:
@@ -10,8 +11,8 @@ class BruteForce:
         try:
             brute_force_header()
             print('Scripts:')
-            print('\n\t1): SOON - BruteSSH')
-            print('\t2): SOON - BruteFTP')
+            print('\n\t1): BruteSSH - Brute Force SSH ' + RED + '* NOT RECOMMENDED *' + RESET + WHITE)
+            print('\t2): BruteFTP - Brute Force FTP ' + RED + '* NOT RECOMMENDED *' + RESET + WHITE)
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:

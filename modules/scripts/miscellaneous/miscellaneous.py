@@ -10,7 +10,7 @@ class Miscellaneous:
         try:
             miscellaneous_header()
             print('Scripts:')
-            print('\t2): SOON - EXIF - Image Metadata Extractor')
+            print('\t1): EXIF - Image Metadata Extractor')
             print('\n\tZ): Back')
             print('\tX): Exit\n')
             while True:

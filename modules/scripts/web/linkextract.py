@@ -84,7 +84,7 @@ class LinkExtract:
                 print(YELLOW + '\t[+] ' + GREEN + 'Internal Link Found ' + WHITE + '>> ' + BLUE + f"{href}" + WHITE)
                 urls.add(href)
                 self.internal_urls.add(href)
-            input(done_prefix).lower()
+            input('\n' + done_prefix).lower()
             return urls
         except KeyboardInterrupt:
             self.result()
