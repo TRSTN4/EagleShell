@@ -105,6 +105,7 @@ def scripts_header():
 def modules_header():
     os.system(clear_screen)
     print(logo)
+    print(YELLOW + '[OFFICIALLY RELEASED] - January 06 2021')
     print(WHITE + '\nVersion: ' + version)
     print(author)
 
