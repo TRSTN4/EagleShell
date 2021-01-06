@@ -35,8 +35,14 @@ class Exif:
             print('\n\tInput:')
             print('\t------')
             print('\tInput Path To Image Location')
-            print('\tExample: /tmp/images/puppy.jpg\n')
+            print('\tExample: /tmp/images/puppy.jpg')
+            print('\n\tZ): Back')
+            print('\tX): Exit\n')
             self.image_set = input(image_prefix)
+            if self.image_set == 'z' or self.image_set == 'Z':
+                Miscellaneous()
+            elif self.image_set == 'x' or self.image_set == 'X':
+                Exit()
         except KeyboardInterrupt:
             Exit()
 
@@ -45,22 +51,25 @@ class Exif:
             imagename = self.image_set
             image = Image.open(imagename)
             exifdata = image.getexif()
+        except:
+            print(unknown_file_prefix)
+            os.system('sleep 2')
+            Exif()
+        try:
+            self.header()
+            print('Result:\n')
+            print('\tFile: ' + self.image_set + '\n')
             for tag_id in exifdata:
                 tag = TAGS.get(tag_id, tag_id)
                 data = exifdata.get(tag_id)
                 if isinstance(data, bytes):
                     data = data.decode()
-                print(f"{tag:25}: {data}")
-                print('debug')
+                print(f"\t{tag:25}: {data}")
         except:
-            print(unknown_file_prefix)
-            os.system('sleep 2')
-            Exif()
+            pass
 
     def result(self):
         try:
-            self.header()
-            print('Result:\n')
             print('\n\tY): New')
             print('\tZ): Menu')
             print('\tX): Exit\n')
