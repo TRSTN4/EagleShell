@@ -3,7 +3,7 @@
 from assets.banners import exif_banner
 from assets.colors import *
 from assets.designs import logo, author
-from assets.prefixes import eagleshell_prefix, invalid_input_prefix, image_prefix
+from assets.prefixes import eagleshell_prefix, invalid_input_prefix, image_prefix, unknown_file_prefix
 from assets.properties import clear_screen
 from assets.shortcuts import Exit
 from .miscellaneous import Miscellaneous
@@ -36,20 +36,26 @@ class Exif:
             print('\t------')
             print('\tInput Path To Image Location')
             print('\tExample: /tmp/images/puppy.jpg\n')
-            self.image_set = input(image_prefix).lower()
+            self.image_set = input(image_prefix)
         except KeyboardInterrupt:
             Exit()
 
     def extractor(self):
-        imagename = self.image_set
-        image = Image.open(imagename)
-        exifdata = image.getexif()
-        for tag_id in exifdata:
-            tag = TAGS.get(tag_id, tag_id)
-            data = exifdata.get(tag_id)
-            if isinstance(data, bytes):
-                data = data.decode()
-            print(f"{tag:25}: {data}")
+        try:
+            imagename = self.image_set
+            image = Image.open(imagename)
+            exifdata = image.getexif()
+            for tag_id in exifdata:
+                tag = TAGS.get(tag_id, tag_id)
+                data = exifdata.get(tag_id)
+                if isinstance(data, bytes):
+                    data = data.decode()
+                print(f"{tag:25}: {data}")
+                print('debug')
+        except:
+            print(unknown_file_prefix)
+            os.system('sleep 2')
+            Exif()
 
     def result(self):
         try:

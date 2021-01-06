@@ -31,3 +31,4 @@ output_prefix = YELLOW + 'OUTPUT ' + WHITE + '> '
 system_prefix = YELLOW + 'SYSTEM ' + WHITE + '> '
 gateway_prefix = YELLOW + 'GATEWAY ' + WHITE + '> '
 done_prefix = YELLOW + 'DONE? ' + WHITE + '> '
+unknown_file_prefix = RED + '[-] Unknown File.\n' + WHITE
